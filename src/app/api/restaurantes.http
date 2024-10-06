@@ -1,0 +1,33 @@
+### GET request
+GET http://localhost:3000/api/restaurantes
+Content-Type: application/json
+
+### POST request
+POST http://localhost:3000/api/restaurantes
+Content-Type: application/json
+
+{
+  "name": "Restaurante Prueba",
+  "ubicacion": "Calle Falsa 123",
+  "telefono": "123456789"
+}
+### GET por ID:
+GET http://localhost:3000/api/restaurantes/1
+Content-Type: application/json
+
+### PUT (actualizar restaurante por ID):
+PUT http://localhost:3000/api/restaurantes/1
+Content-Type: application/json
+
+{
+  "name": "Nuevo Nombre",
+  "ubicacion": "Nueva Ubicación",
+  "telefono": "987654321"
+}
+
+### DELETE (eliminar restaurante por ID):
+DELETE http://localhost:3000/api/restaurantes/1
+Content-Type: application/json
+
+
+

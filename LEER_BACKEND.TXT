@@ -1,0 +1,68 @@
+ESTRUCTURA DEL PROYECTO GENERAL
+
+/.
+├── .next                # Generado por Next.js en la compilación
+├── node_modules         # Módulos de NPM
+├── prisma               # Archivos relacionados a Prisma (migrations, schema.prisma)
+├── public               # Archivos públicos como imágenes, fuentes, etc.
+├── src                  # Carpeta principal de código fuente
+│   ├── app              # Para rutas y páginas si usas App Router (Next.js 13+)
+│   │   └── api          # Rutas API
+│   └── components       # Todos los componentes de React reutilizables
+├── .env                 # Variables de entorno
+├── .gitignore           # Archivos ignorados por Git
+├── next.config.mjs      # Configuración de Next.js
+├── tailwind.config.ts   # Configuración de Tailwind CSS
+├── tsconfig.json        # Configuración de TypeScript
+├── package.json         # Dependencias y scripts
+└── README.md            # Información del proyecto
+
+
+ESTRUCTURA CARPETA BACKEND
+Asegúrate de seguir esta estructura de carpetas para evitar confusiones:
+
+src
+└── app
+    ├── api
+    │   ├── restaurantes
+    │   │   ├── route.js          # Maneja las operaciones de lista de restaurantes
+    │   │   └── [id]
+    │   │       └── route.js      # Maneja las operaciones de un restaurante específico
+    └── ...
+
+
+CONFIGURACIÓN DE PRISMA
+1. INSTALAR DEPENDENCIAS:
+   - Asegúrate de tener instalado Node.js y npm o yarn.
+   - En la raíz del proyecto, ejecuta:
+     npm install @prisma/client prisma
+
+2. CONFIGURAR LA BASE DE DATOS:
+   - Abre el archivo .env en la raíz del proyecto.
+   - Configura la variable DATABASE_URL con los detalles de conexión a tu base de datos. Por ejemplo:
+     DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/DATABASE"
+
+3. GENERAR EL CLIENTE DE PRISMA:
+   - Asegúrate de que el archivo schema.prisma esté en la carpeta prisma del proyecto.
+   - Ejecuta el siguiente comando para generar el cliente de Prisma:
+     npx prisma generate
+
+4. MIGRAR LA BASE DE DATOS:
+   - Para crear las tablas en la base de datos según el esquema, ejecuta:
+     npx prisma migrate dev --name init
+
+5. USAR PRISMA EN EL CÓDIGO:
+   - Ahora puedes importar y usar PrismaClient en tus archivos para interactuar con la base de datos.
+
+
+------------------------------ REST CLIENT ---------------------------
+restaurant.http
+
+Propósito: 
+Este archivo se utiliza para realizar pruebas de API de manera sencilla. 
+Permite enviar solicitudes HTTP directamente desde el editor de código Visual Studio Code 
+usando la extensión REST Client, lo que facilita el desarrollo y la depuración de las rutas de la API.
+
+Extensión: 
+Debe tener la extensión .http para que la extensión REST Client 
+lo reconozca y permita realizar las solicitudes.   
