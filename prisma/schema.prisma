@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./dev.db" 
+// }
+
+// -------- MODELOS -------
+
+model Usuario {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  email     String    @unique
+  password  String
+  reviews   Review[]
+}
+
+model Restaurante {
+  id              Int       @id @default(autoincrement())
+  name            String
+  ubicacion       String
+  telefono        String?
+  reviews         Review[]
+  calificacionPromedio Float? @default(0)
+  imagen          String?   // URL de la imagen del restaurante
+}
+
+
+model Review {
+  id             Int       @id @default(autoincrement())
+  comentario     String
+  calificacion   Int       // (1-5)
+  id_restaurante Int
+  id_usuario     Int
+  restaurante    Restaurante @relation(fields: [id_restaurante], references: [id])
+  usuario        Usuario     @relation(fields: [id_usuario], references: [id])
+}
