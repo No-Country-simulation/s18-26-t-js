@@ -11,7 +11,14 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        "yellow-color":"var(--yellow-color)",
+        "white-color":"var(--white-color)",
+        "gray-color":"var(--gray-color)",
+        "light-gray":"var(--light-gray)"
       },
+      fontFamily:{
+        montserratBlack:"var(--font-montserrat-black)"
+      }
     },
   },
   plugins: [],

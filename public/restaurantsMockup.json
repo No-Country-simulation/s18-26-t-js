@@ -1,0 +1,208 @@
+[
+  {
+    "id": 1,
+    "name": "El Buen Sabor",
+    "location": "Location ID 1",
+    "phone": "912345678",
+    "reviews": [
+      { "id": 1, "review": "Delicious food and great service!" },
+      { "id": 2, "review": "Best dining experience in town." }
+    ],
+    "averageRating": 4.5,
+    "image": "https://s3-alpha-sig.figma.com/img/b52a/589c/43a177f7b8129343414be30eeab91653?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=MV5NIiGW-Be0E~0Gyhbik7T9KJHdBMxJOAj5Bwomm-qJ7QorScWJVjVEbnIsx5czA8TlWN3Dt4XIQj1BLHUw~AyHQr6-WQDms0nhx4zBi9MBkQwnd07Wqorh~E2H1WAEthIZW2n74R8sQ5F5i8gFZlDmJZQbiLsEuV6nbQLUsCkVKNk~V9PLLXWa~l~UByOi05qrn7DC-9svDWkRJOC-OOuLr41gDp314AoQC7iUSh4w6H15h4XhnO0RvFXcEarRpzD3N2jGaohwKaRXeHzEub4NobO2looJHkEA5VAfZM76CssUNSdixUE0NpWlcJtzpj1UprFfxtlLP19oOx5vCg__",
+    "logo": "https://s3-alpha-sig.figma.com/img/c261/4391/b0b45f88ee36b3c4f3caa78becc59638?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mCxQbfuqYDWIj~P4z4fVv9CH2QoA8fjSACNqw5lY~P0yvYA9DionQmgAZzaeKR7HK0y24pgt7oF3JDInFJ9q1Fo0xtHWC-oMOg2sLOAgH72Xpb-Hm9GRXx4RjpN-nqx9EK2teZyx-I4pdH13-JxIICIqAmXabArB8egFTWJLgEFfbHq-DAauDb30znflnngFdPtuUwvx6yP~DV8PnXl3wCGIiI1JyMpiBZkycKrZ1p-DXGvQNNIEOUIbKQHWx-OvXFr6Q3vheKIxmM29KnrwMmuEC9mU3tf22g8~ltS7ekbkibgylnwG7tg70~rjdOokQL6BHqM-84sXXnA28BQhAw__"
+  },
+  {
+    "id": 2,
+    "name": "La Pasta Perfecta",
+    "location": "Location ID 2",
+    "phone": "933456789",
+    "reviews": [{ "id": 1, "review": "Amazing pasta dishes!" }],
+    "averageRating": 4.7,
+    "image": "https://s3-alpha-sig.figma.com/img/93f8/9bd5/1c51fbbf3ac226ea34edc4299e556ae9?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=SeJil-SolxJzWxGkz6TBMjviAwUMxKQlApPtxr7tLII0gou6Zx7GLLXtPma1HwNpsvjiqtGcQbCUX2PpidK5LVVcbAruMfOaSUSFp9ncmhObiAttYXtt7QX8BBa5axulMX-QlYnzmHkwyvwUJJMQNMlx6zKjYIZb0b~EdZ6~LKB0WUSn4LXRdDpwMPSB54qHYHQ1WzJbhscLSDQz8NlComleud251mnLS43u-4rfS-xObFWYbxpVSgmnbyvCN1P-V0y7pt-H2nH5kVH-QXB1zXDOsWPnZcvE2alRDAnTHRx~V9DFCS2hInYyOXtpnvhQ2j9sRLCJfm63OtFkN5ooJA__",
+    "logo": "https://s3-alpha-sig.figma.com/img/b8a6/2b3c/77828b414d55450a1e22e303b44eccbb?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hCcUrgI-Im~7CONTx64NAPIE2OwBN7o~Lvq5XbuccpF4Kjjpfq0mMHUYIK3MWDnvJPCfKv-D98CBwhDBUtbF8meSry1gRvpZBQX4uC~WrvaQ2eVktSTmtxMRpS6c2T7j0G9vU-h8gYgYrQJDbA87~fL7W1HSBXKvmqFZeA~D68j0TM6hxcK50AbKnu1GVe53i7p4ecAUlpyQTH04nXDb2RC7jMylpIQNkE2ZT6l09XRDEkM9jxPmsnalIRKMk3940jR4-jMgWQXwzs66wgUhfDrmTbj1cnrYa3a~66aNn0K-kDjGMy7gmj06X5FQGDrPu-mGYX0smY~dkgFFXU713Q__"
+  },
+  {
+    "id": 3,
+    "name": "Sushi del Mar",
+    "location": "Location ID 3",
+    "phone": "961234567",
+    "reviews": [],
+    "averageRating": 4.8,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Sushi+del+Mar",
+    "logo": "https://s3-alpha-sig.figma.com/img/ce9d/550f/2e90dbf0df71c4c514dc351b55fe12e8?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V6oYD7pZin67WivzbrLd2gtGBBiJYXg3M-xb3L5bk6z8UnjPE7MaR~X~Ql1UlZWql9EYZEUg-BFtpuZPDW9f3ajUGhte-3LhY8bAY5y7uzKlSSyGl4rrJP144L6FxPkOnjvTT3Gn6igYg-IF~4qDcLYH8bnBVAdXi60Z54bIOv8-k7YcbYXlmR~48zwMvx3jX5hgJB0FGysAN8-96DIyb6M0vZIazt6Kg0wSJbkJAYKnCyI1zhk-mFbClNv0qmJm1Xxh6UXwULycakEF7bIHvMWQq97VSNZ7hhhURd90~quaUb~NWa7l7yxPwTPYEV61JYMemVxQbSyLA-1dqt1Ykw__"
+  },
+  {
+    "id": 4,
+    "name": "Tacos y Tequila",
+    "location": "Location ID 4",
+    "phone": "954321098",
+    "reviews": [
+      { "id": 1, "review": "Great tacos, highly recommend!" },
+      { "id": 2, "review": "A bit spicy, but delicious!" }
+    ],
+    "averageRating": 4.6,
+    "image": "https://s3-alpha-sig.figma.com/img/dd8c/ba64/8b766f729463e86550be52882d29a3c8?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=MoZjHaTRQvsCaEdybBmk3HOAJ2YGy9w-4r3Z33Zkx2SkjgaV0vjg5JbuyRHhUXfveG1UHcCwu3ZXiAunfnDNLhXuwmATstSNrIOmaN9i~8pdlliSFtc3uTv4ChpQFkfdCRrBuHZaR6tHM2DXYMVgIaUsLGfC~BFgFu6Ha5NdYue38jFz8thWmHl5LXr6KtPscw9erlI4Eh1ixJsssPlVEooenQ~aiugnkySfqplb8C2zsmng-8iPM1d1EMwGOAn4l68sBPIIp-NfXYjUFy2YnFU6nKI0DvXuTPujjw3mz00oGEMKAjfej6yQeaiFbEDXIIlyqyKadAqigVQmvTKdWw__",
+    "logo": "https://s3-alpha-sig.figma.com/img/b5dd/ca6f/7ebc09803c4b9924df08d858d425536d?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QfIafkbGaHd1UJgy2ysUasIM5RC9kGS9BpxTC356ORy422ewSy-Cg24DBOPqN9p0Al7SeUeNf9l-oVX22Ik3-wFn~G9wKHUaOPCBJwtOc2t1rBgxyaFQxkZwjktRSHvDm~~uPtK~XbeVLCQs9jEHxwfAGDo2uuRYqiGLZaEK6bIQjs2yhoSafNMt71qvi9HL~ywhGjcoNgSvsANnET99rogmSu-FmXAE25f7qsA3EQkK8d4Y9Td5hr9VA9JbxJeEqLEoRZG9C-~PUq8samjwrQhFwvWDlXMIt5~Vrs6mIImbK73u7OFBvXbojLeCbdw0dzY5D1A3Z5TS8uMj68x2Uw__"
+  },
+  {
+    "id": 5,
+    "name": "Café del Arte",
+    "location": "Location ID 5",
+    "phone": "915678123",
+    "reviews": [],
+    "averageRating": 4.2,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Café+del+Arte",
+    "logo": "https://s3-alpha-sig.figma.com/img/77bc/0761/5cbbd82d9e049b6af9cd75b89bf89475?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=f-d8WW6s5LJty8Ow2tSH9Q0W5POpZC5SRRWk9h02ufqc8mEEbozkqThhB3CsHAGpB4in6882CpYeqfgehq4wmmve8~Nv1ehGoi1vwxpc0OOgAS9xor2n4QVivqRWvcA3T3hCEqYGXt-8lPq0KgR1nX1jMnouHkctI0ABE36Y6WHTFfY08xIcoRvNwVsuUGmRj89A1OU~SEJY~QB51nC~wxeBYFcjb9rYVFUmE1w7keE2HVFbwx6b7~ua7g56UxdoY-ATI9RX0H0Zo6Buc-emZ7AvAtXtBxUaYk4x3~icem0dlkLMdTNU9giq8CHS3INpPItnR35MxIYvv7Xkb29YSw__"
+  },
+  {
+    "id": 6,
+    "name": "Pescados Frescos",
+    "location": "Location ID 6",
+    "phone": null,
+    "reviews": [{ "id": 1, "review": "Fresh seafood every time!" }],
+    "averageRating": 4.9,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Pescados+Frescos",
+    "logo": "https://s3-alpha-sig.figma.com/img/f4ef/65b6/f1c4a4186ef32bdc56ab2bba34cd4486?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Q9Gi~3am6AsjBegqHe1gQ76n0a~8JAc0jCoTAF4ywlLnuUgK0KiUGhx5rJXN0iQ4sGNQXv45WlyIY5SA~vQY8VER3v4V2gwufuZ~7mCsIAcIX6Cw8VBxKtUd2GgmO7VcMR4YiOHFc~K1DNRSGLhOrAsy62YlltqXcf9hafMN1fwp3dtCtjQalnKnA8UgBEza8Q0Oh2s1wyYcSgmlcaYOzAh~H6vFKIjQTlm6qyoGHjQcCdz8azfQnrtFhmLcZ55kU3olOTyRWpabZv7KLn4ZsTimpvxmxWSpG~CrNGaLgnsqMU0WLznWNXV28jYqWkaHsutyyk9fPAZ-qVq5x0mxeg__"
+  },
+  {
+    "id": 7,
+    "name": "La Parrilla de Luis",
+    "location": "Location ID 7",
+    "phone": "957654321",
+    "reviews": [],
+    "averageRating": 4.4,
+    "image": "https://dummyimage.com/200x200/000/fff&text=La+Parrilla+de+Luis",
+    "logo": "https://s3-alpha-sig.figma.com/img/8b42/532d/3e24ecb4e25a862cb3bcf56810e7f4a7?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=AK22fADFArL0k~mY5BbX8us64lw9SxzG-IhEo8kijFypwTW9xUXxp0gwNT1NuUK6ZNp1GA-rsi0M3~Cfn1HjIMh2vZEHlkUZHdjOiA-P4-ZUf9HP02ESHB8pJpK13F4Ed-olUBVH15KTVBvTMuY4NpNGTwFCWMthF6Ku3C4jM2bbpFojEktGKZNjwuOMux5euHJXcUHGs-94qlLVVzVRo27tIkjYnN2ZlO5YWHxoBqWBNnoKaESxBiT71itztpc5BwzO2SxUuoto4rK7IxzrEGvmnBBg-fB~t9dic6AVzjAK4CaGjI9BMwSJfH4hiIThQGfkM5GUNAZlV5EW7XnkxQ__"
+  },
+  {
+    "id": 8,
+    "name": "Dulce Tentación",
+    "location": "Location ID 8",
+    "phone": "958123456",
+    "reviews": [],
+    "averageRating": 4.1,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Dulce+Tentación",
+    "logo": "https://s3-alpha-sig.figma.com/img/f935/7f6a/f1ec29fc0dc7e5345ca9d7faae57fde4?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mTgOcj5Rzny0Jjp3EakzpEK~FgpwJIpPxoI8Cs24Lg~jnhfIALAUxNf0PW0ICLys4GCovkbJW3S3xbdPy3j~IEpBXG5burHhGM0e9d-rROu2MOIBECBnmXFix7yOZ3QX3rEXUjFN8aMvE1QQJNvxIQYIu0A2jLb3B38Hih54AoHRXEtjnUbkPyapX-uCV0RzBiWXGYeKcY7bFcE2v3SBn~qM-V2~00YuYNRV5Ajvez5ME8guKXyVijG9otHz9gVUk8XN5tPbXGj~IQXu5xrqT9kX9r-0st2k201WN54AeBjkwPmt4OPgdKUQW-lWLmV~MS8l2BckJfwjAG82R3LDVQ__"
+  },
+  {
+    "id": 9,
+    "name": "Burger & Fries",
+    "location": "Location ID 9",
+    "phone": "951234567",
+    "reviews": [{ "id": 1, "review": "The burgers are huge and tasty!" }],
+    "averageRating": 4.3,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Burger+&+Fries",
+    "logo": "https://s3-alpha-sig.figma.com/img/8c87/1d45/909c92f99aea8e39c24beef542bd4094?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EiGuDgQeeAe1JvqGniOixNzRIJwY-RtAQsv52m0~eTe0LFIvIThTzxjuyw-PFrtD~~pifcIXoQp4FroBYUYa0NtL2hniUY8dp7DptR-f1mjMXs-hMzR8rRsIUyFl8QGvy44ys1geg0bh3~ymBWsS6S-JEh3WndQHd2zaJ-jqKU8Mmn3uww7XtiT6ZGqbN7NLMqFHc5YoDPTfQl8lpAbcvo7VoDaQO6FIMS8-4a9lQ-bj4JNq8DKUKUR2z7bjecZAs-wo67bqmQ5PO9ZHstLrBcyicOy4-hpk-7LBu~1vWmyrhCcAhQ1SpL0GoVopf6vAp3MFslczRGNFmWXsUtI1gw__"
+  },
+  {
+    "id": 10,
+    "name": "Pizza Rápida",
+    "location": "Location ID 10",
+    "phone": null,
+    "reviews": [],
+    "averageRating": 4.0,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Pizza+Rápida",
+    "logo": "https://s3-alpha-sig.figma.com/img/f935/7f6a/f1ec29fc0dc7e5345ca9d7faae57fde4?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mTgOcj5Rzny0Jjp3EakzpEK~FgpwJIpPxoI8Cs24Lg~jnhfIALAUxNf0PW0ICLys4GCovkbJW3S3xbdPy3j~IEpBXG5burHhGM0e9d-rROu2MOIBECBnmXFix7yOZ3QX3rEXUjFN8aMvE1QQJNvxIQYIu0A2jLb3B38Hih54AoHRXEtjnUbkPyapX-uCV0RzBiWXGYeKcY7bFcE2v3SBn~qM-V2~00YuYNRV5Ajvez5ME8guKXyVijG9otHz9gVUk8XN5tPbXGj~IQXu5xrqT9kX9r-0st2k201WN54AeBjkwPmt4OPgdKUQW-lWLmV~MS8l2BckJfwjAG82R3LDVQ__"
+  },
+  {
+    "id": 11,
+    "name": "Cocina Vegetariana",
+    "location": "Location ID 11",
+    "phone": "962345678",
+    "reviews": [{ "id": 1, "review": "A great option for vegetarians!" }],
+    "averageRating": 4.5,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Cocina+Vegetariana",
+    "logo": "https://s3-alpha-sig.figma.com/img/c261/4391/b0b45f88ee36b3c4f3caa78becc59638?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mCxQbfuqYDWIj~P4z4fVv9CH2QoA8fjSACNqw5lY~P0yvYA9DionQmgAZzaeKR7HK0y24pgt7oF3JDInFJ9q1Fo0xtHWC-oMOg2sLOAgH72Xpb-Hm9GRXx4RjpN-nqx9EK2teZyx-I4pdH13-JxIICIqAmXabArB8egFTWJLgEFfbHq-DAauDb30znflnngFdPtuUwvx6yP~DV8PnXl3wCGIiI1JyMpiBZkycKrZ1p-DXGvQNNIEOUIbKQHWx-OvXFr6Q3vheKIxmM29KnrwMmuEC9mU3tf22g8~ltS7ekbkibgylnwG7tg70~rjdOokQL6BHqM-84sXXnA28BQhAw__"
+  },
+  {
+    "id": 12,
+    "name": "La Casa de la Empanada",
+    "location": "Location ID 12",
+    "phone": "965432109",
+    "reviews": [],
+    "averageRating": 4.6,
+    "image": "https://dummyimage.com/200x200/000/fff&text=La+Casa+de+la+Empanada",
+    "logo": "https://s3-alpha-sig.figma.com/img/b8a6/2b3c/77828b414d55450a1e22e303b44eccbb?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hCcUrgI-Im~7CONTx64NAPIE2OwBN7o~Lvq5XbuccpF4Kjjpfq0mMHUYIK3MWDnvJPCfKv-D98CBwhDBUtbF8meSry1gRvpZBQX4uC~WrvaQ2eVktSTmtxMRpS6c2T7j0G9vU-h8gYgYrQJDbA87~fL7W1HSBXKvmqFZeA~D68j0TM6hxcK50AbKnu1GVe53i7p4ecAUlpyQTH04nXDb2RC7jMylpIQNkE2ZT6l09XRDEkM9jxPmsnalIRKMk3940jR4-jMgWQXwzs66wgUhfDrmTbj1cnrYa3a~66aNn0K-kDjGMy7gmj06X5FQGDrPu-mGYX0smY~dkgFFXU713Q__"
+  },
+  {
+    "id": 13,
+    "name": "Pasta al Dente",
+    "location": "Location ID 13",
+    "phone": "912345123",
+    "reviews": [],
+    "averageRating": 4.2,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Pasta+al+Dente",
+    "logo": "https://s3-alpha-sig.figma.com/img/ce9d/550f/2e90dbf0df71c4c514dc351b55fe12e8?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V6oYD7pZin67WivzbrLd2gtGBBiJYXg3M-xb3L5bk6z8UnjPE7MaR~X~Ql1UlZWql9EYZEUg-BFtpuZPDW9f3ajUGhte-3LhY8bAY5y7uzKlSSyGl4rrJP144L6FxPkOnjvTT3Gn6igYg-IF~4qDcLYH8bnBVAdXi60Z54bIOv8-k7YcbYXlmR~48zwMvx3jX5hgJB0FGysAN8-96DIyb6M0vZIazt6Kg0wSJbkJAYKnCyI1zhk-mFbClNv0qmJm1Xxh6UXwULycakEF7bIHvMWQq97VSNZ7hhhURd90~quaUb~NWa7l7yxPwTPYEV61JYMemVxQbSyLA-1dqt1Ykw__"
+  },
+  {
+    "id": 14,
+    "name": "Taco Fiesta",
+    "location": "Location ID 14",
+    "phone": null,
+    "reviews": [],
+    "averageRating": 4.1,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Taco+Fiesta",
+    "logo": "https://s3-alpha-sig.figma.com/img/b5dd/ca6f/7ebc09803c4b9924df08d858d425536d?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QfIafkbGaHd1UJgy2ysUasIM5RC9kGS9BpxTC356ORy422ewSy-Cg24DBOPqN9p0Al7SeUeNf9l-oVX22Ik3-wFn~G9wKHUaOPCBJwtOc2t1rBgxyaFQxkZwjktRSHvDm~~uPtK~XbeVLCQs9jEHxwfAGDo2uuRYqiGLZaEK6bIQjs2yhoSafNMt71qvi9HL~ywhGjcoNgSvsANnET99rogmSu-FmXAE25f7qsA3EQkK8d4Y9Td5hr9VA9JbxJeEqLEoRZG9C-~PUq8samjwrQhFwvWDlXMIt5~Vrs6mIImbK73u7OFBvXbojLeCbdw0dzY5D1A3Z5TS8uMj68x2Uw__"
+  },
+  {
+    "id": 15,
+    "name": "Sazón Tradicional",
+    "location": "Location ID 15",
+    "phone": "944567890",
+    "reviews": [],
+    "averageRating": 4.3,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Sazón+Tradicional",
+    "logo": "https://s3-alpha-sig.figma.com/img/77bc/0761/5cbbd82d9e049b6af9cd75b89bf89475?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=f-d8WW6s5LJty8Ow2tSH9Q0W5POpZC5SRRWk9h02ufqc8mEEbozkqThhB3CsHAGpB4in6882CpYeqfgehq4wmmve8~Nv1ehGoi1vwxpc0OOgAS9xor2n4QVivqRWvcA3T3hCEqYGXt-8lPq0KgR1nX1jMnouHkctI0ABE36Y6WHTFfY08xIcoRvNwVsuUGmRj89A1OU~SEJY~QB51nC~wxeBYFcjb9rYVFUmE1w7keE2HVFbwx6b7~ua7g56UxdoY-ATI9RX0H0Zo6Buc-emZ7AvAtXtBxUaYk4x3~icem0dlkLMdTNU9giq8CHS3INpPItnR35MxIYvv7Xkb29YSw__"
+  },
+  {
+    "id": 16,
+    "name": "Crepas Gourmet",
+    "location": "Location ID 16",
+    "phone": "955678901",
+    "reviews": [],
+    "averageRating": 4.7,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Crepas+Gourmet",
+    "logo": "https://s3-alpha-sig.figma.com/img/f4ef/65b6/f1c4a4186ef32bdc56ab2bba34cd4486?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Q9Gi~3am6AsjBegqHe1gQ76n0a~8JAc0jCoTAF4ywlLnuUgK0KiUGhx5rJXN0iQ4sGNQXv45WlyIY5SA~vQY8VER3v4V2gwufuZ~7mCsIAcIX6Cw8VBxKtUd2GgmO7VcMR4YiOHFc~K1DNRSGLhOrAsy62YlltqXcf9hafMN1fwp3dtCtjQalnKnA8UgBEza8Q0Oh2s1wyYcSgmlcaYOzAh~H6vFKIjQTlm6qyoGHjQcCdz8azfQnrtFhmLcZ55kU3olOTyRWpabZv7KLn4ZsTimpvxmxWSpG~CrNGaLgnsqMU0WLznWNXV28jYqWkaHsutyyk9fPAZ-qVq5x0mxeg__"
+  },
+  {
+    "id": 17,
+    "name": "El Rincón del Vino",
+    "location": "Location ID 17",
+    "phone": "911234567",
+    "reviews": [],
+    "averageRating": 4.8,
+    "image": "https://dummyimage.com/200x200/000/fff&text=El+Rincón+del+Vino",
+    "logo": "https://s3-alpha-sig.figma.com/img/8b42/532d/3e24ecb4e25a862cb3bcf56810e7f4a7?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=AK22fADFArL0k~mY5BbX8us64lw9SxzG-IhEo8kijFypwTW9xUXxp0gwNT1NuUK6ZNp1GA-rsi0M3~Cfn1HjIMh2vZEHlkUZHdjOiA-P4-ZUf9HP02ESHB8pJpK13F4Ed-olUBVH15KTVBvTMuY4NpNGTwFCWMthF6Ku3C4jM2bbpFojEktGKZNjwuOMux5euHJXcUHGs-94qlLVVzVRo27tIkjYnN2ZlO5YWHxoBqWBNnoKaESxBiT71itztpc5BwzO2SxUuoto4rK7IxzrEGvmnBBg-fB~t9dic6AVzjAK4CaGjI9BMwSJfH4hiIThQGfkM5GUNAZlV5EW7XnkxQ__"
+  },
+  {
+    "id": 18,
+    "name": "Sabores de la Tierra",
+    "location": "Location ID 18",
+    "phone": null,
+    "reviews": [],
+    "averageRating": 4.4,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Sabores+de+la+Tierra",
+    "logo": "https://s3-alpha-sig.figma.com/img/f935/7f6a/f1ec29fc0dc7e5345ca9d7faae57fde4?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mTgOcj5Rzny0Jjp3EakzpEK~FgpwJIpPxoI8Cs24Lg~jnhfIALAUxNf0PW0ICLys4GCovkbJW3S3xbdPy3j~IEpBXG5burHhGM0e9d-rROu2MOIBECBnmXFix7yOZ3QX3rEXUjFN8aMvE1QQJNvxIQYIu0A2jLb3B38Hih54AoHRXEtjnUbkPyapX-uCV0RzBiWXGYeKcY7bFcE2v3SBn~qM-V2~00YuYNRV5Ajvez5ME8guKXyVijG9otHz9gVUk8XN5tPbXGj~IQXu5xrqT9kX9r-0st2k201WN54AeBjkwPmt4OPgdKUQW-lWLmV~MS8l2BckJfwjAG82R3LDVQ__"
+  },
+  {
+    "id": 19,
+    "name": "Mariscos del Pacífico",
+    "location": "Location ID 19",
+    "phone": "956789012",
+    "reviews": [],
+    "averageRating": 4.6,
+    "image": "https://dummyimage.com/200x200/000/fff&text=Mariscos+del+Pacífico",
+    "logo": "https://s3-alpha-sig.figma.com/img/8c87/1d45/909c92f99aea8e39c24beef542bd4094?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EiGuDgQeeAe1JvqGniOixNzRIJwY-RtAQsv52m0~eTe0LFIvIThTzxjuyw-PFrtD~~pifcIXoQp4FroBYUYa0NtL2hniUY8dp7DptR-f1mjMXs-hMzR8rRsIUyFl8QGvy44ys1geg0bh3~ymBWsS6S-JEh3WndQHd2zaJ-jqKU8Mmn3uww7XtiT6ZGqbN7NLMqFHc5YoDPTfQl8lpAbcvo7VoDaQO6FIMS8-4a9lQ-bj4JNq8DKUKUR2z7bjecZAs-wo67bqmQ5PO9ZHstLrBcyicOy4-hpk-7LBu~1vWmyrhCcAhQ1SpL0GoVopf6vAp3MFslczRGNFmWXsUtI1gw__"
+  },
+  {
+    "id": 20,
+    "name": "El Jardín Secreto",
+    "location": "Location ID 20",
+    "phone": "968765432",
+    "reviews": [{ "id": 1, "review": "A hidden gem with lovely ambiance!" }],
+    "averageRating": 4.9,
+    "image": "https://dummyimage.com/200x200/000/fff&text=El+Jardín+Secreto",
+    "logo": "https://s3-alpha-sig.figma.com/img/f4ef/65b6/f1c4a4186ef32bdc56ab2bba34cd4486?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Q9Gi~3am6AsjBegqHe1gQ76n0a~8JAc0jCoTAF4ywlLnuUgK0KiUGhx5rJXN0iQ4sGNQXv45WlyIY5SA~vQY8VER3v4V2gwufuZ~7mCsIAcIX6Cw8VBxKtUd2GgmO7VcMR4YiOHFc~K1DNRSGLhOrAsy62YlltqXcf9hafMN1fwp3dtCtjQalnKnA8UgBEza8Q0Oh2s1wyYcSgmlcaYOzAh~H6vFKIjQTlm6qyoGHjQcCdz8azfQnrtFhmLcZ55kU3olOTyRWpabZv7KLn4ZsTimpvxmxWSpG~CrNGaLgnsqMU0WLznWNXV28jYqWkaHsutyyk9fPAZ-qVq5x0mxeg__"
+  }
+]
