@@ -7,7 +7,7 @@ import { SlSocialInstagram } from 'react-icons/sl';
 
 export default function Footer() {
   return (
-    <footer className='bg-[#F5D03A] grid sm:grid-cols-[1fr_3.5fr] relative  overflow-hidden min-h-[274px]'>
+    <footer className='bg-[#F5D03A] text-white-color grid sm:grid-cols-[1fr_3.5fr] relative  overflow-hidden min-h-[274px]'>
       <div className='h-full sm:block hidden'>
         <Image
           src='/img/women.png'
