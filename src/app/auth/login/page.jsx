@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
+import Link from "next/link";
 
 function LoginPage() {
   const {
@@ -32,19 +33,22 @@ function LoginPage() {
   });
 
   return (
-    <div className="h-[calc(100vh-7rem)] flex justify-center items-center">
-      <form onSubmit={onSubmit} className="w-1/4">
+    <div className="h-[calc(100vh-7rem)] w-screen  flex justify-center items-center">
+      <form onSubmit={onSubmit} 
+      className="rounded-xl shadow-xl w-full max-w-[400px] py-5 px-4 border-[#F5D03A59] border-solid border-[1px]
+       flex flex-col gap-6 items-center">
 
         {error && (
           <p className="bg-red-500 text-lg text-white p-3 rounded mb-2">{error}</p>
         )}
 
-        <h1 className="text-slate-200 font-bold text-4xl mb-4">Login</h1>
-
-        <label htmlFor="email" className="text-slate-500 mb-2 block text-sm">
+        <h1 className="text-[#F5D03A] font-bold text-2xl  ">¡Bienvenido!</h1>
+        <p className="text-[14px] font-normal">Ingresa con tu cuenta</p>
+        {/*<label htmlFor="email" className="text-slate-500 mb-2 block text-sm">
           Email:
-        </label>
+        </label>//*/}
         <input
+         autoFocus
           type="email"
           {...register("email", {
             required: {
@@ -52,7 +56,7 @@ function LoginPage() {
               message: "Email is required",
             },
           })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
+          className="p-2 text-[14px] rounded-xl block mb-2 bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full"
           placeholder="user@email.com"
         />
 
@@ -60,9 +64,9 @@ function LoginPage() {
           <span className="text-red-500 text-xs">{errors.email.message}</span>
         )}
 
-        <label htmlFor="password" className="text-slate-500 mb-2 block text-sm">
+        {/*<label htmlFor="password" className="text-slate-500 mb-2 block text-sm">
           Password:
-        </label>
+        </label>*/}
         <input
           type="password"
           {...register("password", {
@@ -71,7 +75,7 @@ function LoginPage() {
               message: "Password is required",
             },
           })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
+          className="p-2 text-[14px] rounded-xl block mb-2 bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full"
           placeholder="******"
         />
 
@@ -81,10 +85,16 @@ function LoginPage() {
           </span>
         )}
 
-        <button className="w-full bg-blue-500 text-white p-3 rounded-lg mt-2">
-          Login
+        <button 
+        className=" transition-colors w-full max-w-[300px] bg-[#F5D03A] text-white py-[5px] font-bold rounded-lg mt-2
+         hover:bg-yellow-900  ">
+          Iniciar sesión
         </button>
+        <Link
+        className="text-[#D2AB0B] font-medium underline transition-colors hover:text-yellow-700" 
+        href={'register'}>No tienes una cuenta? regístrate</Link>
       </form>
+     
     </div>
   );
 }
