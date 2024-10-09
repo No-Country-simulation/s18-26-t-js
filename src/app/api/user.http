@@ -1,0 +1,28 @@
+### GET request
+GET http://localhost:3000/api/hello
+Content-Type: application/json
+
+
+### Crear un nuevo usuario
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "test2",
+    "email": "test2@test.com",
+    "password": "123"
+}
+
+### Obtener CSRF token
+GET http://localhost:3000/api/auth/csrf
+
+
+### Login con CSRF token
+POST http://localhost:3000/api/auth/signin
+Content-Type: application/json
+
+{
+  "csrfToken": "63d8797aa8e96fb5e615199bf3d5edf337db0d2d20badb2a4e9b96effd07bba6",
+  "email": "test@test.com",
+  "password": "123"
+}

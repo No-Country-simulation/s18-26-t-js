@@ -8,24 +8,26 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
-}
-
 // datasource db {
-//   provider = "sqlite"
-//   url      = "file:./dev.db" 
+//   provider = "mysql"
+//   url      = env("DATABASE_URL")
 // }
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db" 
+}
 
 // -------- MODELOS -------
 
-model Usuario {
-  id        Int       @id @default(autoincrement())
-  username  String    @unique
-  email     String    @unique
-  password  String
-  reviews   Review[]
+model User {
+  id           Int @id @default(autoincrement())
+  username     String @unique
+  email        String @unique
+  password     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  reviews      Review[]
 }
 
 model Restaurante {
@@ -38,13 +40,12 @@ model Restaurante {
   imagen          String?   // URL de la imagen del restaurante
 }
 
-
 model Review {
   id             Int       @id @default(autoincrement())
   comentario     String
   calificacion   Int       // (1-5)
   id_restaurante Int
-  id_usuario     Int
+  id_user        Int
   restaurante    Restaurante @relation(fields: [id_restaurante], references: [id])
-  usuario        Usuario     @relation(fields: [id_usuario], references: [id])
+  user           User        @relation(fields: [id_user], references: [id])
 }
