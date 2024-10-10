@@ -4,8 +4,10 @@ import { signIn } from "next-auth/react";
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 import Link from "next/link";
+import { BiLoader } from "react-icons/bi";
 
 function LoginPage() {
+  const [Loading, setLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -16,7 +18,7 @@ function LoginPage() {
   
   const onSubmit = handleSubmit(async (data) => {
     console.log(data);
-
+    setLoading(true)
     const res = await signIn("credentials", {
       email: data.email,
       password: data.password,
@@ -25,15 +27,17 @@ function LoginPage() {
 
     console.log(res)
     if (res.error) {
+      setLoading(false);
       setError(res.error)
     } else {
+      setLoading(false)
       router.push('/')
       router.refresh()
     }
   });
 
   return (
-    <div className="h-[calc(100vh-7rem)] w-screen  flex justify-center items-center">
+    <div className="h-screen   flex justify-center items-center">
       <form onSubmit={onSubmit} 
       className="rounded-xl shadow-xl w-full max-w-[400px] py-5 px-4 border-[#F5D03A59] border-solid border-[1px]
        flex flex-col gap-6 items-center">
@@ -86,10 +90,13 @@ function LoginPage() {
         )}
 
         <button 
-        className=" transition-colors w-full max-w-[300px] bg-[#F5D03A] text-white py-[5px] font-bold rounded-lg mt-2
-         hover:bg-yellow-900  ">
+        className={` transition-colors w-full max-w-[300px] bg-[#F5D03A] text-white py-[5px] font-bold rounded-lg mt-2
+         hover:bg-yellow-900   ${Loading ? 'bg-slate-500' : 'bg-[#F5D03A]' }`}
+         disabled = { Loading} >
           Iniciar sesión
         </button>
+        { <div className={`transition-all flex items-center ${ Loading ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
+           >Por favor <BiLoader className="animate-spin"/>espere</div>}
         <Link
         className="text-[#D2AB0B] font-medium underline transition-colors hover:text-yellow-700" 
         href={'register'}>No tienes una cuenta? regístrate</Link>
