@@ -2,8 +2,12 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { BiLoader } from "react-icons/bi";
+import { useState } from "react";
 
 function RegisterPage() {
+ 
+  const [Loading, setLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -15,7 +19,7 @@ function RegisterPage() {
     if (data.password !== data.confirmPassword) {
       return alert("Passwords do not match");
     }
-
+      setLoading(true);
     const res = await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({
@@ -28,20 +32,25 @@ function RegisterPage() {
       },
     });
 
+     
     if (res.ok) {
+     setLoading(false)
       router.push("/auth/login");
+    } else {
+      alert('Error al  registrarse')
+      setLoading(false)
     }
   });
 
   console.log(errors);
 
   return (
-    <div className="h-[calc(100vh-7rem)] w-screen  flex justify-center items-center">
+    <div className="h-screen   flex justify-center items-center">
       <form onSubmit={onSubmit} className="rounded-xl shadow-xl w-full max-w-[400px] py-5 px-4 border-[#F5D03A59] border-solid border-[1px]
        flex flex-col gap-5 items-center">
          <h1 className="text-[#F5D03A] font-bold text-2xl  ">¡Bienvenido!</h1>
-         <p className="text-[14px] font-normal">Ingresa con tu cuenta</p>
-        <input
+          <p className="text-[14px] font-normal">Ingresa con tu cuenta</p>
+        <input 
           type="text"
           autoFocus
           {...register("username", {
@@ -110,10 +119,15 @@ function RegisterPage() {
           </span>
         )}
 
-        <button className="transition-colors w-full max-w-[300px] bg-[#F5D03A]
-         text-white py-[5px] font-bold rounded-lg mt-2 hover:bg-yellow-900 ">
+        <button className={`transition-colors w-full max-w-[300px] 
+         text-white py-[5px] font-bold rounded-lg mt-2 hover:bg-yellow-900 
+         ${Loading ? 'bg-slate-500' : 'bg-[#F5D03A]' }`}
+         disabled = { Loading}
+         >
           Register
         </button>
+        { <div className={`transition-all flex items-center ${ Loading ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
+           >Por favor <BiLoader className="animate-spin"/>espere</div>}
         <Link
         className="text-[#D2AB0B] font-medium underline transition-colors hover:text-yellow-700" 
         href={'login'}>Tienes una cuenta? inicia sesión</Link>
