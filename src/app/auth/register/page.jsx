@@ -1,6 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function RegisterPage() {
   const {
@@ -35,22 +36,22 @@ function RegisterPage() {
   console.log(errors);
 
   return (
-    <div className="h-[calc(100vh-7rem)] flex justify-center items-center">
-      <form onSubmit={onSubmit} className="w-1/4">
-        <h1 className="text-slate-200 font-bold text-4xl mb-4">Register</h1>
-
-        <label htmlFor="username" className="text-slate-500 mb-2 block text-sm">
-          Username:
-        </label>
+    <div className="h-[calc(100vh-7rem)] w-screen  flex justify-center items-center">
+      <form onSubmit={onSubmit} className="rounded-xl shadow-xl w-full max-w-[400px] py-5 px-4 border-[#F5D03A59] border-solid border-[1px]
+       flex flex-col gap-5 items-center">
+         <h1 className="text-[#F5D03A] font-bold text-2xl  ">¡Bienvenido!</h1>
+         <p className="text-[14px] font-normal">Ingresa con tu cuenta</p>
         <input
           type="text"
+          autoFocus
           {...register("username", {
             required: {
               value: true,
               message: "Username is required",
             },
           })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
+          className="p-2 text-[14px] rounded-xl block mb-2 
+          bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full"
           placeholder="yourUser123"
         />
 
@@ -60,9 +61,6 @@ function RegisterPage() {
           </span>
         )}
 
-        <label htmlFor="email" className="text-slate-500 mb-2 block text-sm">
-          Email:
-        </label>
         <input
           type="email"
           {...register("email", {
@@ -71,16 +69,13 @@ function RegisterPage() {
               message: "Email is required",
             },
           })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
+          className="p-2 text-[14px] rounded-xl block mb-2 bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full"
           placeholder="user@email.com"
         />
         {errors.email && (
           <span className="text-red-500 text-xs">{errors.email.message}</span>
         )}
 
-        <label htmlFor="password" className="text-slate-500 mb-2 block text-sm">
-          Password:
-        </label>
         <input
           type="password"
           {...register("password", {
@@ -89,7 +84,7 @@ function RegisterPage() {
               message: "Password is required",
             },
           })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
+          className="p-2 text-[14px] rounded-xl block mb-2 bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full"
           placeholder="********"
         />
         {errors.password && (
@@ -98,12 +93,6 @@ function RegisterPage() {
           </span>
         )}
 
-        <label
-          htmlFor="confirmPassword"
-          className="text-slate-500 mb-2 block text-sm"
-        >
-          Confirm Password:
-        </label>
         <input
           type="password"
           {...register("confirmPassword", {
@@ -112,7 +101,7 @@ function RegisterPage() {
               message: "Confirm Password is required",
             },
           })}
-          className="p-3 rounded block mb-2 bg-slate-900 text-slate-300 w-full"
+          className="p-2 text-[14px] rounded-xl block mb-2 bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full"
           placeholder="********"
         />
         {errors.confirmPassword && (
@@ -121,9 +110,13 @@ function RegisterPage() {
           </span>
         )}
 
-        <button className="w-full bg-blue-500 text-white p-3 rounded-lg mt-2">
+        <button className="transition-colors w-full max-w-[300px] bg-[#F5D03A]
+         text-white py-[5px] font-bold rounded-lg mt-2 hover:bg-yellow-900 ">
           Register
         </button>
+        <Link
+        className="text-[#D2AB0B] font-medium underline transition-colors hover:text-yellow-700" 
+        href={'login'}>Tienes una cuenta? inicia sesión</Link>
       </form>
     </div>
   );
