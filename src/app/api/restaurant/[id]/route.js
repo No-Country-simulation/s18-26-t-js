@@ -29,12 +29,12 @@ export async function GET(req, { params }) {
 export async function PUT(req, { params }) {
   const { id } = params;
   const body = await req.json();
-  const { name, city, location, phone, averageRating, imageUrl} = body;
+  const { name, city, location, phone, averageRating, imageUrl, logoUrl, description} = body;
 
   try {
     const restaurantUpdate = await prisma.restaurant.update({
       where: { id: parseInt(id) },
-      data: { name, city, location, phone, averageRating, imageUrl},
+      data: { name, city, location, phone, averageRating, imageUrl, logoUrl, description},
     });
 
     return NextResponse.json(restaurantUpdate, { status: 200 });

@@ -15,7 +15,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db" 
+  url      = "file:./dev.db"
 }
 
 // -------- MODELOS -------
@@ -31,26 +31,28 @@ model User {
 }
 
 model Restaurant {
-  id                 Int       @id @default(autoincrement())
-  name               String
-  city               String
-  location           String
-  phone              String?
-  reviews            Review[]
-  averageRating      Float?    @default(0)
-  imageUrl           String?   // Restaurant image URL
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  name          String
+  city          String
+  location      String
+  phone         String?
+  reviews       Review[]
+  averageRating Float?   @default(0)
+  imageUrl      String? // Restaurant image URL
+  logoUrl          String? // Restaurant logo URL
+  description   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Review {
-  id             Int       @id @default(autoincrement())
-  comment        String?
-  rating         Int       // 1 - 5
-  restaurantId   Int
-  userId         Int
-  images         String?     @default("")
-  createdAt      DateTime    @default(now())
-  restaurant     Restaurant  @relation(fields: [restaurantId], references: [id])
-  user           User        @relation(fields: [userId], references: [id])
+  id           Int        @id @default(autoincrement())
+  comment      String?
+  rating       Int // 1 - 5
+  restaurantId Int
+  userId       Int
+  images       String?    @default("")
+  createdAt    DateTime   @default(now())
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
 }

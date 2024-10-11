@@ -22,7 +22,7 @@ export async function GET() {
 export async function POST(req) {
   try {
     const body = await req.json(); // Parsear el cuerpo de la solicitud
-    const { name, city, location, phone, averageRating, imageUrl} = body;
+    const { name, city, location, phone, averageRating, imageUrl, logoUrl, description} = body;
 
     const newRestaurant = await prisma.restaurant.create({
       data: {
@@ -32,6 +32,8 @@ export async function POST(req) {
         phone,
         averageRating,
         imageUrl,
+        logoUrl,
+        description,
       },
     });
     return NextResponse.json(newRestaurant, { status: 201 });
