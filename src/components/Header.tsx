@@ -1,5 +1,5 @@
-import { BiSearch, BiUserCircle } from 'react-icons/bi';
-
+import { BiSearch } from 'react-icons/bi';
+import UserMenuHeader from '@/components/UserMenuHeader';
 export default function Header() {
   return (
     <header className='grid grid-flow-col py-5 md:px-20 sm:px-10 px-2 bg-[#FFFFFA] shadow-lg gap-2'>
@@ -16,13 +16,7 @@ export default function Header() {
           <BiSearch className='ml-auto' color='#FB6800' size={19} />
         </div>
       </div>
-      <div className='flex justify-end items-center'>
-        <BiUserCircle
-          color='#FB6800'
-          size={32}
-          className='hover:cursor-pointer'
-        />
-      </div>
+      <UserMenuHeader />
     </header>
   );
 }
