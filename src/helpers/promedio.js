@@ -1,29 +1,28 @@
 import db from '@/libs/db'
 
-export default async function actualizarPromedio (restauranteId) {
+export default async function actualizarPromedio (restaurantId) {
   
-  console.log(restauranteId)
   // Obtener reseñas del restaurante...
   const reviews = await db.review.findMany({
     where: {
-      id_restaurante: restauranteId,
+      restaurantId,
     }
   });
 
   // 3. Promedio...
-  let calificacionPromedio = 0;
+  let averageRating = 0;
   if (reviews.length > 0) {
-    const sumaCalificaciones = reviews.reduce((total, review) => total + review.calificacion, 0);
-    calificacionPromedio = Math.round(sumaCalificaciones / reviews.length);
+    const sumaCalificaciones = reviews.reduce((total, review) => total + review.rating, 0);
+    averageRating = Math.round(sumaCalificaciones / reviews.length);
   }
 
   // 4. Actualizar la calificacion.. .
-  await db.restaurante.update({
+  await db.restaurant.update({
     where: { 
-      id: restauranteId
+      id: restaurantId
     },
     data: { 
-      calificacionPromedio 
+      averageRating 
     },
   });
 

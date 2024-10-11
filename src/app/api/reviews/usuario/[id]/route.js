@@ -4,16 +4,15 @@ import { NextResponse } from 'next/server'
 // Get all reviews by user ID
 export async function GET(request, {params}) {
   const { id } = params;
-  console.log(id);
   try {
     const reviews = await db.review.findMany({
       where: {
-        id_user: Number(id),
+        userId: Number(id),
       },
       select: {
         id: true,
-        comentario: true,
-        calificacion: true,
+        comment: true,
+        rating: true,
         images: true,
         createdAt: true,
         // user: {
@@ -22,7 +21,7 @@ export async function GET(request, {params}) {
         //     username: true,
         //   }
         // },
-        restaurante: {
+        restaurant: {
           select: {
             id: true,
             name: true,
