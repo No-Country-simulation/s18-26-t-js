@@ -7,15 +7,16 @@ Content-Type: application/x-www-form-urlencoded
 
 csrfToken=be1dbfc5031c91756123bb8ac821fbb9f0c8b6b9d2c52d1024c84d4a985d8f74&email=test@test.com&password=123
 
+
 ### Crear una nueva reseña
 POST http://localhost:3000/api/reviews
 Content-Type: application/json
 
 {
-  "comentario": "Restaurante3 user4",
-  "calificacion": 4,
-  "id_restaurante": 3,
-  "id_user": 4
+  "comment": "Restaurante3 user4",
+  "rating": 4,
+  "restaurantId": 3,
+  "userId": 4
 }
 
 ### Obtener todas las reseñas
@@ -29,7 +30,7 @@ PUT http://localhost:3000/api/reviews/14
 Content-Type: application/json
 
 {
-  "comentario": "Actualizacion del comentario"
+  "comment": "Actualizacion del comentario"
 }
 
 ### Actualizar una reseña por ID
@@ -37,7 +38,7 @@ PUT http://localhost:3000/api/reviews/14
 Content-Type: application/json
 
 {
-  "calificacion": 1
+  "rating": 1
 }
 
 ### Eliminar una reseña por ID
