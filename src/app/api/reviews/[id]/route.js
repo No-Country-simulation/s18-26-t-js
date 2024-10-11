@@ -13,8 +13,8 @@ export async function GET(request, {params}) {
       },
       select: {
         id: true,
-        comentario: true,
-        calificacion: true,
+        comment: true,
+        rating: true,
         images: true,
         createdAt: true,
         user: {
@@ -23,7 +23,7 @@ export async function GET(request, {params}) {
             username: true,
           }
         },
-        restaurante: {
+        restaurant: {
           select: {
             id: true,
             name: true,
@@ -31,7 +31,6 @@ export async function GET(request, {params}) {
         }
       }
     });
-    console.log(review);
     return NextResponse.json(review);
   } catch (e) {
     console.log(e);
@@ -43,14 +42,14 @@ export async function GET(request, {params}) {
 export async function PUT(request, {params}) {
   const { id } = params;
   const data = await request.json();
-  if (data.calificacion) {
-    if (data.calificacion < 1 || data.calificacion > 5) {
+
+  if (data.rating) {
+    if (data.rating < 1 || data.rating > 5) {
       return NextResponse.json({ response: 'Error al actualizar la reseña. La calificacion debe ser un numero entre 1 y 5.' }, { status: 400 });
     }
   }
   
   try {
-
     const review = await db.review.update({
       where: {
         id: Number(id),
@@ -58,8 +57,8 @@ export async function PUT(request, {params}) {
       data
     })
 
-    if (data.calificacion) {
-      await actualizarPromedio(review.id_restaurante);
+    if (data.rating) {
+      await actualizarPromedio(review.restaurantId);
     }
 
     return NextResponse.json(review);
@@ -79,7 +78,7 @@ export async function DELETE(request, {params}) {
       },
     })
 
-    await actualizarPromedio(review.id_restaurante);
+    await actualizarPromedio(review.restaurantId);
 
     return NextResponse.json(review);
   } catch (error) {

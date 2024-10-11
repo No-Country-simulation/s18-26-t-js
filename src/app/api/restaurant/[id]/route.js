@@ -8,7 +8,7 @@ export async function GET(req, { params }) {
   const { id } = params;
 
   try {
-    const restaurante = await prisma.restaurante.findUnique({
+    const restaurante = await prisma.restaurant.findUnique({
       where: { id: parseInt(id) },
       include: {
         reviews: true,
@@ -29,15 +29,15 @@ export async function GET(req, { params }) {
 export async function PUT(req, { params }) {
   const { id } = params;
   const body = await req.json();
-  const { name, ubicacion, telefono } = body;
+  const { name, city, location, phone, averageRating, imageUrl} = body;
 
   try {
-    const restauranteActualizado = await prisma.restaurante.update({
+    const restaurantUpdate = await prisma.restaurant.update({
       where: { id: parseInt(id) },
-      data: { name, ubicacion, telefono },
+      data: { name, city, location, phone, averageRating, imageUrl},
     });
 
-    return NextResponse.json(restauranteActualizado, { status: 200 });
+    return NextResponse.json(restaurantUpdate, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Error al actualizar el restaurante' }, { status: 500 });
@@ -48,7 +48,7 @@ export async function DELETE(req, { params }) {
   const { id } = params;
 
   try {
-    await prisma.restaurante.delete({
+    await prisma.restaurant.delete({
       where: { id: parseInt(id) },
     });
 

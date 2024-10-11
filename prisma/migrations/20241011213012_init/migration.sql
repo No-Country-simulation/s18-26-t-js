@@ -9,26 +9,29 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Restaurante" (
+CREATE TABLE "Restaurant" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
-    "ubicacion" TEXT NOT NULL,
-    "telefono" TEXT,
-    "calificacionPromedio" REAL DEFAULT 0,
-    "imagen" TEXT
+    "city" TEXT NOT NULL,
+    "location" TEXT NOT NULL,
+    "phone" TEXT,
+    "averageRating" REAL DEFAULT 0,
+    "imageUrl" TEXT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "Review" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "comentario" TEXT,
-    "calificacion" INTEGER NOT NULL,
-    "id_restaurante" INTEGER NOT NULL,
-    "id_user" INTEGER NOT NULL,
-    "images" TEXT NOT NULL DEFAULT '',
+    "comment" TEXT,
+    "rating" INTEGER NOT NULL,
+    "restaurantId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "images" TEXT DEFAULT '',
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "Review_id_restaurante_fkey" FOREIGN KEY ("id_restaurante") REFERENCES "Restaurante" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Review_id_user_fkey" FOREIGN KEY ("id_user") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Review_restaurantId_fkey" FOREIGN KEY ("restaurantId") REFERENCES "Restaurant" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "Review_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex

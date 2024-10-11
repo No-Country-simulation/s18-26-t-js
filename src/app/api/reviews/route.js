@@ -8,8 +8,8 @@ export async function GET() {
     const reviews = await db.review.findMany({
       select: {
         id: true,
-        comentario: true,
-        calificacion: true,
+        comment: true,
+        rating: true,
         images: true,
         createdAt: true,
         user: {
@@ -18,7 +18,7 @@ export async function GET() {
             username: true,
           }
         },
-        restaurante: {
+        restaurant: {
           select: {
             id: true,
             name: true,
@@ -35,23 +35,23 @@ export async function GET() {
 
 // Crear Nueva Reseña
 export async function POST(request) {
-  const { id_user, id_restaurante, comentario, calificacion, images } = await request.json();
-  if (calificacion < 1 || calificacion > 5) {
+  const { userId, restaurantId, comment, rating, images } = await request.json();
+  if (rating < 1 || rating > 5) {
     return NextResponse.json({ response: 'Error al crear nueva reseña. La calificacion debe ser un numero entre 1 y 5.' }, { status: 400 });
   }
 
   try {
     const nuevaReview = await db.review.create({
       data: {
-        comentario,
-        calificacion,
-        id_restaurante,
-        id_user,
+        comment,
+        rating,
+        restaurantId,
+        userId,
         images,
       },
     });
 
-    await actualizarPromedio(id_restaurante);
+    await actualizarPromedio(restaurantId);
 
     return NextResponse.json(nuevaReview);
   } catch (e) {

@@ -22,7 +22,7 @@ POST http://localhost:3000/api/auth/signin
 Content-Type: application/json
 
 {
-  "csrfToken": "63d8797aa8e96fb5e615199bf3d5edf337db0d2d20badb2a4e9b96effd07bba6",
+  "csrfToken": "8190380692d25feb093b4d2e5cc73ef5c27f791638a69a81527aea885357127b",
   "email": "test@test.com",
   "password": "123"
 }

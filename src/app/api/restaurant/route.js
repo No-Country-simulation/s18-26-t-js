@@ -6,12 +6,12 @@ const prisma = new PrismaClient();
 // Handler GET
 export async function GET() {
   try {
-    const restaurantes = await prisma.restaurante.findMany({
+    const restaurants = await prisma.restaurant.findMany({
       include: {
         reviews: true
       }
     });
-    return NextResponse.json(restaurantes, { status: 200 });
+    return NextResponse.json(restaurants, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Error al obtener los restaurantes' }, { status: 500 });
@@ -22,16 +22,19 @@ export async function GET() {
 export async function POST(req) {
   try {
     const body = await req.json(); // Parsear el cuerpo de la solicitud
-    const { name, ubicacion, telefono } = body;
+    const { name, city, location, phone, averageRating, imageUrl} = body;
 
-    const nuevoRestaurante = await prisma.restaurante.create({
+    const newRestaurant = await prisma.restaurant.create({
       data: {
         name,
-        ubicacion,
-        telefono,
+        city,
+        location,
+        phone,
+        averageRating,
+        imageUrl,
       },
     });
-    return NextResponse.json(nuevoRestaurante, { status: 201 });
+    return NextResponse.json(newRestaurant, { status: 201 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Error al crear el restaurante' }, { status: 500 });
