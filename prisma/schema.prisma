@@ -42,10 +42,12 @@ model Restaurante {
 
 model Review {
   id             Int       @id @default(autoincrement())
-  comentario     String
-  calificacion   Int       // (1-5)
+  comentario     String?
+  calificacion   Int       // 1 - 5
   id_restaurante Int
   id_user        Int
+  images         String    @default("")
+  createdAt      DateTime  @default(now())
   restaurante    Restaurante @relation(fields: [id_restaurante], references: [id])
   user           User        @relation(fields: [id_user], references: [id])
 }

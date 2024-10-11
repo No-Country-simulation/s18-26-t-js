@@ -21,10 +21,12 @@ CREATE TABLE "Restaurante" (
 -- CreateTable
 CREATE TABLE "Review" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "comentario" TEXT NOT NULL,
+    "comentario" TEXT,
     "calificacion" INTEGER NOT NULL,
     "id_restaurante" INTEGER NOT NULL,
     "id_user" INTEGER NOT NULL,
+    "images" TEXT NOT NULL DEFAULT '',
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "Review_id_restaurante_fkey" FOREIGN KEY ("id_restaurante") REFERENCES "Restaurante" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Review_id_user_fkey" FOREIGN KEY ("id_user") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
