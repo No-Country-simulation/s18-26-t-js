@@ -13,10 +13,10 @@ POST http://localhost:3000/api/reviews
 Content-Type: application/json
 
 {
-  "comment": "Restaurante3 user4",
+  "comment": "Restaurante1 user1",
   "rating": 4,
-  "restaurantId": 3,
-  "userId": 4
+  "restaurantId": 1,
+  "userId": 1
 }
 
 ### Obtener todas las reseñas
@@ -26,7 +26,7 @@ GET http://localhost:3000/api/reviews
 GET http://localhost:3000/api/reviews/1
 
 ### Actualizar una reseña por ID
-PUT http://localhost:3000/api/reviews/14
+PUT http://localhost:3000/api/reviews/1
 Content-Type: application/json
 
 {
