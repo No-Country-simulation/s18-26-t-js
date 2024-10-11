@@ -7,10 +7,13 @@ POST http://localhost:3000/api/restaurant
 Content-Type: application/json
 
 {
-  "name": "Restaurante 2",
-  "city": "Ciudad Prueba 2",
-  "location": "Calle Falsa 456 2",
-  "phone": "123456789"
+  "name": "Restaurante 1",
+  "city": "Ciudad Prueba 1",
+  "location": "Calle Falsa 456",
+  "phone": "123456789",
+  "imageUrl": "https://example.com/image.jpg",
+  "logoUrl": "https://example.com/logo.jpg"
+
 }
 ### Consular un restaurante por ID:
 GET http://localhost:3000/api/restaurant/1

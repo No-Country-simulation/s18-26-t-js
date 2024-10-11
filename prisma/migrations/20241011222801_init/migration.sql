@@ -17,6 +17,8 @@ CREATE TABLE "Restaurant" (
     "phone" TEXT,
     "averageRating" REAL DEFAULT 0,
     "imageUrl" TEXT,
+    "logoUrl" TEXT,
+    "description" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
