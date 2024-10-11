@@ -22,7 +22,7 @@ export async function GET() {
 export async function POST(req) {
   try {
     const body = await req.json(); // Parsear el cuerpo de la solicitud
-    const { name, city, location, phone, averageRating, imageUrl } = body;
+    const { name, city, location, phone, averageRating, imageUrl} = body;
 
     const newRestaurant = await prisma.restaurant.create({
       data: {

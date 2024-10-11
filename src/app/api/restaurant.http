@@ -1,0 +1,35 @@
+### Consular todos los restaurantes
+GET http://localhost:3000/api/restaurant
+Content-Type: application/json
+
+### Crear un nuevo restaurante
+POST http://localhost:3000/api/restaurant
+Content-Type: application/json
+
+{
+  "name": "Restaurante3 Prueba",
+  "city": "Ciudad Prueba",
+  "location": "Calle Falsa 456",
+  "phone": "123456789"
+}
+### Consular un restaurante por ID:
+GET http://localhost:3000/api/restaurant/1
+Content-Type: application/json
+
+### actualizar restaurante por ID:
+PUT http://localhost:3000/api/restaurant/1
+Content-Type: application/json
+
+{
+  "name": "Restaurante3 Prueba update",
+  "city": "Ciudad Prueba - update",
+  "location": "Calle Falsa 456 - uptade",
+  "phone": "0000000"
+}
+
+### Eliminar restaurante por ID:
+DELETE http://localhost:3000/api/restaurant/1
+Content-Type: application/json
+
+
+
