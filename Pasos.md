@@ -10,18 +10,13 @@ npx prisma init
 
 Paso 3:
 Definir los Modelos
-migrate: 
+migrate:
 npx prisma migrate dev --name init
 
 Paso 4:
 Crear carpeta "api" en src/app
 Crear la carpeta "libs" en src/libs , el archico db.js
 
-
 Next Auth
-Paso 1: 
+Paso 1:
 npm i next-auth
-
-
-
-
