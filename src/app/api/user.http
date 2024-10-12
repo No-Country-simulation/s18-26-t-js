@@ -26,3 +26,16 @@ Content-Type: application/json
   "email": "test@test.com",
   "password": "123"
 }
+
+
+
+### Actualizar el perfil del usuario
+PATCH http://localhost:3000/api/user/profile
+Content-Type: application/json
+
+{
+  "name": "John",
+  "lastname": "Doe",
+  "birthDate": "1990-01-01",
+  "avatarUrl": "http://example.com/avatar.jpg"
+}

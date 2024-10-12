@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
   "comment": "Restaurante1 user1",
-  "rating": 4,
+  "rating": 5,
   "restaurantId": 1,
   "userId": 1
 }
