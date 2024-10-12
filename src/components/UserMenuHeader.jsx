@@ -5,12 +5,14 @@ import { BiUserCircle } from 'react-icons/bi';
 
 export default function UserMenuHeader() {
   const [openOptions, setOpenOptions] = useState(false);
-
+ const toggleOptions = () => {
+    setOpenOptions(!openOptions);
+  };
   return (
     <div className='flex justify-end items-center relative'>
       <BiUserCircle
         tabIndex={0}
-        onClick={() => setOpenOptions(true)}
+        onClick={toggleOptions}
         color='#FB6800'
         size={32}
         className='hover:cursor-pointer focus:outline-none'

@@ -15,39 +15,48 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db" 
+  url      = "file:./dev.db"
 }
 
 // -------- MODELOS -------
 
 model User {
-  id           Int @id @default(autoincrement())
-  username     String @unique
-  email        String @unique
-  password     String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  reviews      Review[]
+  id             Int      @id @default(autoincrement())
+  username       String   @unique
+  email          String   @unique
+  password       String
+  name           String?  
+  lastname       String?  
+  birthDate      DateTime? 
+  avatarUrl      String?  
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  reviews        Review[]
 }
 
-model Restaurante {
-  id              Int       @id @default(autoincrement())
-  name            String
-  ubicacion       String
-  telefono        String?
-  reviews         Review[]
-  calificacionPromedio Float? @default(0)
-  imagen          String?   // URL de la imagen del restaurante
+model Restaurant {
+  id            Int      @id @default(autoincrement())
+  name          String
+  city          String
+  location      String
+  phone         String?
+  reviews       Review[]
+  averageRating Float?   @default(0)
+  imageUrl      String? // Restaurant image URL
+  logoUrl          String? // Restaurant logo URL
+  description   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Review {
-  id             Int       @id @default(autoincrement())
-  comentario     String?
-  calificacion   Int       // 1 - 5
-  id_restaurante Int
-  id_user        Int
-  images         String    @default("")
-  createdAt      DateTime  @default(now())
-  restaurante    Restaurante @relation(fields: [id_restaurante], references: [id])
-  user           User        @relation(fields: [id_user], references: [id])
+  id           Int        @id @default(autoincrement())
+  comment      String?
+  rating       Int // 1 - 5
+  restaurantId Int
+  userId       Int
+  images       String?    @default("")
+  createdAt    DateTime   @default(now())
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
 }

@@ -31,7 +31,7 @@ export async function getCurrentUser() {
 
 export async function getRestaurantById(restaurantId) {
   try {
-    const restaurant = await prisma.restaurante.findUnique({
+    const restaurant = await prisma.restaurant.findUnique({
       where: { id: restaurantId },
       include: { reviews: true },
     });

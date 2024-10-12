@@ -1,0 +1,55 @@
+### Consular todos los restaurantes
+GET http://localhost:3000/api/restaurant
+Content-Type: application/json
+
+### Crear un nuevo restaurante
+POST http://localhost:3000/api/restaurant
+Content-Type: application/json
+
+{
+  "name": "Restaurante 1",
+  "city": "Ciudad Prueba 1",
+  "location": "Calle Falsa 456",
+  "phone": "123456789",
+  "imageUrl": "https://example.com/image.jpg",
+  "logoUrl": "https://example.com/logo.jpg"
+
+}
+### Consular un restaurante por ID:
+GET http://localhost:3000/api/restaurant/1
+Content-Type: application/json
+
+### actualizar restaurante por ID:
+PUT http://localhost:3000/api/restaurant/1
+Content-Type: application/json
+
+{
+  "name": "Restaurante",
+  "city": "Ciudad Prueba",
+  "location": "Calle Falsa 456",
+  "phone": "0000000"
+}
+
+### Eliminar restaurante por ID:
+DELETE http://localhost:3000/api/restaurant/1
+Content-Type: application/json
+
+
+### EXTRAS ####
+
+### Restaurantes con mas reviews
+GET http://localhost:3000/api/restaurant/most-reviewed?limit=5&offset=0
+Content-Type: application/json
+
+### Consultar restaurantes mas calificados
+GET http://localhost:3000/api/restaurant/top-rated?limit=5&offset=10
+Content-Type: application/json
+
+
+### Obtener lista de ciudades en orden alfabético
+GET http://localhost:3000/api/restaurants/cities
+Content-Type: application/json
+
+
+
+
