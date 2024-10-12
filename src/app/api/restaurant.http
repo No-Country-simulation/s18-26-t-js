@@ -35,4 +35,21 @@ DELETE http://localhost:3000/api/restaurant/1
 Content-Type: application/json
 
 
+### EXTRAS ####
+
+### Restaurantes con mas reviews
+GET http://localhost:3000/api/restaurant/most-reviewed?limit=5&offset=0
+Content-Type: application/json
+
+### Consultar restaurantes mas calificados
+GET http://localhost:3000/api/restaurant/top-rated?limit=5&offset=10
+Content-Type: application/json
+
+
+### Obtener lista de ciudades en orden alfabético
+GET http://localhost:3000/api/restaurants/cities
+Content-Type: application/json
+
+
+
 
