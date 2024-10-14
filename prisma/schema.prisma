@@ -8,30 +8,32 @@ generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
 // datasource db {
 //   provider = "mysql"
 //   url      = env("DATABASE_URL")
 // }
 
-datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
-}
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./dev.db" 
+// }
 
 // -------- MODELOS -------
 
 model User {
-  id             Int      @id @default(autoincrement())
-  username       String   @unique
-  email          String   @unique
-  password       String
-  name           String?  
-  lastname       String?  
-  birthDate      DateTime? 
-  avatarUrl      String?  
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  reviews        Review[]
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  reviews   Review[]
 }
 
 model Restaurant {
