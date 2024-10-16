@@ -1,75 +1,46 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
-import restaurantsList from '../../public/restaurantsMockup.json';
 import Carousel from './Carousel';
-import { MdOutlineStarPurple500 } from 'react-icons/md';
+import { Restaurant } from '@/types/restaurant';
+import RestaurantLogoCard from './RestaurantLogoCard';
+import RestaurantCard from './RestaurantCard';
 
-const TopLists = () => {
-  const [itemsToShowRated, setItemsToShowRated] = useState(9);
-  const [itemsToShowReviewed, setItemsToShowReviewed] = useState(3);
-  const [isMounted, setIsMounted] = useState(false);
+const TopLists = async () => {
+  const res = await fetch('http://localhost:3000/api/restaurant');
+  const restaurants: Restaurant[] = await res.json();
 
-  useEffect(() => {
-    setIsMounted(true);
+  const mostReviewedToShow = {
+    sm: 1,
+    md: 2,
+    lg: 3,
+  };
 
-    const handleResize = () => {
-      if (!isMounted) return;
-      if (window.innerWidth < 800) {
-        setItemsToShowRated(3);
-        setItemsToShowReviewed(1);
-      } else if (window.innerWidth < 1200) {
-        setItemsToShowRated(6);
-        setItemsToShowReviewed(2);
-      } else {
-        setItemsToShowRated(9);
-        setItemsToShowReviewed(3);
-      }
-    };
+  const topRatedToShow = {
+    sm: 3,
+    md: 6,
+    lg: 9,
+  };
 
-    handleResize();
+  const topRated = restaurants.filter((r) => r.averageRating > -1);
+  const mostReviewed = restaurants.filter((r) => r.reviews.length > -1);
 
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, [isMounted]);
-
-  const topRated = restaurantsList.filter((r) => r.averageRating > 4.3);
-  const mostReviewed = restaurantsList.filter((r) => r.reviews.length > 0);
+  const topRatedList = topRated.map((item) => (
+    <RestaurantLogoCard key={item.id} item={item} />
+  ));
 
   const mostReviewedList = mostReviewed.map((item) => (
-    <div className='' key={item.id}>
-      <img
-        className='block w-full h-24 object-cover'
-        src={item.image}
-        alt={item.name}
-      />
-      <div className='flex justify-between px-2 my-2'>
-        <h4 className='text-gray-color text-lg font-semibold'>{item.name}</h4>
-        <div className='flex items-center gap-1'>
-          <MdOutlineStarPurple500 className='text-[#F5D03A]' size={20} />
-          <span className='text-lg font-semibold text-light-gray'>
-            {item.averageRating}
-          </span>
-        </div>
-      </div>
-      <p className='px-2 pb-2 text-lg font-semibold text-gray-color'>
-        {item.location}
-      </p>
-    </div>
+    <RestaurantCard key={item.id} item={item} />
   ));
 
   return (
     <section className='w-max m-auto flex flex-col gap-10'>
       <Carousel
         title='Nuestros usuarios recomiendan'
-        itemsToShow={itemsToShowRated}
-        objectList={topRated}
+        itemsToShowSizes={topRatedToShow}
+        elementList={topRatedList}
         itemWidth={120}
       />
       <Carousel
         title='Lugares más reseñados'
-        itemsToShow={itemsToShowReviewed}
+        itemsToShowSizes={mostReviewedToShow}
         elementList={mostReviewedList}
         itemWidth={376}
       />
