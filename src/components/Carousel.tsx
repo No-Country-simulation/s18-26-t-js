@@ -1,28 +1,31 @@
 'use client';
-import { Restaurant } from '@/types/restaurant';
 import React, { useState, useRef, useEffect, ReactElement } from 'react';
 import { MdArrowForwardIos, MdOutlineArrowBackIosNew } from 'react-icons/md';
 
 interface Props {
-  itemsToShow: number;
-  objectList?: Restaurant[];
-  elementList?: ReactElement[];
+  itemsToShowSizes: {
+    sm: number;
+    md: number;
+    lg: number;
+  };
+  elementList: ReactElement[];
   itemWidth: number;
   title: string;
 }
 
 const Carousel = ({
-  itemsToShow,
-  objectList,
   elementList,
   itemWidth,
   title,
+  itemsToShowSizes,
 }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const [itemsToShow, setItemsToShow] = useState(itemsToShowSizes.lg);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const gapWidth = 8;
-  const totalItems = objectList?.length || elementList?.length || 1;
+  const totalItems = elementList.length;
   const lastIndexToShow = totalItems - itemsToShow;
 
   const adjustIndex = (index: number) => {
@@ -52,6 +55,24 @@ const Carousel = ({
     scrollToIndex(currentIndex);
   }, [currentIndex]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 800) {
+        setItemsToShow(itemsToShowSizes.sm);
+      } else if (window.innerWidth < 1200) {
+        setItemsToShow(itemsToShowSizes.md);
+      } else {
+        setItemsToShow(itemsToShowSizes.lg);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className='relative w-max overflow-hidden'>
       <div className='flex justify-between items-center px-2 mb-2'>
@@ -78,33 +99,15 @@ const Carousel = ({
           width: `${itemsToShow * (itemWidth + gapWidth) + gapWidth}px`,
         }}
       >
-        {objectList && objectList.length > 0
-          ? objectList.map((item) => (
-              <div
-                key={item.id}
-                className={`flex-shrink-0 rounded-md overflow-hidden cursor-pointer`}
-                style={{ width: itemWidth }}
-              >
-                <img
-                  src={item.logo || ''}
-                  alt={item.name}
-                  className='w-full h-full object-cover'
-                />
-              </div>
-            ))
-          : null}
-
-        {elementList && elementList.length > 0
-          ? elementList.map((element) => (
-              <div
-                key={element.key}
-                className={`flex-shrink-0 rounded-md overflow-hidden cursor-pointer shadow-md border border-gray-200`}
-                style={{ width: itemWidth }}
-              >
-                {element}
-              </div>
-            ))
-          : null}
+        {elementList.map((element) => (
+          <div
+            key={element.key}
+            className={`flex-shrink-0 rounded-md overflow-hidden cursor-pointer shadow-md border border-gray-200`}
+            style={{ width: itemWidth }}
+          >
+            {element}
+          </div>
+        ))}
       </div>
     </div>
   );
