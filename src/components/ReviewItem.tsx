@@ -5,12 +5,13 @@ import { FaStar } from 'react-icons/fa';
 
 interface Review {
   id: number;
-  name: string;
-  photo: string;
-  comentario: string;
+  comment: string;
   images: string[];
-  calificacion: number;
+  rating: number;
   createdAt: string;
+  user: {
+    username: string;
+  };
 }
 
 interface ReviewItemProps {
@@ -18,15 +19,17 @@ interface ReviewItemProps {
 }
 
 export default function ReviewItem({ review }: ReviewItemProps) {
-  const { name, photo, images, calificacion, createdAt, comentario } = review;
+  const { images, comment, rating, createdAt } = review;
+  const { username } = review?.user;
 
-  const isPhoto = photo ? `/img/${photo}` : '/img/default-user.jpg';
+  // const isPhoto = photo ? `/img/${photo}` : '/img/default-user.jpg';
+  const isImage = Array.isArray(images) && images.length > 0;
 
   return (
     <li className='pt-4 mr-4  pb-4 border-bottom  grid grid-cols-[auto_1fr] gap-4'>
       <div className='rounded-full relative w-16 h-16  mt-5'>
         <Image
-          src={isPhoto}
+          src={'/img/default-user.jpg'}
           alt=''
           className='block object-cover rounded-full object-center'
           fill
@@ -35,7 +38,7 @@ export default function ReviewItem({ review }: ReviewItemProps) {
 
       <div>
         <div className='flex mb-3 gap-2 items-center'>
-          <h3 className='text-lg font-medium'>{name}</h3>
+          <h3 className='text-lg font-medium'>{username}</h3>
 
           <small className=' text-xs text-[--light-gray]'>
             {format(new Date(createdAt), 'MM/dd/yyyy')}
@@ -43,13 +46,13 @@ export default function ReviewItem({ review }: ReviewItemProps) {
 
           <small className='flex items-center gap-1 text-base'>
             <FaStar className=' text-[--yellow-color] ' />
-            {calificacion}
+            {rating}
           </small>
         </div>
 
-        <p className='text-base mb-3 font-normal leading-6'>{comentario}</p>
+        <p className='text-base mb-3 font-normal leading-6'>{comment}</p>
 
-        {images?.length > 0 && (
+        {isImage && (
           <div className='flex  gap-3  w-[490px] pb-4 scrollBar'>
             {images.map((image, i) => (
               <div key={i} className='relative w-28 h-28  flex-shrink-0'>

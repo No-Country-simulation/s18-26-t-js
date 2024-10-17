@@ -16,7 +16,7 @@ export default function Modal({ children, onClose }: ModalProps) {
       ></div>
 
       <div className='scrollBar w-[80%] h-[80%] shadow-xl relative bg-[--white-color] rounded-xl'>
-        <div className='flex flex-col gap-5 p-5'>
+        <div className='flex flex-col gap-5 p-5 h-full'>
           <button onClick={onClose} className='self-end text-xl'>
             <GoX />
           </button>

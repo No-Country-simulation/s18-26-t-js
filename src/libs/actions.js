@@ -44,3 +44,21 @@ export async function getRestaurantById(restaurantId) {
     return null;
   }
 }
+
+// Reviews -----
+
+export async function getReviewsByRestaurantId(restaurantId) {
+  try {
+    const reviews = await prisma.review.findMany({
+      where: { restaurantId: restaurantId },
+      include: { user: true },
+    });
+
+    if (reviews.length === 0) throw new Error('Sorry,no reviews were found');
+
+    return reviews;
+  } catch (error) {
+    console.error(`💥Error:`, error);
+    return [];
+  }
+}
