@@ -1,6 +1,6 @@
 import React from 'react'
 import Estrella from '@/components/iconos/Estrella'
-export default function page() {
+export default function CalificacionesRestaurantes() {
     
     const calificacionesRestaurantes = {
         reseñas:'115',
