@@ -1,6 +1,6 @@
-import React from 'react';
-import Estrella from '@/components/iconos/Estrella';
-export default function page() {
+import Estrella from './iconos/Estrella';
+
+const Rating = () => {
   const calificacionesRestaurantes = {
     reseñas: '115',
     tipos_de_reseñas: {
@@ -11,6 +11,7 @@ export default function page() {
       malo: 1,
     },
   };
+
   return (
     <div className='p-2'>
       <div className='flex pb-5 gap-16'>
@@ -77,4 +78,6 @@ export default function page() {
       </div>
     </div>
   );
-}
+};
+
+export default Rating;

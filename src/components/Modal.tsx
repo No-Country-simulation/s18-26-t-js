@@ -5,7 +5,6 @@ interface ModalProps {
   children: ReactNode;
   onClose: () => void;
 }
-// background: #45424B80;
 
 export default function Modal({ children, onClose }: ModalProps) {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Estrella({ color = '#A0A0A0', id }) {
+export default function Estrella({ color = '#A0A0A0' }) {
   return (
     <svg
       className='drop-shadow'
