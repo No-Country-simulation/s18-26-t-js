@@ -1,7 +1,10 @@
 import { FiSearch } from 'react-icons/fi';
+
 import AddReviewButton from './AddReviewButton';
-import { getCurrentUser } from '@/libs/actions';
 import ReviewsList from './ReviewsList';
+import AddReview from './AddReview';
+
+import { getCurrentUser, getRestaurantById } from '@/libs/actions';
 
 interface ReviewsProps {
   restaurantId: string;
@@ -9,7 +12,7 @@ interface ReviewsProps {
 
 export default async function Reviews({ restaurantId }: ReviewsProps) {
   const user = await getCurrentUser();
-  console.log('user', user);
+  const restaurant = await getRestaurantById(+restaurantId);
 
   return (
     <div>
@@ -25,7 +28,9 @@ export default async function Reviews({ restaurantId }: ReviewsProps) {
           </button>
         </form>
 
-        <AddReviewButton isUser={user} />
+        <AddReviewButton isUser={user}>
+          <AddReview restaurantId={restaurant.id} userId={user.id} />
+        </AddReviewButton>
       </div>
 
       <ReviewsList restaurantId={restaurantId} />

@@ -1,14 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, ReactNode } from 'react';
 import Modal from './Modal';
 import Link from 'next/link';
 
 interface AddReviewButtonProps {
   isUser: boolean | null;
+  children: ReactNode;
 }
 
-export default function AddReviewButton({ isUser }: AddReviewButtonProps) {
+export default function AddReviewButton({
+  isUser,
+  children,
+}: AddReviewButtonProps) {
   const [openModal, setOpenModal] = useState(false);
 
   if (!isUser) {
@@ -33,9 +37,7 @@ export default function AddReviewButton({ isUser }: AddReviewButtonProps) {
       </button>
 
       {openModal && (
-        <Modal onClose={() => setOpenModal(false)}>
-          <p>MODAL - Agregar reseña</p>
-        </Modal>
+        <Modal onClose={() => setOpenModal(false)}>{children}</Modal>
       )}
     </>
   );

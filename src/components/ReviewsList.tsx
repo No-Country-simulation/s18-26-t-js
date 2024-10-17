@@ -1,11 +1,23 @@
 import { Suspense } from 'react';
-//import { getRestaurantById } from '@/libs/actions';
+import { getReviewsByRestaurantId } from '@/libs/actions';
 import ReviewItem from './ReviewItem';
+
+interface Review {
+  id: number;
+  comment: string;
+  images: string[];
+  rating: number;
+  createdAt: string;
+  user: {
+    username: string;
+  };
+}
 
 interface ReviewsProps {
   restaurantId: string;
 }
 
+/*
 const fakeReviews = [
   {
     id: 1,
@@ -50,16 +62,15 @@ const fakeReviews = [
     calificacion: 3,
     createdAt: '2024-10-10T23:48:20.317Z',
   },
-];
+];*/
 
 export default async function ReviewsList({ restaurantId }: ReviewsProps) {
-  // const { reviews } = await getRestaurantById(+restaurantId);
-  //console.log(reviews);
+  const reviews: Review[] = await getReviewsByRestaurantId(+restaurantId);
 
   return (
     <ul className='scrollBar flex flex-col gap-4  h-[850px]'>
       <Suspense fallback={<p>loading...</p>}>
-        {fakeReviews?.map((review) => (
+        {reviews?.map((review) => (
           <ReviewItem key={review.id} review={review} />
         ))}
       </Suspense>
