@@ -29,7 +29,7 @@ export default async function Reviews({ restaurantId }: ReviewsProps) {
         </form>
 
         <AddReviewButton isUser={user}>
-          <AddReview restaurantId={restaurant.id} userId={user.id} />
+          <AddReview restaurantId={restaurant.id} userId={user?.id} />
         </AddReviewButton>
       </div>
 
