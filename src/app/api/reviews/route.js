@@ -10,7 +10,12 @@ export async function GET() {
         id: true,
         comment: true,
         rating: true,
-        images: true,
+        images: {
+          select: {
+            id: true,
+            imgUrl: true,
+          }
+        },
         createdAt: true,
         user: {
           select: {
