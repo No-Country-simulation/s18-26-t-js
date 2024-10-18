@@ -1,0 +1,70 @@
+
+### Crear usuario sin hash de contraseña
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "username": "lau",
+    "email": "lau_87_@outlook.com.ar",
+    "password": "$2b$10$TQLWZCRXFAu2f5z7xCoE9OpNGJ0.2RVDpO72U4f9tN1PhuPr2TwJ2"
+}
+
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "username": "guido",
+    "email": "test@test.com",
+    "password": "$2b$10$RpSa496aHJ650QQoQu3nl.Ehq96PdIvPf0XBLadNyM95q9xZq0h8q"
+}
+
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "username": "Lis",
+    "email": "lissbeth@gmail.com",
+    "password": "$2b$10$t4mpb1js1wOE4G9rdorwmu/p5ctfNCNtRMSsfBqwOUHn3uWnCcXIa"
+}
+
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "username": "leo",
+    "email": "leo@gmail.com",
+    "password": "$2b$10$bgtQhnjKrHwQ.EgE7wp9ZuzXu23rebDBp/OyT0yCRiqYuFRepU0x."
+}
+
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "username": "Yhordi",
+    "email": "yordychoque124@gmail.com",
+    "password": "$2b$10$4ADtFptiXalfgnNSHac/NOMTRD744k94a0Tt2U67YYbFsIcWtAQCW"
+}
+
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "username": "alejandraguayo",
+    "email": "aguayomalejandra@gmail.com",
+    "password": "$2b$10$wV/iheVaNEUzfirJOYy6Q.rSgPjV9WMh3O8uvdulvveJGszBqIPjG"
+}
+
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "username": "edison",
+    "email": "edison@test.com",
+    "password": "$2b$10$UXqZs3xpxfDuGPbg97VSnOAVBWkuyEq9UkFXusbAvhFBf2Zho8Hq."
+}
