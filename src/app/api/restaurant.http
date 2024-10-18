@@ -47,9 +47,12 @@ Content-Type: application/json
 
 
 ### Obtener lista de ciudades en orden alfabético
-GET http://localhost:3000/api/restaurants/cities
+GET http://localhost:3000/api/restaurant/cities
 Content-Type: application/json
 
 
 
+### /api/restaurant?name=Pizzeria&city=mendoza
+GET http://localhost:3000/api/restaurant?city=mendoza
+Content-Type: application/json
 
