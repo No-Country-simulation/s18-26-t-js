@@ -17,7 +17,7 @@ const RestaurantInfo = ({ restaurant }: Props) => {
           src={restaurant.imageUrl}
         />
       </div>
-      <div className='max-w-6xl mx-auto mb-8 pt-8'>
+      <div className='max-w-6xl mx-auto mb-8 pt-8 px-4'>
         <div className='flex gap-8 items-center mb-2'>
           <h2 className='font-semibold text-2xl'>
             {restaurant.name} - {restaurant.location}

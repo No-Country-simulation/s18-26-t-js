@@ -1,6 +1,11 @@
+import { Restaurant } from '@/types/restaurant';
 import Estrella from './iconos/Estrella';
 
-const Rating = () => {
+interface Props {
+  restaurant: Restaurant;
+}
+
+const Rating = ({ restaurant }: Props) => {
   const calificacionesRestaurantes = {
     reseñas: '115',
     tipos_de_reseñas: {
@@ -12,6 +17,10 @@ const Rating = () => {
     },
   };
 
+  const reviews = restaurant.reviews;
+
+  console.log('list', reviews);
+
   return (
     <div className='p-2'>
       <div className='flex pb-5 gap-16'>
@@ -19,7 +28,7 @@ const Rating = () => {
           <span>
             <Estrella color='#F5D03A' />
           </span>
-          <p>5,0</p>
+          <p>{restaurant.averageRating}</p>
         </div>
         <p>({calificacionesRestaurantes.reseñas} reseñas)</p>
       </div>

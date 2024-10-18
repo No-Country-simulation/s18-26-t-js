@@ -68,7 +68,12 @@ export default async function ReviewsList({ restaurantId }: ReviewsProps) {
   const reviews: Review[] = await getReviewsByRestaurantId(+restaurantId);
 
   return (
-    <ul className='scrollBar flex flex-col gap-4  h-[850px]'>
+    <ul className='scrollBar flex flex-col gap-4 min-h-[400px] max-h-[850px]'>
+      {reviews.length < 1 && (
+        <p className='text-center mt-16 text-gray-color italic'>
+          Aún no hay reseñas. ¡Anímate a dejar la primera!
+        </p>
+      )}
       <Suspense fallback={<p>loading...</p>}>
         {reviews?.map((review) => (
           <ReviewItem key={review.id} review={review} />
