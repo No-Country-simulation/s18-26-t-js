@@ -21,6 +21,7 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
   const [userRating, setUserRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [images, setImages] = useState<FileList | null>(null);
 
   const { register, handleSubmit, reset } = useForm<FormData>();
 
@@ -36,16 +37,27 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
       return;
     }
 
-    const newReview = {
-      ...data,
-      rating: userRating,
-      images: '',
-      userId,
-      restaurantId,
-    };
+    const formData = new FormData()
+    if (images) {
+      Array.from(images).forEach( image => 
+        formData.append('image', image))
+    }
+
+    formData.append('comment', data.comment);
+    formData.append('rating', userRating.toString());
+    formData.append('restaurantId', restaurantId);
+    formData.append('userId', userId);
+
+    // const newReview = {
+    //   ...data, // comment
+    //   rating: userRating,
+    //   images: '',
+    //   userId,
+    //   restaurantId,
+    // };
 
     await axios
-      .post('/api/reviews', newReview)
+      .post('/api/reviews', formData)
       .then(() => {
         console.log('La reseña se agregó exitosamente 🎉');
         router.refresh();
@@ -99,6 +111,10 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
           <LuImagePlus className='text-2xl' />
           <span className='text-base'>Haz click para agregar fotos.</span>
         </button>
+        <input type="file" multiple onChange={(e) => {
+          console.log(e.target.files);
+          setImages(e.target.files)
+        }} />
       </div>
 
       <div className=' ml-auto flex gap-3 pr-9 '>
