@@ -6,6 +6,8 @@ import axios from 'axios';
 import Star from './Star';
 import { useForm } from 'react-hook-form';
 import { LuImagePlus } from 'react-icons/lu';
+import { useOpenModal } from '@/context/ModalContext';
+import toast from 'react-hot-toast';
 
 interface AddReviewProps {
   userId: string;
@@ -22,6 +24,8 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [images, setImages] = useState<FileList | null>(null);
+
+  const { handleCloseModal } = useOpenModal();
 
   const { register, handleSubmit, reset } = useForm<FormData>();
 
@@ -59,14 +63,19 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
     await axios
       .post('/api/reviews', formData)
       .then(() => {
-        console.log('La reseña se agregó exitosamente 🎉');
+        toast.success('¡Tu reseña se subio con éxito!');
         router.refresh();
       })
-      .catch(() => console.log('¡Algo salió mal!'))
+      .catch(() =>
+        toast.error(
+          'Ups... Hubo un error \nNo se pudo subir tu reseña, intentalo nuevamente.',
+        ),
+      )
       .finally(() => {
         reset();
         setIsLoading(false);
         setIsError(false);
+        handleCloseModal();
       });
   }
 

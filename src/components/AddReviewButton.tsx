@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
+import { useOpenModal } from '@/context/ModalContext';
 import Modal from './Modal';
 import Link from 'next/link';
 
@@ -13,13 +14,13 @@ export default function AddReviewButton({
   isUser,
   children,
 }: AddReviewButtonProps) {
-  const [openModal, setOpenModal] = useState(false);
+  const { openModal, handleOpenModal } = useOpenModal();
 
   if (!isUser) {
     return (
       <Link
         href='/auth/login'
-        className='bg-[#FB6800] cursor-pointer basis-[35%] font-medium  text-white-color px-5 py-1 rounded-md'
+        className='text-center bg-[#FB6800] cursor-pointer basis-[35%] font-medium  text-white-color px-5 py-1 rounded-md'
       >
         Agregar reseña
       </Link>
@@ -29,16 +30,14 @@ export default function AddReviewButton({
   return (
     <>
       <button
-        onClick={() => setOpenModal(true)}
+        onClick={handleOpenModal}
         type='button'
-        className='bg-[#FB6800] basis-[35%] font-medium  text-white-color px-5 py-1 rounded-md'
+        className='text-center bg-[#FB6800] basis-[35%] font-medium  text-white-color px-5 py-1 rounded-md'
       >
         Agregar reseña
       </button>
 
-      {openModal && (
-        <Modal onClose={() => setOpenModal(false)}>{children}</Modal>
-      )}
+      {openModal && <Modal>{children}</Modal>}
     </>
   );
 }
