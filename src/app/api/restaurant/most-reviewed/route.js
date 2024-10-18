@@ -3,6 +3,8 @@
 import {NextResponse } from 'next/server';
 import prisma from '@/libs/db'; 
 
+export const dynamic = 'force-dynamic'; // Forzar que la ruta sea dinámica
+
 export async function GET(req) {
   try {
     //  Paginación

@@ -9,7 +9,7 @@ export async function GET() {
         },
         where: {
           city: {
-            not: null, //  excluir ciudades null
+            not: "", 
           },
         },
         distinct: ['city'], // Eliminar duplicadas

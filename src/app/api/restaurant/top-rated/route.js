@@ -3,10 +3,12 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/libs/db'; 
 
+export const dynamic = 'force-dynamic'; // Forzar que la ruta sea dinámica
+
 export async function GET(req) {
   try {
     // Extraer parámetros de consulta si quieres manejar paginación o limitar resultados
-    const { limit = 10, offset = 0 } = req.nextUrl.searchParams;
+    const { limit = 10, offset = 0 } = Object.fromEntries(req.nextUrl.searchParams);
 
     const restaurants = await prisma.restaurant.findMany({
       where: {
