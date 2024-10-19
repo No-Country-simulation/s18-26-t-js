@@ -52,7 +52,30 @@ export async function getReviewsByRestaurantId(restaurantId) {
   try {
     const reviews = await prisma.review.findMany({
       where: { restaurantId: restaurantId },
-      include: { user: true },
+      select: {
+        id: true,
+        comment: true,
+        rating: true,
+        images: {
+          select: {
+            id: true,
+            imgUrl: true,
+          }
+        },
+        createdAt: true,
+        user: {
+          select: {
+            id: true,
+            username: true,
+          }
+        }
+        // restaurant: {
+        //   select: {
+        //     id: true,
+        //     name: true,
+        //   }
+        // }
+      }
     });
 
     if (reviews.length === 0) throw new Error('Sorry,no reviews were found');
