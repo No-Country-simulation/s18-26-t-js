@@ -6,6 +6,8 @@ import axios from 'axios';
 import Star from './Star';
 import { useForm } from 'react-hook-form';
 import { LuImagePlus } from 'react-icons/lu';
+import { useOpenModal } from '@/context/ModalContext';
+import toast from 'react-hot-toast';
 
 interface AddReviewProps {
   userId: string;
@@ -21,6 +23,10 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
   const [userRating, setUserRating] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [images, setImages] = useState<FileList | null>(null);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+
+  const { handleCloseModal } = useOpenModal();
 
   const { register, handleSubmit, reset } = useForm<FormData>();
 
@@ -36,25 +42,33 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
       return;
     }
 
-    const newReview = {
-      ...data,
-      rating: userRating,
-      images: '',
-      userId,
-      restaurantId,
-    };
+    const formData = new FormData()
+    if (images) {
+      Array.from(images).forEach( image => 
+        formData.append('image', image))
+    }
+
+    formData.append('comment', data.comment);
+    formData.append('rating', userRating.toString());
+    formData.append('restaurantId', restaurantId);
+    formData.append('userId', userId);
 
     await axios
-      .post('/api/reviews', newReview)
+      .post('/api/reviews', formData)
       .then(() => {
-        console.log('La reseña se agregó exitosamente 🎉');
+        toast.success('¡Tu reseña se subio con éxito!');
         router.refresh();
       })
-      .catch(() => console.log('¡Algo salió mal!'))
+      .catch(() =>
+        toast.error(
+          'Ups... Hubo un error \nNo se pudo subir tu reseña, intentalo nuevamente.',
+        ),
+      )
       .finally(() => {
         reset();
         setIsLoading(false);
         setIsError(false);
+        handleCloseModal();
       });
   }
 
@@ -92,13 +106,32 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
         ></textarea>
 
         <p className='text-lg'>Agrega algunas fotos.</p>
-        <button
-          type='button'
-          className='w-[80%] h-28 flex justify-center items-center flex-col rounded-md border-[#a0a0a07a] border-[1px]'
-        >
-          <LuImagePlus className='text-2xl' />
-          <span className='text-base'>Haz click para agregar fotos.</span>
-        </button>
+        <div className='flex items-center relative w-[80%] min-h-28 justify-center flex-col rounded-md border-[#a0a0a07a] border-[1px]'>
+          <div className='flex gap-2 flex-wrap m-3 justify-center items-center'>
+            {
+              imagePreviews.length > 0 && (
+                imagePreviews.map((preview, index) =>
+                  <img key={index} src={preview} className='max-h-28 w-auto h-auto object-cover ' />
+                )
+              )
+            }
+            <div className='h-28 border-4 border-[#929292] border-dashed flex justify-center items-center flex-col p-3'>
+              <LuImagePlus className='text-2xl' />
+              <span className='text-base'>Haz click para agregar fotos.</span>
+            </div>
+          </div>
+          <input type="file" 
+              className='absolute border-4 opacity-0 w-full h-full z-10 cursor-pointer'
+              multiple onChange={(e) => {
+                const files = e.target.files
+
+                if (!files) return
+                const previews = Array.from(files).map(file => URL.createObjectURL(file));
+                setImagePreviews(previews)
+
+                setImages(files)
+              }} />
+        </div>
       </div>
 
       <div className=' ml-auto flex gap-3 pr-9 '>

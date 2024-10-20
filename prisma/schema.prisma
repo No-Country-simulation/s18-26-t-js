@@ -57,8 +57,16 @@ model Review {
   rating       Int // 1 - 5
   restaurantId Int
   userId       Int
-  images       String?    @default("")
+  images       ReviewImage[]
   createdAt    DateTime   @default(now())
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
   user         User       @relation(fields: [userId], references: [id])
+}
+
+model ReviewImage {
+  id           Int        @id @default(autoincrement())
+  imgUrl       String
+  reviewId     Int
+  createdAt    DateTime   @default(now())
+  review       Review @relation(fields: [reviewId], references: [id])
 }

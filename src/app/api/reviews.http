@@ -42,10 +42,65 @@ Content-Type: application/json
 }
 
 ### Eliminar una reseña por ID
-DELETE http://localhost:3000/api/reviews/9
+DELETE http://localhost:3000/api/reviews/1
 
 ### Obtener todas las reseñas del restaurante
 GET http://localhost:3000/api/reviews/restaurante/1
 
 ### Obtener todas las reseñas del usuario
 GET http://localhost:3000/api/reviews/usuario/2
+
+
+################
+
+### 
+POST http://localhost:3000/api/reviews
+Content-Type: application/json
+
+{
+  "comment": "Este es u comentario de restaurant 20",
+  "rating": 4,
+  "images": "https://s3-alpha-sig.figma.com/img/800f/4da2/ab7675998da8a61ea809ceda5ca3a9c8?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=mBRXiwzEtopyOl4WYnU6~No-oEGBw4qZWhzJ88qQ8gqT4BdyeqVzU2Zgn3QmN3-xW~ak9OmkOaI12iyr5IsGRM9Q45374v8J2n1ODWGQDjoMN-GCbAWGWV9ocYMm7mJnPFgBV56Ho0xJQqTmIuuTr~X5sBKb7exQwyp~WrI82Mn9uZxDQPbK6QWkSf5PmpQfHX9GqdDo0Qr4we5JIdRAMsZ8Gb2CxlJR~T9d0IvKMIFdte2GAfGDO-y-~Bd49RxfXdg7eUpxM1sTKcSSXoF4XcOFvMwaxCbvjF6DMH--Xk7q-S6j6qjKFOi5MPH7JjMH~vm-t~tABxylyntrFriLpw__",
+  "restaurantId": 20,
+  "userId": 4
+}
+### 
+POST http://localhost:3000/api/reviews
+Content-Type: application/json
+
+{
+  "comment": "Este es u comentario de restaurant 20",
+  "rating": 2,
+  "restaurantId": 20,
+  "userId": 3
+}
+### 
+POST http://localhost:3000/api/reviews
+Content-Type: application/json
+
+{
+  "comment": "Este es u comentario de restaurant 20",
+  "rating": 1,
+  "restaurantId": 20,
+  "userId": 3
+}
+### 
+POST http://localhost:3000/api/reviews
+Content-Type: application/json
+
+{
+  "comment": "abc",
+  "rating": 4,
+  "restaurantId": 8,
+  "userId": 4
+}
+### 
+POST http://localhost:3000/api/reviews
+Content-Type: application/json
+
+{
+  "comment": "Este es u comentario de restaurant 20",
+  "rating": 5,
+  "restaurantId": 20,
+  "userId": 3
+}

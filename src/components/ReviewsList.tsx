@@ -5,12 +5,16 @@ import ReviewItem from './ReviewItem';
 interface Review {
   id: number;
   comment: string;
-  images: string[];
+  images: {
+    id: number;
+    imgUrl: string;
+  };
   rating: number;
   createdAt: string;
   user: {
+    id: number;
     username: string;
-  };
+  }
 }
 
 interface ReviewsProps {
@@ -66,7 +70,7 @@ const fakeReviews = [
 
 export default async function ReviewsList({ restaurantId }: ReviewsProps) {
   const reviews: Review[] = await getReviewsByRestaurantId(+restaurantId);
-
+  
   return (
     <ul className='scrollBar flex flex-col gap-4 min-h-[400px] max-h-[850px]'>
       {reviews.length < 1 && (

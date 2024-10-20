@@ -6,12 +6,16 @@ import { FaStar } from 'react-icons/fa';
 interface Review {
   id: number;
   comment: string;
-  images: string[];
+  images: {
+    id: number;
+    imgUrl: string;
+  };
   rating: number;
   createdAt: string;
   user: {
+    id: number;
     username: string;
-  };
+  }
 }
 
 interface ReviewItemProps {
@@ -19,6 +23,8 @@ interface ReviewItemProps {
 }
 
 export default function ReviewItem({ review }: ReviewItemProps) {
+  // console.log(review);
+  
   const { images, comment, rating, createdAt } = review;
   const { username } = review?.user;
 
@@ -54,16 +60,17 @@ export default function ReviewItem({ review }: ReviewItemProps) {
 
         {isImage && (
           <div className='flex  gap-3  w-[490px] pb-4 scrollBar'>
-            {images.map((image, i) => (
-              <div key={i} className='relative w-28 h-28  flex-shrink-0'>
-                <Image
-                  src={`/img/${image}`}
-                  alt=''
-                  fill
-                  className=' object-cover block object-center rounded-lg'
-                />
-              </div>
-            ))}
+            {images.map(({ id, imgUrl }) => (
+                <div key={id} className='relative w-28 h-28  flex-shrink-0'>
+                  <Image
+                    src={`${imgUrl}`}
+                    alt=''
+                    fill
+                    className=' object-cover block object-center rounded-lg'
+                  />
+                </div>
+              )
+            )}
           </div>
         )}
       </div>

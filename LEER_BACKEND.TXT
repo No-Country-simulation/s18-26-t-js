@@ -66,3 +66,14 @@ usando la extensión REST Client, lo que facilita el desarrollo y la depuración
 Extensión: 
 Debe tener la extensión .http para que la extensión REST Client 
 lo reconozca y permita realizar las solicitudes.   
+
+
+Actualizar la base de datos con Prisma Migrate sin perder los datos existentes:
+1. Actualizar archivo schema.prisma
+2. Ejecutar el siguiente comando para actualizar la base de datos:
+   npx prisma migrate dev --name add_new_table_and_modify_existing
+3. Ejecutar el siguiente comando para actualizar la base de datos:
+   npx prisma migrate deploy
+4?.(Segun ChatGPT *Por revisar) Ejecutar el siguiente comando para actualizar el cliente de Prisma:
+   Después de realizar la migración, debes actualizar el cliente de Prisma para que los cambios en el esquema sean reflejados en tu código:
+   npx prisma generate

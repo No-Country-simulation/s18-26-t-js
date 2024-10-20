@@ -13,7 +13,12 @@ export async function GET(request, {params}) {
         id: true,
         comment: true,
         rating: true,
-        images: true,
+        images: {
+          select: {
+            id: true,
+            imgUrl: true,
+          }
+        },
         createdAt: true,
         // user: {
         //   select: {
