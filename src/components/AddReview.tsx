@@ -24,6 +24,7 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [images, setImages] = useState<FileList | null>(null);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
   const { handleCloseModal } = useOpenModal();
 
@@ -51,14 +52,6 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
     formData.append('rating', userRating.toString());
     formData.append('restaurantId', restaurantId);
     formData.append('userId', userId);
-
-    // const newReview = {
-    //   ...data, // comment
-    //   rating: userRating,
-    //   images: '',
-    //   userId,
-    //   restaurantId,
-    // };
 
     await axios
       .post('/api/reviews', formData)
@@ -113,17 +106,32 @@ export default function AddReview({ userId, restaurantId }: AddReviewProps) {
         ></textarea>
 
         <p className='text-lg'>Agrega algunas fotos.</p>
-        <button
-          type='button'
-          className='w-[80%] h-28 flex justify-center items-center flex-col rounded-md border-[#a0a0a07a] border-[1px]'
-        >
-          <LuImagePlus className='text-2xl' />
-          <span className='text-base'>Haz click para agregar fotos.</span>
-        </button>
-        <input type="file" multiple onChange={(e) => {
-          console.log(e.target.files);
-          setImages(e.target.files)
-        }} />
+        <div className='flex items-center relative w-[80%] min-h-28 justify-center flex-col rounded-md border-[#a0a0a07a] border-[1px]'>
+          <div className='flex gap-2 flex-wrap m-3 justify-center items-center'>
+            {
+              imagePreviews.length > 0 && (
+                imagePreviews.map((preview, index) =>
+                  <img key={index} src={preview} className='max-h-28 w-auto h-auto object-cover ' />
+                )
+              )
+            }
+            <div className='h-28 border-4 border-[#929292] border-dashed flex justify-center items-center flex-col p-3'>
+              <LuImagePlus className='text-2xl' />
+              <span className='text-base'>Haz click para agregar fotos.</span>
+            </div>
+          </div>
+          <input type="file" 
+              className='absolute border-4 opacity-0 w-full h-full z-10 cursor-pointer'
+              multiple onChange={(e) => {
+                const files = e.target.files
+
+                if (!files) return
+                const previews = Array.from(files).map(file => URL.createObjectURL(file));
+                setImagePreviews(previews)
+
+                setImages(files)
+              }} />
+        </div>
       </div>
 
       <div className=' ml-auto flex gap-3 pr-9 '>
