@@ -8,21 +8,21 @@ generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") 
-  directUrl = env("POSTGRES_URL_NON_POOLING") 
-}
+// datasource db {
+//   provider = "postgresql"
+//   url = env("POSTGRES_PRISMA_URL") 
+//   directUrl = env("POSTGRES_URL_NON_POOLING") 
+// }
 
 // datasource db {
 //   provider = "mysql"
 //   url      = env("DATABASE_URL")
 // }
 
-// datasource db {
-//   provider = "sqlite"
-//   url      = "file:./dev.db" 
-// }
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db" 
+}
 
 // -------- MODELOS -------
 
@@ -39,40 +39,29 @@ model User {
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   reviews    Review[]    @relation("UserReviews")
-  restaurant Restaurant?  
+  restaurants Restaurant[] // Relación uno a muchos  
   favorites  Favorite[]  // Relación con favoritos
 }
 
 model Restaurant {
   id            Int          @id @default(autoincrement())
-  userId        Int          @unique 
+  userId        Int          //Ya no va ser unico porque puede haber varios restaurantes
   name          String
   cityId        Int
   location      String
   phone         String?
-  reviews       Review[]
   averageRating Float?       @default(0)
   imageUrl      String?      
   logoUrl       String?      
   description   String?
-  categoryId    Int
+  openingHours  String?
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
   user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   city          City         @relation(fields: [cityId], references: [id])
-  category      Category     @relation(fields: [categoryId], references: [id])
-  cuisines      RestaurantCuisines[]  // Relación con la tabla intermedia RestaurantCuisines
-  openingHours  OpeningHours[]
-  favorites     Favorite[]   
-}
-
-model OpeningHours {
-  id           Int          @id @default(autoincrement())
-  dayOfWeek    String       // Ej: Monday, Tuesday, etc.
-  openingTime  String       // Ej: "09:00" 
-  closingTime  String       // Ej: "18:00"
-  restaurantId Int
-  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  category      RestaurantCategory[]  // Relacion con la tabla intermedia
+  favorites     Favorite[]  
+  reviews       Review[] 
 }
 
 model Review {
@@ -101,37 +90,29 @@ model City {
   restaurants  Restaurant[]
 }
 
+
 model Category {
   id           Int           @id @default(autoincrement())
   name         String        @unique
-  restaurants  Restaurant[]
+  restaurants  RestaurantCategory[]  // Relacion con la tabla intermedia
 }
 
-model Cuisine {
-  id           Int           @id @default(autoincrement())
-  name         String        @unique
-  restaurants  RestaurantCuisines[]  // Relación con la tabla intermedia RestaurantCuisines
-}
-
-model RestaurantCuisines {
+model RestaurantCategory {
   restaurantId Int
-  cuisineId    Int
+  categoryId    Int
   // Relaciones 
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
-  cuisine      Cuisine    @relation(fields: [cuisineId], references: [id], onDelete: Cascade)
-  @@id([restaurantId, cuisineId])
+  category     Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  @@id([restaurantId, categoryId])
 }
 
+// Opcional para favoritos:
 model Favorite {
-  id           Int        @id @default(autoincrement())
+
   userId       Int
   restaurantId Int
-  createdAt    DateTime   @default(now())
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  restaurant   Restaurant   @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
 
-  // Relaciones
-  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
-
-  // Evita que un usuario marque el mismo restaurante como favorito más de una vez
-  @@unique([userId, restaurantId])
+  @@id([userId, restaurantId])
 }
