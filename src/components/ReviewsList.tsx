@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { getReviewsByRestaurantId } from '@/libs/actions';
 import ReviewItem from './ReviewItem';
+import axios from 'axios';
 
 interface Review {
   id: number;
@@ -14,7 +15,7 @@ interface Review {
   user: {
     id: number;
     username: string;
-  }
+  };
 }
 
 interface ReviewsProps {
@@ -69,8 +70,12 @@ const fakeReviews = [
 ];*/
 
 export default async function ReviewsList({ restaurantId }: ReviewsProps) {
-  const reviews: Review[] = await getReviewsByRestaurantId(+restaurantId);
-  
+  // const reviews: Review[] = await getReviewsByRestaurantId(+restaurantId);
+  const res = await axios.get(
+    `${process.env.NEXTAUTH_URL}/api/reviews/restaurante/${restaurantId}`,
+  );
+  const reviews: Review[] = res.data;
+
   return (
     <ul className='scrollBar flex flex-col gap-4 min-h-[400px] max-h-[850px]'>
       {reviews.length < 1 && (

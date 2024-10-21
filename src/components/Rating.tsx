@@ -17,9 +17,9 @@ const Rating = ({ restaurant }: Props) => {
     },
   };
 
-  const reviews = restaurant.reviews;
+  const amountByRating = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
-  console.log('list', reviews);
+  restaurant.reviews.forEach((review) => amountByRating[review.rating]++);
 
   return (
     <div className='p-2'>
@@ -30,17 +30,17 @@ const Rating = ({ restaurant }: Props) => {
           </span>
           <p>{restaurant.averageRating}</p>
         </div>
-        <p>({calificacionesRestaurantes.reseñas} reseñas)</p>
+        <p>({restaurant.reviews.length} reseñas)</p>
       </div>
       <div className='flex gap-3'>
-        <div className='flex gap-1 flex-col'>
+        <div className='flex gap-1 flex-col justify-between'>
           <p>Excelente</p>
           <p>Muy bueno</p>
           <p>Bueno</p>
           <p>Regular</p>
           <p>Malo</p>
         </div>
-        <div className='flex gap-2 flex-col'>
+        <div className='flex gap-2 flex-col justify-between'>
           <div className='flex gap-2'>
             <Estrella color='#F5D03A' />
             <Estrella color='#F5D03A' />
@@ -77,12 +77,12 @@ const Rating = ({ restaurant }: Props) => {
             <Estrella />
           </div>
         </div>
-        <div className='flex gap-2 flex-col'>
-          <p>{calificacionesRestaurantes.tipos_de_reseñas.excelente}</p>
-          <p>{calificacionesRestaurantes.tipos_de_reseñas.muy_bueno}</p>
-          <p>{calificacionesRestaurantes.tipos_de_reseñas.bueno}</p>
-          <p>{calificacionesRestaurantes.tipos_de_reseñas.regular}</p>
-          <p>{calificacionesRestaurantes.tipos_de_reseñas.malo}</p>
+        <div className='flex gap-2 flex-col text-right'>
+          <p>{amountByRating[5]}</p>
+          <p>{amountByRating[4]}</p>
+          <p>{amountByRating[3]}</p>
+          <p>{amountByRating[2]}</p>
+          <p>{amountByRating[1]}</p>
         </div>
       </div>
     </div>
