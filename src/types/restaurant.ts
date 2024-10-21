@@ -1,18 +1,12 @@
-// export interface Restaurant {
-//   id: number
-//   name: string
-//   location: string
-//   phone: string | null
-//   reviews: Review[]
-//   averageRating: number
-//   image: string
-//   logo: string | null
-// }
-
-// export interface Review {
-//   id: number
-//   review: string
-// }
+export interface Review {
+  id:number     
+  comment?:string
+  rating:1|2|3|4|5
+  restaurantId:number 
+  userId:number 
+  images?:string[] 
+  createdAt:string 
+}
 
 
 export interface Restaurant {
@@ -27,5 +21,5 @@ export interface Restaurant {
   description: string
   createdAt: string
   updatedAt: string
-  reviews: object[]
+  reviews: Review[]
 }
