@@ -48,7 +48,7 @@ model Restaurant {
   userId        Int          //Ya no va ser unico porque puede haber varios restaurantes
   name          String
   cityId        Int
-  location      String
+  address       String?
   phone         String?
   averageRating Float?       @default(0)
   imageUrl      String?      
