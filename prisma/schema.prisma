@@ -38,7 +38,7 @@ model User {
   bio        String?
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  reviews    Review[]    @relation("UserReviews")
+  reviews    Review[]
   restaurants Restaurant[] // Relación uno a muchos  
   favorites  Favorite[]  // Relación con favoritos
 }
@@ -65,23 +65,23 @@ model Restaurant {
 }
 
 model Review {
-  id           Int           @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   comment      String?
-  rating       Int           // 1 - 5
+  rating       Int // 1 - 5
   restaurantId Int
   userId       Int
   images       ReviewImage[]
-  createdAt    DateTime       @default(now())
-  restaurant   Restaurant     @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
-  user         User           @relation("UserReviews", fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
 }
 
 model ReviewImage {
-  id           Int           @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   imgUrl       String
   reviewId     Int
-  createdAt    DateTime       @default(now())
-  review       Review         @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+  review       Review @relation(fields: [reviewId], references: [id])
 }
 
 model City {
