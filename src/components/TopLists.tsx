@@ -2,10 +2,11 @@ import Carousel from './Carousel';
 import { Restaurant } from '@/types/restaurant';
 import RestaurantLogoCard from './RestaurantLogoCard';
 import RestaurantCard from './RestaurantCard';
+import axios from 'axios';
 
 const TopLists = async () => {
-  const res = await fetch('http://localhost:3000/api/restaurant');
-  const restaurants: Restaurant[] = await res.json();
+  const res = await axios(`${process.env.NEXTAUTH_URL}/api/restaurant`);
+  const restaurants: Restaurant[] = res.data;
 
   const mostReviewedToShow = {
     sm: 1,
