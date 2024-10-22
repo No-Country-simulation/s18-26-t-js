@@ -25,6 +25,8 @@ export async function GET(req, { params }) {
     return NextResponse.json({ error: 'Error al obtener el restaurante' }, { status: 500 });
   }
 }
+
+
 // Handler  PUT (actualizar un restaurante por ID)
 export async function PUT(req, { params }) {
   const { id } = params;
@@ -43,6 +45,8 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ error: 'Error al actualizar el restaurante' }, { status: 500 });
   }
 }
+
+
 // Handler DELETE (eliminar un restaurante por ID)
 export async function DELETE(req, { params }) {
   const { id } = params;

@@ -1,44 +1,92 @@
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
+import prisma from '@/libs/db';
+// import uploadImages from '@/helpers/uploadImages';
+import { uploadSingleImage } from '@/libs/uploadSingleImage';
 
-const prisma = new PrismaClient();
 
-// Handler GET
+// GET .../api/restaurant
+
 export async function GET() {
   try {
     const restaurants = await prisma.restaurant.findMany({
       include: {
-        reviews: true
-      }
+        category: true,  // Incluir categorías si es necesario
+        city: true,      // Incluir información de la ciudad
+        reviews: {
+          select: {
+            id: true,
+            comment: true,
+            rating: true,
+            user: {
+              select: {
+                id: true,
+                username: true,
+              }
+            },
+            images: {
+              select: {
+                id: true,
+                imgUrl: true,
+              }
+            },
+            createdAt: true,
+          }
+        },
+      },
     });
-    return NextResponse.json(restaurants, { status: 200 });
+
+    return new Response(JSON.stringify(restaurants), { status: 200 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Error al obtener los restaurantes' }, { status: 500 });
+    return new Response(JSON.stringify({ error: 'Error fetching restaurants' }), { status: 500 });
   }
 }
 
-// Handler POST
-export async function POST(req) {
-  try {
-    const body = await req.json(); // Parsear el cuerpo de la solicitud
-    const { name, city, location, phone, averageRating, imageUrl, logoUrl, description} = body;
 
+// POST .../api/restaurant
+
+export async function POST(req) {
+  const data = await req.formData();
+
+  const name = data.get('name');
+  const cityId = +data.get('cityId');
+  const userId = +data.get('userId');
+  const description = data.get('description');
+  const address = data.get('address'); 
+  const image = data.get('imageUrl'); // Imagen del restaurante
+  const logo = data.get('logoUrl'); // Logo del restaurante
+
+  try {
+    let imageUrl = null;
+    let logoUrl = null;
+
+    // Subir imagen del restaurante a Cloudinary si existe
+    if (image) {
+      imageUrl = await uploadSingleImage(image);
+    }else {
+      console.log('No se proporcionó una imagen para el restaurante.');
+    }
+
+    // Subir logo a Cloudinary si existe
+    if (logo) {
+      logoUrl = await uploadSingleImage(logo);
+    }else {
+      console.log('No se proporcionó una imagen para el logo del restaurante.');
+    }
     const newRestaurant = await prisma.restaurant.create({
       data: {
         name,
-        city,
-        location,
-        phone,
-        averageRating,
+        cityId,
+        userId,
+        description,
         imageUrl,
         logoUrl,
-        description,
+        address,
       },
     });
-    return NextResponse.json(newRestaurant, { status: 201 });
+
+    return new Response(JSON.stringify(newRestaurant), { status: 201 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Error al crear el restaurante' }, { status: 500 });
+    return new Response(JSON.stringify({ error: 'Error creating restaurant' }), { status: 500 });
   }
 }
