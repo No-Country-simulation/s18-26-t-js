@@ -24,9 +24,10 @@ export const uploadSingleImage = async (image, folder = 'NoCountryS18') => {
     const optimizedUrl = cloudinary.url(result.public_id, {
       fetch_format: 'auto',
       quality: 'auto',
-      width: 300,
-      height: 300,
-      crop: 'fill',
+      crop: 'limit', // Evita redimensionar
+      // width: 300,
+      // height: 300,
+      // crop: 'fill',
     });
 
     return optimizedUrl; // Devolver la URL optimizada de la imagen
