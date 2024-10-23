@@ -47,11 +47,14 @@ Content-Type: application/json
 
 ### x
 POST http://localhost:3000/api/restaurant
-Content-Type: multipart/form-data
+Content-Type: application/json
 
   {
     "id": 20,
     "name": "El Jardín Secreto",
-    "address": "Address ID 20",
+    "city":"San Juan",
+    "location": "Location ID 20",
     "phone": "968765432",
+    "imageUrl": "https://dummyimage.com/200x200/000/fff&text=El+Jardín+Secreto",
+    "logoUrl": "https://s3-alpha-sig.figma.com/img/f4ef/65b6/f1c4a4186ef32bdc56ab2bba34cd4486?Expires=1729468800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Q9Gi~3am6AsjBegqHe1gQ76n0a~8JAc0jCoTAF4ywlLnuUgK0KiUGhx5rJXN0iQ4sGNQXv45WlyIY5SA~vQY8VER3v4V2gwufuZ~7mCsIAcIX6Cw8VBxKtUd2GgmO7VcMR4YiOHFc~K1DNRSGLhOrAsy62YlltqXcf9hafMN1fwp3dtCtjQalnKnA8UgBEza8Q0Oh2s1wyYcSgmlcaYOzAh~H6vFKIjQTlm6qyoGHjQcCdz8azfQnrtFhmLcZ55kU3olOTyRWpabZv7KLn4ZsTimpvxmxWSpG~CrNGaLgnsqMU0WLznWNXV28jYqWkaHsutyyk9fPAZ-qVq5x0mxeg__"
   }

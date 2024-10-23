@@ -47,7 +47,6 @@ export async function POST(request) {
         username: data.username,
         email: data.email,
         password: hashedPassword,
-        owner: data.owner 
       },
     });
 
