@@ -2,14 +2,17 @@ import prisma from '@/libs/db';
 import { uploadSingleImage } from '@/libs/uploadSingleImage';
 // import uploadImages from '@/helpers/uploadImages';
 
-
 // GET .../api/restaurant
 
 export async function GET() {
   try {
     const restaurants = await prisma.restaurant.findMany({
       include: {
-        category: true, // Incluir categorías si es necesario
+        category: {
+          include: {
+            category: true, // Incluir información de la categoría
+          },
+        },
         city: true, // Incluir información de la ciudad
         reviews: {
           select: {
@@ -34,7 +37,13 @@ export async function GET() {
       },
     });
 
-    return new Response(JSON.stringify(restaurants), { status: 200 });
+    // Mapear los restaurantes para incluir solo los nombres de las categorías
+    const formattedRestaurants = restaurants.map((restaurant) => ({
+      ...restaurant,
+      category: restaurant.category.map((rc) => rc.category.name), // Cambiar la estructura de categorías
+    }));
+
+    return new Response(JSON.stringify(formattedRestaurants), { status: 200 });
   } catch (error) {
     console.error(error);
     return new Response(
@@ -52,10 +61,14 @@ export async function POST(req) {
   const name = data.get('name');
   const cityId = +data.get('cityId');
   const userId = +data.get('userId');
+  const categories = data.getAll('category[]');
   const description = data.get('description');
   const address = data.get('address');
+  const phone = data.get('phone');
   const image = data.get('imageUrl'); // Imagen del restaurante
   const logo = data.get('logoUrl'); // Logo del restaurante
+
+  console.log('valor category', categories);
 
   try {
     let imageUrl = null;
@@ -83,6 +96,14 @@ export async function POST(req) {
         imageUrl,
         logoUrl,
         address,
+        phone,
+        category: {
+          create: categories.map((id) => ({
+            category: {
+              connect: { id: +id }, // Conectas cada categoría usando el ID
+            },
+          })),
+        },
       },
     });
 
