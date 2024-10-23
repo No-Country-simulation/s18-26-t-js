@@ -12,8 +12,12 @@ export async function GET(req, { params }) {
         id: Number(id),
       },
       include: {
-        category: true,  // Incluir categoria
-        city: true,      // Incluir  la ciudad
+        category: {
+          include: {
+            category: true, // Incluir información de la categoría
+          },
+        },
+        city: true, // Incluir  la ciudad
         reviews: {
           select: {
             id: true,
@@ -23,31 +27,41 @@ export async function GET(req, { params }) {
               select: {
                 id: true,
                 username: true,
-              }
+              },
             },
             images: {
               select: {
                 id: true,
                 imgUrl: true,
-              }
+              },
             },
             createdAt: true,
-          }
+          },
         },
       },
     });
 
     if (!restaurant) {
-      return new Response(JSON.stringify({ error: 'Restaurant not found' }), { status: 404 });
+      return new Response(JSON.stringify({ error: 'Restaurant not found' }), {
+        status: 404,
+      });
     }
 
-    return new Response(JSON.stringify(restaurant), { status: 200 });
+    return new Response(
+      JSON.stringify({
+        ...restaurant,
+        category: restaurant.category.map((rc) => rc.category.name), // Cambiar la estructura de categorías
+      }),
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: 'Error fetching restaurant' }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: 'Error fetching restaurant' }),
+      { status: 500 },
+    );
   }
 }
-
 
 // PUT .../api/restaurant/[id]
 
@@ -68,11 +82,13 @@ export async function PUT(req, { params }) {
     });
 
     if (!restaurant) {
-      return new Response(JSON.stringify({ error: 'Restaurant not found' }), { status: 404 });
+      return new Response(JSON.stringify({ error: 'Restaurant not found' }), {
+        status: 404,
+      });
     }
 
     let imageUrl = restaurant.imageUrl; // Mantener la imagen anterior por defecto
-    let logoUrl = restaurant.logoUrl;   // Mantener el logo anterior por defecto
+    let logoUrl = restaurant.logoUrl; // Mantener el logo anterior por defecto
 
     // Subir nueva imagen si existe
     if (image) {
@@ -102,7 +118,10 @@ export async function PUT(req, { params }) {
     return new Response(JSON.stringify(updatedRestaurant), { status: 200 });
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: 'Error updating restaurant' }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: 'Error updating restaurant' }),
+      { status: 500 },
+    );
   }
 }
 
@@ -117,16 +136,24 @@ export async function DELETE(req, { params }) {
     });
 
     if (!restaurant) {
-      return new Response(JSON.stringify({ error: 'Restaurant not found' }), { status: 404 });
+      return new Response(JSON.stringify({ error: 'Restaurant not found' }), {
+        status: 404,
+      });
     }
 
     await prisma.restaurant.delete({
       where: { id: Number(id) },
     });
 
-    return new Response(JSON.stringify({ message: 'Restaurant deleted successfully' }), { status: 200 });
+    return new Response(
+      JSON.stringify({ message: 'Restaurant deleted successfully' }),
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
-    return new Response(JSON.stringify({ error: 'Error deleting restaurant' }), { status: 500 });
+    return new Response(
+      JSON.stringify({ error: 'Error deleting restaurant' }),
+      { status: 500 },
+    );
   }
 }
