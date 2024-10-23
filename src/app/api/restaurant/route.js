@@ -1,6 +1,7 @@
 import prisma from '@/libs/db';
-// import uploadImages from '@/helpers/uploadImages';
 import { uploadSingleImage } from '@/libs/uploadSingleImage';
+// import uploadImages from '@/helpers/uploadImages';
+
 
 // GET .../api/restaurant
 
