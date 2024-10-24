@@ -1,0 +1,3 @@
+### Consular todos los restaurantes por name
+GET http://localhost:3000/api/restaurant/search?name=
+Content-Type: application/json

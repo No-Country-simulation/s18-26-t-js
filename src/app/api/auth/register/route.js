@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
-import bcrypt from "bcrypt";
-import db from "@/libs/db";
+import { NextResponse } from 'next/server';
+import bcrypt from 'bcrypt';
+import db from '@/libs/db';
 import { omit } from 'lodash';
 
 export async function POST(request) {
@@ -16,11 +16,11 @@ export async function POST(request) {
     if (userFound) {
       return NextResponse.json(
         {
-          message: "Email already exists",
+          message: 'Email already exists',
         },
         {
           status: 400,
-        }
+        },
       );
     }
 
@@ -33,11 +33,11 @@ export async function POST(request) {
     if (usernameFound) {
       return NextResponse.json(
         {
-          message: "username already exists",
+          message: 'username already exists',
         },
         {
           status: 400,
-        }
+        },
       );
     }
 
@@ -47,7 +47,7 @@ export async function POST(request) {
         username: data.username,
         email: data.email,
         password: hashedPassword,
-        owner: data.owner 
+        owner: data.owner || false,
       },
     });
 
@@ -64,7 +64,7 @@ export async function POST(request) {
       },
       {
         status: 500,
-      }
+      },
     );
   }
 }
