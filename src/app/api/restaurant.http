@@ -4,7 +4,7 @@ Content-Type: application/json
 
 ### Crear un nuevo restaurante
 POST http://localhost:3000/api/restaurant
-Content-Type: application/json
+Content-Type: multipart/form-data
 
 {
   "name": "Restaurante 1",
@@ -20,15 +20,10 @@ GET http://localhost:3000/api/restaurant/1
 Content-Type: application/json
 
 ### actualizar restaurante por ID:
-PUT http://localhost:3000/api/restaurant/1
-Content-Type: application/json
+PUT http://localhost:3000/api/restaurant/8
+Content-Type: multipart/form-data
 
-{
-  "name": "Restaurante",
-  "city": "Ciudad Prueba",
-  "location": "Calle Falsa 456",
-  "phone": "0000000"
-}
+name=Jardín
 
 ### Eliminar restaurante por ID:
 DELETE http://localhost:3000/api/restaurant/1
