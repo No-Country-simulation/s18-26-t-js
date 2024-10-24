@@ -10,7 +10,7 @@ export async function GET() {
       include: {
         category: {
           include: {
-            category: true, // Incluir información de la categoría
+            category: true, 
           },
         },
         city: true, // Incluir información de la ciudad
@@ -36,11 +36,21 @@ export async function GET() {
         },
       },
     });
+    
+    //En Caso el Frontend necesita el obj con ID y Name
+    // Mapear los restaurantes para incluir solo los id y nombres de las categorías
+    // const formattedRestaurants = restaurants.map((restaurant) => ({
+    //   ...restaurant,
+    //   category: restaurant.category.map((rc) => ({
+    //     id: rc.category.id,      
+    //     name: rc.category.name,   
+    //   })),
+    // }));
 
     // Mapear los restaurantes para incluir solo los nombres de las categorías
     const formattedRestaurants = restaurants.map((restaurant) => ({
       ...restaurant,
-      category: restaurant.category.map((rc) => rc.category.name), // Cambiar la estructura de categorías
+      category: restaurant.category.map((rc) => rc.category.name), 
     }));
 
     return new Response(JSON.stringify(formattedRestaurants), { status: 200 });
