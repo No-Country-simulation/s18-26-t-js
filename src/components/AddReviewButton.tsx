@@ -1,12 +1,12 @@
 'use client';
 
 import React, { ReactNode } from 'react';
-import { useOpenModal } from '@/context/ModalContext';
 import Modal from './Modal';
 import Link from 'next/link';
+import { useVisibility } from '@/context/VisibilityContext';
 
 interface AddReviewButtonProps {
-  isUser: boolean | null;
+  isUser: { user: { owner: boolean } } | null;
   children: ReactNode;
 }
 
@@ -14,7 +14,7 @@ export default function AddReviewButton({
   isUser,
   children,
 }: AddReviewButtonProps) {
-  const { openModal, handleOpenModal } = useOpenModal();
+  const { isComponentVisible, handleShow } = useVisibility();
 
   if (!isUser) {
     return (
@@ -27,17 +27,21 @@ export default function AddReviewButton({
     );
   }
 
+  if (isUser.user.owner) return null;
+
   return (
     <>
       <button
-        onClick={handleOpenModal}
+        onClick={() => handleShow('review')}
         type='button'
         className='text-center bg-[#FB6800] basis-[35%] font-medium  text-white-color px-5 py-1 rounded-md'
       >
         Agregar reseña
       </button>
 
-      {openModal && <Modal>{children}</Modal>}
+      {isComponentVisible('review') && (
+        <Modal modalId='review'>{children}</Modal>
+      )}
     </>
   );
 }

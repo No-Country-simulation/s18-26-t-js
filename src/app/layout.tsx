@@ -5,8 +5,8 @@ import './globals.css';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
-import ModalProvider from '@/context/ModalContext';
 import ToasterContext from '@/context/ToasterContext';
+import VisibilityProvider from '@/context/VisibilityContext';
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
@@ -46,7 +46,7 @@ export default function RootLayout({
 
         <Header />
 
-        <ModalProvider>{children}</ModalProvider>
+        <VisibilityProvider>{children}</VisibilityProvider>
 
         <Footer />
       </body>
