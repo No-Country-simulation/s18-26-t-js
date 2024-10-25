@@ -95,14 +95,14 @@ export default function Page() {
   };
 
   return (
-    <div className='p-16 flex flex-col gap-5'>
+    <div className='w-[90%] mx-auto flex flex-col gap-5 my-4'>
       {params.get('q') && (
         <h1 className='text-xl'>
           Resultados para: <b>{params.get('q')}</b>
         </h1>
       )}
-      <section className='flex gap-5'>
-        <label className='border p-1 rounded-lg'>
+      <section className='grid grid-cols-2 gap-5 max-w-96'>
+        <label className='border p-1 rounded-lg '>
           <p className='text-gray-600'>Ciudades</p>
           <select
             onChange={({ target }) => setFilterByCity(Number(target.value))}
@@ -116,11 +116,12 @@ export default function Page() {
             ))}
           </select>
         </label>
-        <label className='border p-1 rounded-lg'>
+        <label className='border p-1 rounded-lg '>
           <p className='text-gray-600'>Categorías</p>
           <select
             onChange={({ target }) => setFilterByCategory(Number(target.value))}
             value={filterByCategory}
+            className='max-w-full'
           >
             <option value=''>Todos</option>
             {categories.map(({ id, name }) => (
@@ -134,9 +135,12 @@ export default function Page() {
       <section className=''>
         {!loadingStatus ? (
           !errorMessage ? (
-            <ul className='grid grid-cols-4 gap-5'>
+            <ul className='flex flex-wrap gap-1'>
               {filteredResult.map((restaurant, index) => (
-                <li key={index} className='rounded-lg overflow-hidden border'>
+                <li
+                  key={index}
+                  className='rounded-lg overflow-hidden border max-w-44 md:max-w-60 w-full'
+                >
                   <RestaurantCard item={restaurant} />
                 </li>
               ))}
