@@ -28,7 +28,9 @@ datasource db {
 
 model User {
   id         Int         @id @default(autoincrement())
-  country    String?     
+  country    String?  
+  name       String?
+  lastName   String?
   username   String      @unique
   email      String      @unique
   password   String

@@ -10,6 +10,10 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
   // Extraer la imagen y los demás campos
   const formData = await request.formData();
+
+  const name = formData.get('name')?.toString();
+  const lastName = formData.get('lastName')?.toString();
+
   const country = formData.get('country')?.toString();
   const avatarImage = formData.get('avatarUrl') as File | null;
   const birthDate = formData.get('birthDate') ? new Date(formData.get('birthDate')!.toString()) : undefined;
@@ -27,6 +31,8 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     const user = await prisma.user.update({
       where: { id: parseInt(id) },
       data: {
+        name,
+        lastName,
         country,
         avatarUrl: avatarUrl || undefined, // Guardar la nueva URL si existe
         birthDate,
