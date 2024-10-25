@@ -9,7 +9,7 @@ const RestaurantCard = ({ item }: { item: Restaurant }) => {
   return (
     <div
       onClick={() => router.push(`/restaurant/${item.id}`)}
-      className=''
+      className='cursor-pointer'
       key={item.id}
     >
       <img
@@ -27,7 +27,7 @@ const RestaurantCard = ({ item }: { item: Restaurant }) => {
         </div>
       </div>
       <p className='px-2 pb-2 text-lg font-semibold text-gray-color'>
-        {item.location}
+        {item.city.name}
       </p>
     </div>
   );

@@ -5,6 +5,7 @@ import ReviewsList from './ReviewsList';
 import AddReview from './AddReview';
 
 import { getRestaurantById, getSession } from '@/libs/actions';
+import ReviewImage from './ReviewImage';
 
 interface ReviewsProps {
   restaurantId: string;
@@ -36,6 +37,7 @@ export default async function Reviews({ restaurantId }: ReviewsProps) {
       </div>
 
       <ReviewsList restaurantId={restaurantId} />
+      <ReviewImage />
     </div>
   );
 }
