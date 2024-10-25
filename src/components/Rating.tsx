@@ -6,17 +6,6 @@ interface Props {
 }
 
 const Rating = ({ restaurant }: Props) => {
-  const calificacionesRestaurantes = {
-    reseñas: '115',
-    tipos_de_reseñas: {
-      excelente: 85,
-      muy_bueno: 15,
-      bueno: 10,
-      regular: 4,
-      malo: 1,
-    },
-  };
-
   const amountByRating = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
   restaurant.reviews.forEach((review) => amountByRating[review.rating]++);
@@ -28,7 +17,7 @@ const Rating = ({ restaurant }: Props) => {
           <span>
             <Estrella color='#F5D03A' />
           </span>
-          <p>{restaurant.averageRating}</p>
+          <p>{restaurant.averageRating.toFixed(1)}</p>
         </div>
         <p>({restaurant.reviews.length} reseñas)</p>
       </div>

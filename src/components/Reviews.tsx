@@ -4,14 +4,15 @@ import AddReviewButton from './AddReviewButton';
 import ReviewsList from './ReviewsList';
 import AddReview from './AddReview';
 
-import { getCurrentUser, getRestaurantById } from '@/libs/actions';
+import { getRestaurantById, getSession } from '@/libs/actions';
 
 interface ReviewsProps {
   restaurantId: string;
 }
 
 export default async function Reviews({ restaurantId }: ReviewsProps) {
-  const user = await getCurrentUser();
+  const session = await getSession();
+
   const restaurant = await getRestaurantById(+restaurantId);
 
   return (
@@ -27,9 +28,10 @@ export default async function Reviews({ restaurantId }: ReviewsProps) {
             <FiSearch className='text-[#FB6800]' />
           </button>
         </form>
-
-        <AddReviewButton isUser={user}>
-          <AddReview restaurantId={restaurant.id} userId={user?.id} />
+        <AddReviewButton isUser={session}>
+          {session && (
+            <AddReview restaurantId={restaurant.id} userId={session.user.id} />
+          )}
         </AddReviewButton>
       </div>
 

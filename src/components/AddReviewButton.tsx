@@ -6,7 +6,7 @@ import Modal from './Modal';
 import Link from 'next/link';
 
 interface AddReviewButtonProps {
-  isUser: boolean | null;
+  isUser: { user: { owner: boolean } } | null;
   children: ReactNode;
 }
 
@@ -26,6 +26,8 @@ export default function AddReviewButton({
       </Link>
     );
   }
+
+  if (isUser.user.owner) return null;
 
   return (
     <>

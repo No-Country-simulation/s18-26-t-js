@@ -15,7 +15,7 @@ interface Review {
   user: {
     id: number;
     username: string;
-  }
+  };
 }
 
 interface ReviewItemProps {
@@ -24,7 +24,7 @@ interface ReviewItemProps {
 
 export default function ReviewItem({ review }: ReviewItemProps) {
   // console.log(review);
-  
+
   const { images, comment, rating, createdAt } = review;
   const { username } = review?.user;
 
@@ -52,7 +52,7 @@ export default function ReviewItem({ review }: ReviewItemProps) {
 
           <small className='flex items-center gap-1 text-base'>
             <FaStar className=' text-[--yellow-color] ' />
-            {rating}
+            {rating.toFixed(1)}
           </small>
         </div>
 
@@ -61,16 +61,15 @@ export default function ReviewItem({ review }: ReviewItemProps) {
         {isImage && (
           <div className='flex  gap-3  w-[490px] pb-4 scrollBar'>
             {images.map(({ id, imgUrl }) => (
-                <div key={id} className='relative w-28 h-28  flex-shrink-0'>
-                  <Image
-                    src={`${imgUrl}`}
-                    alt=''
-                    fill
-                    className=' object-cover block object-center rounded-lg'
-                  />
-                </div>
-              )
-            )}
+              <div key={id} className='relative w-28 h-28  flex-shrink-0'>
+                <Image
+                  src={`${imgUrl}`}
+                  alt=''
+                  fill
+                  className=' object-cover block object-center rounded-lg'
+                />
+              </div>
+            ))}
           </div>
         )}
       </div>

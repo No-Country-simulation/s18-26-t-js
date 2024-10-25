@@ -37,7 +37,7 @@ function LoginPage() {
   });
 
   return (
-    <div className='h-screen   flex justify-center items-center'>
+    <div className='py-12 flex justify-center items-center'>
       <form
         onSubmit={onSubmit}
         className='rounded-xl shadow-xl w-full max-w-[400px] py-5 px-4 border-[#F5D03A59] border-solid border-[1px]
