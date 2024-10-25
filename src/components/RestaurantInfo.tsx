@@ -14,7 +14,7 @@ const RestaurantInfo = ({ restaurant }: Props) => {
           fill
           className='object-cover'
           alt={restaurant.name}
-          src={restaurant.imageUrl}
+          src={restaurant.imageUrl || '/img/restaurant-default.png'}
         />
       </div>
       <div className='max-w-6xl mx-auto mb-8 pt-8 px-4'>
@@ -24,7 +24,9 @@ const RestaurantInfo = ({ restaurant }: Props) => {
           </h2>
           <p className='flex gap-1 text-xl items-center'>
             <Estrella color='#F5D03A' />
-            <span className='text-gray-color'>{restaurant.averageRating}</span>
+            <span className='text-gray-color'>
+              {restaurant.averageRating.toFixed(1)}
+            </span>
           </p>
         </div>
         <p className='text-lg text-gray-color mb-4'>

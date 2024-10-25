@@ -11,7 +11,7 @@ export default function UserMenuHeader() {
     setOpenOptions(!openOptions);
   };
   const user = useSession();
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className='flex justify-end items-center relative'>
@@ -39,7 +39,7 @@ export default function UserMenuHeader() {
         >
           {user.data ? (
             <>
-              <Link className='py-2  hover:text-black' href={'/'}>
+              <Link className='py-2  hover:text-black' href={'/profileUser'}>
                 Perfil
               </Link>
               <Link className='py-2  hover:text-black' href={'/'}>
