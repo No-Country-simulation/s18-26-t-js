@@ -5,10 +5,13 @@ import ReviewsList from './ReviewsList';
 import AddReview from './AddReview';
 
 import { getCurrentUser, getRestaurantById } from '@/libs/actions';
+import ReviewImage from './ReviewImage';
 
 interface ReviewsProps {
   restaurantId: string;
 }
+
+
 
 export default async function Reviews({ restaurantId }: ReviewsProps) {
   const user = await getCurrentUser();
@@ -34,6 +37,7 @@ export default async function Reviews({ restaurantId }: ReviewsProps) {
       </div>
 
       <ReviewsList restaurantId={restaurantId} />
+      <ReviewImage />
     </div>
   );
 }

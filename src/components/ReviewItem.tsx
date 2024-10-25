@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import { FaStar } from 'react-icons/fa';
+import { useVisibility } from '@/context/VisibilityContext';
 
 interface Review {
   id: number;
@@ -15,7 +18,7 @@ interface Review {
   user: {
     id: number;
     username: string;
-  }
+  };
 }
 
 interface ReviewItemProps {
@@ -23,8 +26,8 @@ interface ReviewItemProps {
 }
 
 export default function ReviewItem({ review }: ReviewItemProps) {
-  // console.log(review);
-  
+  const { handleShow, handleData } = useVisibility();
+
   const { images, comment, rating, createdAt } = review;
   const { username } = review?.user;
 
@@ -60,17 +63,27 @@ export default function ReviewItem({ review }: ReviewItemProps) {
 
         {isImage && (
           <div className='flex  gap-3  w-[490px] pb-4 scrollBar'>
-            {images.map(({ id, imgUrl }) => (
-                <div key={id} className='relative w-28 h-28  flex-shrink-0'>
-                  <Image
-                    src={`${imgUrl}`}
-                    alt=''
-                    fill
-                    className=' object-cover block object-center rounded-lg'
-                  />
-                </div>
-              )
-            )}
+            {images.map(({ id, imgUrl }, index) => (
+              <div
+                key={id}
+                className='relative w-28 h-28  flex-shrink-0'
+                role='button'
+                onClick={() => {
+                  handleShow('review-img');
+                  handleData('review-img', {
+                    images,
+                    index,
+                  });
+                }}
+              >
+                <Image
+                  src={`${imgUrl}`}
+                  alt=''
+                  fill
+                  className=' object-cover block object-center rounded-lg'
+                />
+              </div>
+            ))}
           </div>
         )}
       </div>
