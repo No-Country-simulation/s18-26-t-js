@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useVisibility } from '@/context/VisibilityContext';
 
 interface AddReviewButtonProps {
-  isUser: boolean | null;
+  isUser: { user: { owner: boolean } } | null;
   children: ReactNode;
 }
 
@@ -26,6 +26,8 @@ export default function AddReviewButton({
       </Link>
     );
   }
+
+  if (isUser.user.owner) return null;
 
   return (
     <>

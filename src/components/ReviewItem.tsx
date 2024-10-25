@@ -55,7 +55,7 @@ export default function ReviewItem({ review }: ReviewItemProps) {
 
           <small className='flex items-center gap-1 text-base'>
             <FaStar className=' text-[--yellow-color] ' />
-            {rating}
+            {rating.toFixed(1)}
           </small>
         </div>
 

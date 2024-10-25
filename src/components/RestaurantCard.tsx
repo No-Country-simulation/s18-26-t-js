@@ -14,7 +14,7 @@ const RestaurantCard = ({ item }: { item: Restaurant }) => {
     >
       <img
         className='block w-full h-24 object-cover'
-        src={item.imageUrl}
+        src={item.imageUrl || '/img/restaurant-default.png'}
         alt={item.name}
       />
       <div className='flex justify-between px-2 my-2'>
@@ -22,7 +22,7 @@ const RestaurantCard = ({ item }: { item: Restaurant }) => {
         <div className='flex items-center gap-1'>
           <MdOutlineStarPurple500 className='text-[#F5D03A]' size={20} />
           <span className='text-lg font-semibold text-light-gray'>
-            {item.averageRating}
+            {item.averageRating.toFixed(1)}
           </span>
         </div>
       </div>
