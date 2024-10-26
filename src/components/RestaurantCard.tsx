@@ -27,7 +27,7 @@ const RestaurantCard = ({ item }: { item: Restaurant }) => {
         </div>
       </div>
       <p className='px-2 pb-2 text-lg font-semibold text-gray-color'>
-        {item.city.name}
+        {item.city}
       </p>
     </div>
   );

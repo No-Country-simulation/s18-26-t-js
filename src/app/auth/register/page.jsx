@@ -10,19 +10,21 @@ function RegisterPage() {
   const [Loading, setLoading] = useState(false);
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const password = watch('password');
+
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (data) => {
-    if (data.password !== data.confirmPassword) {
-      return alert('Passwords do not match');
-    }
-
     setLoading(true);
 
     const res = await axios.post('/api/auth/register', {
+      name: data.name,
+      lastName: data.lastName,
       username: data.username,
       email: data.email,
       password: data.password,
@@ -48,17 +50,53 @@ function RegisterPage() {
         <h1 className='text-[#F5D03A] font-bold text-2xl  '>¡Bienvenido!</h1>
         <p className='text-[14px] font-normal'>Ingresa con tu cuenta</p>
         <input
-          type='text'
           autoFocus
-          {...register('username', {
+          type='text'
+          {...register('name', {
             required: {
               value: true,
-              message: 'Username is required',
+              message: 'Nombre es requerido',
             },
           })}
           className='p-2 text-[14px] rounded-xl block mb-2 
           bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full'
-          placeholder='yourUser123'
+          placeholder='Nombre'
+        />
+
+        {errors.name && (
+          <span className='text-red-500 text-xs'>{errors.name.message}</span>
+        )}
+
+        <input
+          type='text'
+          {...register('lastName', {
+            required: {
+              value: true,
+              message: 'Apellido es requerido',
+            },
+          })}
+          className='p-2 text-[14px] rounded-xl block mb-2 
+          bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full'
+          placeholder='Apellido'
+        />
+
+        {errors.lastName && (
+          <span className='text-red-500 text-xs'>
+            {errors.lastName.message}
+          </span>
+        )}
+
+        <input
+          type='text'
+          {...register('username', {
+            required: {
+              value: true,
+              message: 'Username es requerido',
+            },
+          })}
+          className='p-2 text-[14px] rounded-xl block mb-2 
+          bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full'
+          placeholder='Username'
         />
 
         {errors.username && (
@@ -72,7 +110,7 @@ function RegisterPage() {
           {...register('email', {
             required: {
               value: true,
-              message: 'Email is required',
+              message: 'Email es requerido',
             },
           })}
           className='p-2 text-[14px] rounded-xl block mb-2 bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full'
@@ -87,7 +125,7 @@ function RegisterPage() {
           {...register('password', {
             required: {
               value: true,
-              message: 'Password is required',
+              message: 'Contraseña es requerida',
             },
           })}
           className='p-2 text-[14px] rounded-xl block mb-2 bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full'
@@ -104,8 +142,10 @@ function RegisterPage() {
           {...register('confirmPassword', {
             required: {
               value: true,
-              message: 'Confirm Password is required',
+              message: 'Confirmar Contraseña es requerida',
             },
+            validate: (value) =>
+              value === password || 'Las contraseñas deben coincidir',
           })}
           className='p-2 text-[14px] rounded-xl block mb-2 bg-transparent text-black border-[#F5D03A59] border-solid border-[1px] w-full'
           placeholder='********'
