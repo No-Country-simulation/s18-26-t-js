@@ -29,6 +29,7 @@ export default function ReviewItem({ review }: ReviewItemProps) {
   const { handleShow, handleData } = useVisibility();
 
   const { images, comment, rating, createdAt } = review;
+  // eslint-disable-next-line no-unsafe-optional-chaining
   const { username } = review?.user;
 
   // const isPhoto = photo ? `/img/${photo}` : '/img/default-user.jpg';

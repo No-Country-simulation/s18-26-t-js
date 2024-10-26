@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { getReviewsByRestaurantId } from '@/libs/actions';
+// import { getReviewsByRestaurantId } from '@/libs/actions';
 import ReviewItem from './ReviewItem';
 import axios from 'axios';
 
@@ -93,3 +93,4 @@ export default async function ReviewsList({ restaurantId }: ReviewsProps) {
 }
 
 // change -> ul: h-[850px]
+

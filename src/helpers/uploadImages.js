@@ -22,7 +22,7 @@ export default async function uploadImages(images) {
   for (const image of images) {
     const arrayBuffer = await image.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-
+// eslint-disable-next-line no-undef
     const result = await new Promise((res, rej) => {
       cloudinary.uploader.upload_stream({
         folder: 'NoCountryS18'

@@ -10,7 +10,7 @@ export const uploadSingleImage = async (image, folder = 'NoCountryS18') => {
   try {
     const arrayBuffer = await image.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-
+// eslint-disable-next-line no-undef
     const result = await new Promise((res, rej) => {
       cloudinary.uploader.upload_stream(
         { folder }, 

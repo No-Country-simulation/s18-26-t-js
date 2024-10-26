@@ -20,6 +20,7 @@ const fetchRestaurants = async (param: string) => {
   }
 };
 const fetchCities = async () => {
+  // eslint-disable-next-line no-useless-catch
   try {
     const response = await fetch(`/api/cities`);
     const data = await response.json();
@@ -33,6 +34,7 @@ const fetchCities = async () => {
   }
 };
 const fetchCategories = async () => {
+  // eslint-disable-next-line no-useless-catch
   try {
     const response = await fetch(`/api/categories`);
     const data = await response.json();

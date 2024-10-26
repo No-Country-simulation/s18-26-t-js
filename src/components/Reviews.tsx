@@ -30,8 +30,8 @@ export default async function Reviews({ restaurantId }: ReviewsProps) {
           </button>
         </form>
         <AddReviewButton isUser={session}>
-          {session && (
-            <AddReview restaurantId={restaurant.id} userId={session.user.id} />
+        {session && restaurant && (
+            <AddReview restaurantId={restaurant.id.toString()} userId={session.user.id} />
           )}
         </AddReviewButton>
       </div>

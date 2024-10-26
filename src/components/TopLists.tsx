@@ -1,24 +1,12 @@
+// Reescrito para el deploy
 import Carousel from './Carousel';
 import { Restaurant } from '@/types/restaurant';
 import RestaurantLogoCard from './RestaurantLogoCard';
 import RestaurantCard from './RestaurantCard';
-import axios from 'axios';
 
-const TopLists = async () => {
-  const res = await axios(`${process.env.NEXTAUTH_URL}/api/restaurant`);
-  const restaurants: Restaurant[] = res.data;
-
-  const mostReviewedToShow = {
-    sm: 1,
-    md: 2,
-    lg: 3,
-  };
-
-  const topRatedToShow = {
-    sm: 3,
-    md: 6,
-    lg: 9,
-  };
+const TopLists = ({ restaurants }: { restaurants: Restaurant[] }) => {
+  const mostReviewedToShow = { sm: 1, md: 2, lg: 3 };
+  const topRatedToShow = { sm: 3, md: 6, lg: 9 };
 
   const topRated = restaurants.filter((r) => r.averageRating > -1);
   const mostReviewed = restaurants.filter((r) => r.reviews.length > -1);
