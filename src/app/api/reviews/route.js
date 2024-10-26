@@ -95,7 +95,7 @@ export async function POST(request) {
       
       // Subir imagenes a la base de datos
       await db.reviewImage.createMany({
-        data: imagesUrl.map((url, index) => ({
+        data: imagesUrl.map((url) => ({
           imgUrl: url,
           reviewId: nuevaReview.id,
         })),

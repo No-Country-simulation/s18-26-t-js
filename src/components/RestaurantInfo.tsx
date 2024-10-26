@@ -20,7 +20,7 @@ const RestaurantInfo = ({ restaurant }: Props) => {
       <div className='max-w-6xl mx-auto mb-8 pt-8 px-4'>
         <div className='flex gap-8 items-center mb-2'>
           <h2 className='font-semibold text-2xl'>
-            {restaurant.name} - {restaurant.location}
+            {restaurant.name} - {restaurant.address}
           </h2>
           <p className='flex gap-1 text-xl items-center'>
             <Estrella color='#F5D03A' />

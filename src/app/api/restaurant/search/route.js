@@ -7,7 +7,7 @@ export async function GET(req) {
 
   try {
     if (!name) {
-      return new Response(JSON.stringify({ error: 'Missing name parameter' }), { status: 400 });
+      return new Response(JSON.stringify({ error: 'Missing or invalid name parameter' }), { status: 400 });
     }
 
     // Obtener todos los restaurantes de la base de datos

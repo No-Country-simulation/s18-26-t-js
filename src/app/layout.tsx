@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import React from 'react';
 
 import ToasterContext from '@/context/ToasterContext';
 import VisibilityProvider from '@/context/VisibilityContext';
