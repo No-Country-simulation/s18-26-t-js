@@ -17,7 +17,11 @@ export async function GET(req, { params }) {
             category: true, // Incluir información de la categoría
           },
         },
-        city: true, // Incluir  la ciudad
+        city: {
+          select: {
+            name: true,
+          },
+        },
         reviews: {
           select: {
             id: true,
@@ -51,6 +55,7 @@ export async function GET(req, { params }) {
       JSON.stringify({
         ...restaurant,
         category: restaurant.category.map((rc) => rc.category.name), // Cambiar la estructura de categorías
+        city: restaurant.city.name, // devolver nombre de ciudad (string)
       }),
       { status: 200 },
     );

@@ -10,10 +10,14 @@ export async function GET() {
       include: {
         category: {
           include: {
-            category: true, 
+            category: true,
           },
         },
-        city: true, // Incluir información de la ciudad
+        city: {
+          select: {
+            name: true,
+          },
+        },
         reviews: {
           select: {
             id: true,
@@ -36,21 +40,22 @@ export async function GET() {
         },
       },
     });
-    
+
     //En Caso el Frontend necesita el obj con ID y Name
     // Mapear los restaurantes para incluir solo los id y nombres de las categorías
     // const formattedRestaurants = restaurants.map((restaurant) => ({
     //   ...restaurant,
     //   category: restaurant.category.map((rc) => ({
-    //     id: rc.category.id,      
-    //     name: rc.category.name,   
+    //     id: rc.category.id,
+    //     name: rc.category.name,
     //   })),
     // }));
 
     // Mapear los restaurantes para incluir solo los nombres de las categorías
     const formattedRestaurants = restaurants.map((restaurant) => ({
       ...restaurant,
-      category: restaurant.category.map((rc) => rc.category.name), 
+      category: restaurant.category.map((rc) => rc.category.name),
+      city: restaurant.city.name,
     }));
 
     return new Response(JSON.stringify(formattedRestaurants), { status: 200 });
@@ -71,26 +76,23 @@ export async function POST(req) {
   const name = data.get('name');
   const cityId = +data.get('cityId');
   const userId = +data.get('userId');
-  const categories = data.getAll('category[]');
+  const categories = data.getAll('category');
   const description = data.get('description');
   const address = data.get('address');
   const phone = data.get('phone');
+  const openingHours = data.get('openingHours');
   const image = data.get('imageUrl'); // Imagen del restaurante
   const logo = data.get('logoUrl'); // Logo del restaurante
-
-  console.log('valor category', categories);
 
   try {
     let imageUrl = null;
     let logoUrl = null;
-
     // Subir imagen del restaurante a Cloudinary si existe
     if (image) {
       imageUrl = await uploadSingleImage(image);
     } else {
       console.log('No se proporcionó una imagen para el restaurante.');
     }
-
     // Subir logo a Cloudinary si existe
     if (logo) {
       logoUrl = await uploadSingleImage(logo);
@@ -107,6 +109,7 @@ export async function POST(req) {
         logoUrl,
         address,
         phone,
+        openingHours,
         category: {
           create: categories.map((id) => ({
             category: {
@@ -116,7 +119,6 @@ export async function POST(req) {
         },
       },
     });
-
     return new Response(JSON.stringify(newRestaurant), { status: 201 });
   } catch (error) {
     console.error(error);
