@@ -45,7 +45,7 @@ export async function POST(request) {
     const newUser = await db.user.create({
       data: {
         name: data.name, //se agrega el campo name
-        lastname: data.lastname, //se agrega el campo lastname
+        lastName: data.lastName, //se agrega el campo lastname
         username: data.username,
         email: data.email,
         password: hashedPassword,
