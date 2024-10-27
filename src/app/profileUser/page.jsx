@@ -3,6 +3,7 @@ import Estrella from '@/components/iconos/Estrella';
 import { getSession } from '@/libs/actions';
 import axios from 'axios';
 import { redirect } from 'next/navigation';
+import RestaurantFormTest from './RestaruantFormTest';
 
 const getUserRestaurants = async (userId, owner) => {
   if (owner) {
@@ -33,6 +34,10 @@ export default async function ProfileUser() {
         {owner ? (
           <section>
             <h2>Contenido usuario dueño: {username}</h2>
+            <div>
+              <h3>crear restaurante</h3>
+              <RestaurantFormTest userId={session.user.id} />
+            </div>
           </section>
         ) : (
           <section>
