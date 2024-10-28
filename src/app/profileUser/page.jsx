@@ -3,7 +3,6 @@ import Estrella from '@/components/iconos/Estrella';
 import { getSession } from '@/libs/actions';
 import axios from 'axios';
 import { redirect } from 'next/navigation';
-import RestaurantFormTest from './RestaruantFormTest';
 import ActualizarPerfil from '@/components/ActualizarPerfil';
 import NewRestaurantCard from '@/components/NewRestaurantCard';
 
@@ -38,24 +37,7 @@ export default async function ProfileUser() {
 
   return (
     <div className=' w-full  '>
-      <div className='max-w-80 mx-auto'>
-        {owner ? (
-          <section>
-            <h2>Contenido usuario dueño: {username}</h2>
-            <div>
-              <h3>crear restaurante</h3>
-              <RestaurantFormTest userId={session.user.id} />
-            </div>
-          </section>
-        ) : (
-          <section>
-            <h2>Contenido usuario normal: {username}</h2>
-          </section>
-        )}
-      </div>
-
       <div className='w-full h-[20vh] bg-[#F5D03A]'></div>
-
       <div className='w-full max-w-[1400px] flex max-md:items-center max-md:flex-col m-auto gap-16 min-h-screen relative p-3'>
         <div className='w-[300px] '>
           <div className='absolute -top-20 left-5 overflow-hidden w-[150px] h-[150px]'>

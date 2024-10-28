@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { redirect } from 'next/navigation';
 export default async function Page() {
   const session = await getSession();
-  console.log(session);
   if (!session) {
     redirect('/auth/login');
   }

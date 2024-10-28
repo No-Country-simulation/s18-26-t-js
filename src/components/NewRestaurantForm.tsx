@@ -90,14 +90,14 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
     <form className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
       <input
         type='text'
-        className='border rounded-lg py-1 px-3'
+        className='border rounded-lg p-3'
         placeholder='Nombre'
         {...register('name', {
           required: true,
         })}
       />
       <select
-        className='border rounded-lg py-1 px-3 w-fit'
+        className='border rounded-lg p-3 w-fit'
         defaultValue={''}
         {...register('cityId', {
           required: true,
@@ -114,7 +114,7 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
       </select>
       <input
         type='text'
-        className='border rounded-lg py-1 px-3'
+        className='border rounded-lg p-3'
         placeholder='Dirección'
         {...register('address', {
           required: true,
@@ -122,13 +122,13 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
       />
       <input
         type='text'
-        className='border rounded-lg py-1 px-3'
+        className='border rounded-lg p-3'
         placeholder='Teléfono'
         {...register('phone')}
       />
       <input
         type='text'
-        className='border rounded-lg py-1 px-3'
+        className='border rounded-lg p-3'
         placeholder='Descripción'
         {...register('description')}
       />
@@ -191,13 +191,13 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
       </label>
       <label className='bg-white w-fit p-3 gap-2 border rounded-lg'>
         <p>Horario de atención</p>
-        <div className='flex'>
+        <div className='flex gap-2 justify-center'>
           <div className='flex flex-col'>
             <p className='text-sm'>Inicio</p>
             <input
               type='time'
               defaultValue={'00:00'}
-              className='border rounded-lg py-1 px-3'
+              className='border rounded-lg p-3'
               placeholder='Horario de atención'
               onChange={(e) =>
                 setTimeSelected({
@@ -212,7 +212,7 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
             <input
               type='time'
               defaultValue={'23:59'}
-              className='border rounded-lg py-1 px-3'
+              className='border rounded-lg p-3'
               placeholder='Horario de atención'
               onChange={(e) =>
                 setTimeSelected({
@@ -244,7 +244,7 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
           ))}
         </div>
       </label>
-      <div className='w-1/2 flex flex-col gap-2 border rounded-xl bg-white p-2'>
+      <div className='w-1/2 flex flex-col gap-2 border rounded-xl bg-white p-3'>
         <p>Agrega el logo de tu restaurante</p>
         <div className='border rounded-xl relative aspect-video flex '>
           {logoSelected ? (
@@ -285,7 +285,7 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
           )}
         </div>
       </div>
-      <div className='w-1/2 flex flex-col gap-2 border rounded-xl bg-white p-2'>
+      <div className='w-1/2 flex flex-col gap-2 border rounded-xl bg-white p-3'>
         <p>Agrega la portada de tu restaurante</p>
         <div className='border rounded-xl relative aspect-video flex '>
           {bannerSelected ? (
