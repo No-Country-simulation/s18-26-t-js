@@ -3,37 +3,13 @@ import RestaurantCard from '@/components/RestaurantCard';
 import { Category } from '@/types/category';
 import { City } from '@/types/city';
 import { Restaurant } from '@/types/restaurant';
+import { fetchCategories } from '@/utils/fetchCategories';
+import { fetchCities } from '@/utils/fetchCities';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-const fetchRestaurants = async (param: string) => {
+const fetchRestaurantsByName = async (param: string) => {
   try {
     const response = await fetch(`/api/restaurant/search?name=${param}`);
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error);
-    }
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
-const fetchCities = async () => {
-  try {
-    const response = await fetch(`/api/cities`);
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error);
-    }
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
-const fetchCategories = async () => {
-  try {
-    const response = await fetch(`/api/categories`);
     const data = await response.json();
 
     if (!response.ok) {
@@ -53,7 +29,7 @@ export default function Page() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loadingStatus, setLoadingStatus] = useState(true);
   const [filterByCity, setFilterByCity] = useState<number>();
-  const [filterByCategory, setFilterByCategory] = useState<number>();
+  const [filterByCategory, setFilterByCategory] = useState<string>();
 
   useEffect(() => {
     fetchCategories().then((res) => setCategories(res));
@@ -61,7 +37,7 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
-    fetchRestaurants(params.get('q') as string)
+    fetchRestaurantsByName(params.get('q') as string)
       .then((res) => setRestaurants(res))
       .catch((error) => setErrorMessage(error.message))
       .finally(() => setLoadingStatus(false));
@@ -81,11 +57,11 @@ export default function Page() {
         return restaurant;
       }
       if (!filterByCity && filterByCategory) {
-        return restaurant.category.some(({ id }) => id === filterByCategory);
+        return restaurant.category.some((name) => name === filterByCategory);
       }
       if (filterByCity && filterByCategory) {
         return (
-          restaurant.category.some(({ id }) => id === filterByCategory) &&
+          restaurant.category.some((name) => name === filterByCategory) &&
           restaurant.cityId === filterByCity
         );
       }
@@ -119,13 +95,13 @@ export default function Page() {
         <label className='border p-1 rounded-lg '>
           <p className='text-gray-600'>Categorías</p>
           <select
-            onChange={({ target }) => setFilterByCategory(Number(target.value))}
+            onChange={({ target }) => setFilterByCategory(target.value)}
             value={filterByCategory}
             className='max-w-full'
           >
             <option value=''>Todos</option>
             {categories.map(({ id, name }) => (
-              <option key={`category-${id}`} value={id}>
+              <option key={`category-${id}`} value={name}>
                 {name}
               </option>
             ))}
