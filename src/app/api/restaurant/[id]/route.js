@@ -41,6 +41,9 @@ export async function GET(req, { params }) {
             },
             createdAt: true,
           },
+          orderBy: {
+            createdAt: 'desc',
+          },
         },
       },
     });

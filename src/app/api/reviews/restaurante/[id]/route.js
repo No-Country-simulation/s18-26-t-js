@@ -31,7 +31,10 @@ export async function GET(request, {params}) {
         //     name: true,
         //   }
         // }
-      }
+      }, 
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
     return NextResponse.json(reviews);
   } catch {
