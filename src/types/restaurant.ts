@@ -29,3 +29,17 @@ export interface Restaurant {
   category: CategoryName[];
   reviews: Review[];
 }
+
+export interface RegisterRestaurant {
+  [key: string]: string | File | string[] | number | null | number[];
+  name: string;
+  cityId: number;
+  userId: number;
+  description: string;
+  category: number[];
+  address: string;
+  phone: string;
+  openingHours: string;
+  imageUrl: File | null;
+  logoUrl: File | null;
+}
