@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { getReviewsByRestaurantId } from '@/libs/actions';
 import ReviewItem from './ReviewItem';
 import axios from 'axios';
 
