@@ -6,57 +6,11 @@ export async function GET(req) {
   const name = searchParams.get('name');
 
   try {
-    // Si no hay un parámetro de nombre, devuelve todos los restaurantes
     if (!name) {
-      const allRestaurants = await prisma.restaurant.findMany({
-        include: {
-          category: {
-            include: {
-              category: true,
-            },
-          },
-          city: {
-            select: {
-              name: true,
-            },
-          },
-          reviews: {
-            select: {
-              id: true,
-              comment: true,
-              rating: true,
-              user: {
-                select: {
-                  id: true,
-                  username: true,
-                },
-              },
-              images: {
-                select: {
-                  id: true,
-                  imgUrl: true,
-                },
-              },
-              createdAt: true,
-            },
-          },
-        },
-      });
-
-      // Formatear los resultados para incluir solo los nombres de las categorías y la ciudad
-      const formattedRestaurants = allRestaurants.map((restaurant) => ({
-        ...restaurant,
-        category: restaurant.category.map((rc) => ({
-          id: rc.category.id,
-          name: rc.category.name,
-        })),
-        city: restaurant.city.name,
-      }));
-
-      return new Response(JSON.stringify(formattedRestaurants), { status: 200 });
+      return new Response(JSON.stringify({ error: 'Missing name parameter' }), { status: 400 });
     }
 
-    // Obtener todos los restaurantes de la base de datos si hay un nombre de búsqueda
+    // Obtener todos los restaurantes de la base de datos
     const restaurants = await prisma.restaurant.findMany({
       include: {
         category: {
@@ -64,11 +18,7 @@ export async function GET(req) {
             category: true,
           },
         },
-        city: {
-          select: {
-            name: true,
-          },
-        },
+        city: true,
         reviews: {
           select: {
             id: true,
@@ -101,14 +51,13 @@ export async function GET(req) {
       return normalizedRestaurantName.includes(normalizedInputName);
     });
 
-    // Formatear los resultados para incluir solo los nombres de las categorías y la ciudad
+    // Formatear los resultados para incluir solo los nombres de las categorías
     const formattedRestaurants = filteredRestaurants.map((restaurant) => ({
       ...restaurant,
       category: restaurant.category.map((rc) => ({
         id: rc.category.id,
         name: rc.category.name,
       })),
-      city: restaurant.city.name,
     }));
 
     return new Response(JSON.stringify(formattedRestaurants), { status: 200 });
