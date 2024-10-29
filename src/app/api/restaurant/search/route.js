@@ -43,13 +43,16 @@ export async function GET(req) {
         },
       });
 
+          // Mapear los restaurantes para incluir solo los nombres de las categorías
+    // const formattedRestaurants = restaurants.map((restaurant) => ({
+    //   ...restaurant,
+    //   category: restaurant.category.map((rc) => rc.category.name),
+    //   city: restaurant.city.name,
+
       // Formatear los resultados para incluir solo los nombres de las categorías y la ciudad
       const formattedRestaurants = allRestaurants.map((restaurant) => ({
         ...restaurant,
-        category: restaurant.category.map((rc) => ({
-          id: rc.category.id,
-          name: rc.category.name,
-        })),
+        category: restaurant.category.map((rc) => rc.category.name),
         city: restaurant.city.name,
       }));
 
@@ -112,10 +115,11 @@ export async function GET(req) {
     // Formatear los resultados para incluir solo los nombres de las categorías y la ciudad
     const formattedRestaurants = filteredRestaurants.map((restaurant) => ({
       ...restaurant,
-      category: restaurant.category.map((rc) => ({
-        id: rc.category.id,
-        name: rc.category.name,
-      })),
+      // category: restaurant.category.map((rc) => ({
+      //   id: rc.category.id,
+      //   name: rc.category.name,
+      // })),
+      category: restaurant.category.map((rc) => rc.category.name),
       city: restaurant.city.name,
     }));
 
