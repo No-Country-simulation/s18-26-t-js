@@ -1,5 +1,4 @@
 import './profile.css';
-import Estrella from '@/components/iconos/Estrella';
 import { getSession } from '@/libs/actions';
 import axios from 'axios';
 import { redirect } from 'next/navigation';
@@ -32,7 +31,7 @@ export default async function ProfileUser() {
     redirect('/auth/login');
   }
 
-  const { id, owner, username } = session.user;
+  const { id, owner } = session.user;
   await axios.get(`${process.env.NEXTAUTH_URL}/api/users/${id}`).then((res) => {
     Profiledate = res.data;
   });

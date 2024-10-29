@@ -44,7 +44,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.owner = user.owner;
@@ -55,7 +55,7 @@ export const authOptions = {
 
       return token;
     },
-    async session({ session, user, token }) {
+    async session({ session, token }) {
       if (token) {
         // session.user.id = token.sub;
         session.user.id = +token.id;

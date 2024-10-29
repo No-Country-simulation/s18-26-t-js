@@ -1,6 +1,11 @@
 import TopLists from '@/components/TopLists';
+import { Restaurant } from '@/types/restaurant';
+import axios from 'axios';
 
-export default function Home() {
+export default async function Home() {
+  const res = await axios(`${process.env.NEXTAUTH_URL}/api/restaurant`);
+  const restaurants: Restaurant[] = res.data;
+
   return (
     <main className='py-14'>
       <section className='bg-yellow-color min-h-[300px] w-[90%]   mx-auto mb-12 px-8 flex items-center'>
@@ -8,7 +13,7 @@ export default function Home() {
           Del restaurante a tu mesa, con reseñas confiables.
         </h1>
       </section>
-      <TopLists />
+      <TopLists restaurants={restaurants} />
     </main>
   );
 }
