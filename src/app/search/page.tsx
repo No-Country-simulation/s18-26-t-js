@@ -6,7 +6,7 @@ import { Restaurant } from '@/types/restaurant';
 import { fetchCategories } from '@/utils/fetchCategories';
 import { fetchCities } from '@/utils/fetchCities';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 const fetchRestaurantsByName = async (param: string) => {
   try {
     const response = await fetch(`/api/restaurant/search?name=${param}`);
@@ -20,7 +20,7 @@ const fetchRestaurantsByName = async (param: string) => {
     throw error;
   }
 };
-export default function Page() {
+function PageContent() {
   const params = useSearchParams();
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [cities, setCities] = useState<City[]>([]);
@@ -132,5 +132,13 @@ export default function Page() {
         )}
       </section>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<p>Cargando...</p>}>
+      <PageContent />
+    </Suspense>
   );
 }

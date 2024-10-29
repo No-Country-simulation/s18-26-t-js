@@ -78,7 +78,8 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
       const { data } = await axios.post('/api/restaurant', formData);
       if (data.id) {
         toast.success('¡Tu restaurante se creó con éxito!');
-        router.push('/');
+        router.push('/profileUser');
+        router.refresh();
       }
     } catch (error) {
       toast.error('¡oh no! Algo ah salido mal.');

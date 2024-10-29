@@ -77,7 +77,9 @@ const Carousel = ({
     <div className='relative w-max overflow-hidden'>
       <div className='flex justify-between items-center px-2 mb-2'>
         <h3 className='font-semibold text-xl'>{title}</h3>
-        <div className='flex gap-2 '>
+        <div
+          className={`${elementList.length <= itemsToShow ? 'hidden' : 'flex'} gap-2`}
+        >
           <button
             onClick={prev}
             className='p-2 flex items-center justify-center bg-gray-200  rounded-full hover:bg-gray-400 transition-colors'
