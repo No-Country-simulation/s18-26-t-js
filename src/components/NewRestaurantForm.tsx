@@ -89,6 +89,90 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
 
   return (
     <form className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
+      <div className='flex gap-3 lg:w-4/5'>
+        <section className='w-1/2 flex flex-col gap-2 border rounded-xl bg-white p-3'>
+          <p>Agrega el logo de tu restaurante</p>
+          <div className='border rounded-xl relative aspect-video flex '>
+            {logoSelected ? (
+              <>
+                <Image
+                  src={logoSelected as string}
+                  alt='logo image selected'
+                  fill
+                  className='rounded-xl'
+                />
+                <BiXCircle
+                  className='z-50 text-black bg-gray-200 bg-opacity-50 rounded-full p-3 m-auto cursor-pointer size-1/2 opacity-30 hover:opacity-100'
+                  onClick={() => {
+                    setLogoSelected(undefined);
+                    setValue('logoUrl', null);
+                  }}
+                />
+              </>
+            ) : (
+              <>
+                <div className='m-auto flex flex-col justify-center items-center'>
+                  <LuImagePlus size={30} />
+                  <p>Haz click para agregar una foto.</p>
+                </div>
+                <input
+                  type='file'
+                  className='absolute z-10 inset-0 opacity-0 cursor-pointer'
+                  onChange={async (e) => {
+                    if (e.target.files?.item(0)) {
+                      const file = e.target.files[0];
+                      const imageData = await loadNewImage(file);
+                      setLogoSelected(imageData as string);
+                      setValue('logoUrl', file);
+                    }
+                  }}
+                />
+              </>
+            )}
+          </div>
+        </section>
+        <section className='w-1/2 flex flex-col gap-2 border rounded-xl bg-white p-3'>
+          <p>Agrega la portada de tu restaurante</p>
+          <div className='border rounded-xl relative aspect-video flex '>
+            {bannerSelected ? (
+              <>
+                <Image
+                  src={bannerSelected as string}
+                  alt='logo image selected'
+                  fill
+                  className='rounded-xl'
+                />
+                <BiXCircle
+                  className='z-50 text-black bg-gray-200 bg-opacity-50 rounded-full p-3 m-auto cursor-pointer size-1/2 opacity-30 hover:opacity-100'
+                  onClick={() => {
+                    setBannerSelected(undefined);
+                    setValue('imageUrl', null);
+                  }}
+                />
+              </>
+            ) : (
+              <>
+                <div className='m-auto flex flex-col justify-center items-center'>
+                  <LuImagePlus size={30} />
+                  <p>Haz click para agregar una foto.</p>
+                </div>
+                <input
+                  type='file'
+                  className='absolute z-10 inset-0 opacity-0 cursor-pointer'
+                  onChange={async (e) => {
+                    if (e.target.files?.item(0)) {
+                      const file = e.target.files[0];
+                      const imageData = await loadNewImage(file);
+                      setBannerSelected(imageData as string);
+                      setValue('imageUrl', file);
+                    }
+                  }}
+                />
+              </>
+            )}
+          </div>
+        </section>
+      </div>
       <input
         type='text'
         className='border rounded-lg p-3'
@@ -127,13 +211,12 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
         placeholder='Teléfono'
         {...register('phone')}
       />
-      <input
-        type='text'
+      <textarea
         className='border rounded-lg p-3'
         placeholder='Descripción'
         {...register('description')}
       />
-      <label className='bg-white p-3 rounded-lg border gap-2 flex flex-col'>
+      <section className='bg-white p-3 rounded-lg border gap-2 flex flex-col'>
         <p>Selecciona las categorías de tu restaurante</p>
         <input
           ref={refInputSearchCategories}
@@ -189,8 +272,8 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
             </li>
           ))}
         </ul>
-      </label>
-      <label className='bg-white w-fit p-3 gap-2 border rounded-lg'>
+      </section>
+      <section className='bg-white w-fit p-3 gap-2 border rounded-lg'>
         <p>Horario de atención</p>
         <div className='flex gap-2 justify-center'>
           <div className='flex flex-col'>
@@ -244,89 +327,8 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
             </span>
           ))}
         </div>
-      </label>
-      <div className='w-1/2 flex flex-col gap-2 border rounded-xl bg-white p-3'>
-        <p>Agrega el logo de tu restaurante</p>
-        <div className='border rounded-xl relative aspect-video flex '>
-          {logoSelected ? (
-            <>
-              <Image
-                src={logoSelected as string}
-                alt='logo image selected'
-                fill
-                className='rounded-xl'
-              />
-              <BiXCircle
-                className='z-50 text-black bg-gray-200 bg-opacity-50 rounded-full p-3 m-auto cursor-pointer size-1/2 opacity-30 hover:opacity-100'
-                onClick={() => {
-                  setLogoSelected(undefined);
-                  setValue('logoUrl', null);
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <div className='m-auto flex flex-col justify-center items-center'>
-                <LuImagePlus size={30} />
-                <p>Haz click para agregar una foto.</p>
-              </div>
-              <input
-                type='file'
-                className='absolute z-10 inset-0 opacity-0 cursor-pointer'
-                onChange={async (e) => {
-                  if (e.target.files?.item(0)) {
-                    const file = e.target.files[0];
-                    const imageData = await loadNewImage(file);
-                    setLogoSelected(imageData as string);
-                    setValue('logoUrl', file);
-                  }
-                }}
-              />
-            </>
-          )}
-        </div>
-      </div>
-      <div className='w-1/2 flex flex-col gap-2 border rounded-xl bg-white p-3'>
-        <p>Agrega la portada de tu restaurante</p>
-        <div className='border rounded-xl relative aspect-video flex '>
-          {bannerSelected ? (
-            <>
-              <Image
-                src={bannerSelected as string}
-                alt='logo image selected'
-                fill
-                className='rounded-xl'
-              />
-              <BiXCircle
-                className='z-50 text-black bg-gray-200 bg-opacity-50 rounded-full p-3 m-auto cursor-pointer size-1/2 opacity-30 hover:opacity-100'
-                onClick={() => {
-                  setBannerSelected(undefined);
-                  setValue('imageUrl', null);
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <div className='m-auto flex flex-col justify-center items-center'>
-                <LuImagePlus size={30} />
-                <p>Haz click para agregar una foto.</p>
-              </div>
-              <input
-                type='file'
-                className='absolute z-10 inset-0 opacity-0 cursor-pointer'
-                onChange={async (e) => {
-                  if (e.target.files?.item(0)) {
-                    const file = e.target.files[0];
-                    const imageData = await loadNewImage(file);
-                    setBannerSelected(imageData as string);
-                    setValue('imageUrl', file);
-                  }
-                }}
-              />
-            </>
-          )}
-        </div>
-      </div>
+      </section>
+
       <button
         type='submit'
         className='text-center bg-[#FB6800] basis-[35%] font-medium  text-white-color px-5 py-1 rounded-md w-2/3 m-auto'

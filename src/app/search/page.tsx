@@ -5,21 +5,10 @@ import { City } from '@/types/city';
 import { Restaurant } from '@/types/restaurant';
 import { fetchCategories } from '@/utils/fetchCategories';
 import { fetchCities } from '@/utils/fetchCities';
+import { fetchRestaurantsByName } from '@/utils/fetchRestaurantsByName';
 import { useSearchParams } from 'next/navigation';
 import React, { Suspense, useEffect, useState } from 'react';
-const fetchRestaurantsByName = async (param: string) => {
-  try {
-    const response = await fetch(`/api/restaurant/search?name=${param}`);
-    const data = await response.json();
 
-    if (!response.ok) {
-      throw new Error(data.error);
-    }
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
 function PageContent() {
   const params = useSearchParams();
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
@@ -71,7 +60,7 @@ function PageContent() {
   };
 
   return (
-    <div className='w-[90%] mx-auto flex flex-col gap-5 my-4'>
+    <main className='w-[90%] mx-auto flex flex-col gap-5 my-4 flex-grow'>
       {params.get('q') && (
         <h1 className='text-xl'>
           Resultados para: <b>{params.get('q')}</b>
@@ -131,7 +120,7 @@ function PageContent() {
           <p>No se han encontrado resultados</p>
         )}
       </section>
-    </div>
+    </main>
   );
 }
 

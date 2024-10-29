@@ -1,11 +1,17 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import React, { FormEvent } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import React, { FormEvent, useEffect, useRef } from 'react';
 import { BiSearch } from 'react-icons/bi';
 
 export default function SearchInputHeader() {
   const router = useRouter();
-
+  const path = usePathname();
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (path !== '/search' && inputRef.current) {
+      inputRef.current.value = '';
+    }
+  }, [path]);
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const inputSearch = e.currentTarget.elements.namedItem(
@@ -20,7 +26,7 @@ export default function SearchInputHeader() {
       onSubmit={handleSubmit}
     >
       <input
-        required
+        ref={inputRef}
         name='search'
         type='text'
         placeholder='Buscar'
