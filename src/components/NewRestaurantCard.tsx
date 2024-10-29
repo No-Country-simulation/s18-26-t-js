@@ -7,10 +7,12 @@ export default function NewRestaurantCard() {
   const router = useRouter();
   return (
     <div
-      className='w-[365px] border-[#45424C7A] border-[1px] rounded-md flex justify-center items-center flex-col cursor-pointer'
+      className='w-min py-8 border-[#45424C7A] border-[1px] rounded-md flex justify-center items-center flex-col cursor-pointer'
       onClick={() => router.push('/new-restaurant')}
     >
-      <p className='text-[#FB6800] text-lg'>Agregar un restaurante</p>
+      <p className='text-[#FB6800] text-lg min-w-80 text-center'>
+        Agregar un restaurante
+      </p>
       <BiPlusCircle color='#FB6800' size={18} />
     </div>
   );

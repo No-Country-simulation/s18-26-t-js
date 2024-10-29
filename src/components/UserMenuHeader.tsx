@@ -42,7 +42,7 @@ export default function UserMenuHeader() {
                 Perfil
               </Link>
               <Link className='py-2  hover:text-black' href={'/'}>
-                Ayuda
+                Inicio
               </Link>
               <p
                 className='py-2  hover:text-black hover:cursor-pointer'
@@ -62,7 +62,7 @@ export default function UserMenuHeader() {
                 Registrarse
               </Link>
               <Link className='py-2  hover:text-black' href={'/'}>
-                Ayuda
+                Inicio
               </Link>
             </>
           )}
