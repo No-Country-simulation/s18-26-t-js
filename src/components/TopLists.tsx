@@ -20,8 +20,8 @@ const TopLists = async () => {
     lg: 9,
   };
 
-  const topRated = restaurants.filter((r) => r.averageRating > -1);
-  const mostReviewed = restaurants.filter((r) => r.reviews.length > -1);
+  const topRated = restaurants.filter((r) => r.averageRating > 4);
+  const mostReviewed = restaurants.filter((r) => r.reviews.length > 2);
 
   const topRatedList = topRated.map((item) => (
     <RestaurantLogoCard key={item.id} item={item} />

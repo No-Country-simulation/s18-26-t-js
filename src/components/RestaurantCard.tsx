@@ -3,12 +3,18 @@ import { Restaurant } from '@/types/restaurant';
 import { useRouter } from 'next/navigation';
 import { MdOutlineStarPurple500 } from 'react-icons/md';
 
-const RestaurantCard = ({ item }: { item: Restaurant }) => {
+const RestaurantCard = ({
+  item,
+  pathEdit,
+}: {
+  item: Restaurant;
+  pathEdit?: string;
+}) => {
   const router = useRouter();
 
   return (
     <div
-      onClick={() => router.push(`/restaurant/${item.id}`)}
+      onClick={() => router.push(pathEdit || `/restaurant/${item.id}`)}
       className='cursor-pointer'
       key={item.id}
     >
@@ -27,7 +33,7 @@ const RestaurantCard = ({ item }: { item: Restaurant }) => {
         </div>
       </div>
       <p className='px-2 pb-2 text-lg font-semibold text-gray-color'>
-        {item.city.name}
+        {item.city}
       </p>
     </div>
   );

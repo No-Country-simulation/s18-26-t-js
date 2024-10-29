@@ -1,5 +1,4 @@
 import { CategoryName } from './category';
-import { City } from './city';
 
 export interface Review {
   id: number;
@@ -16,7 +15,7 @@ export interface Restaurant {
   userId: number;
   name: string;
   cityId: number;
-  city: City;
+  city: string;
   address?: string;
   phone?: string;
   averageRating: number;

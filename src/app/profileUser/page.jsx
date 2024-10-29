@@ -5,16 +5,19 @@ import axios from 'axios';
 import { redirect } from 'next/navigation';
 import ActualizarPerfil from '@/components/ActualizarPerfil';
 import NewRestaurantCard from '@/components/NewRestaurantCard';
+import RestaurantCard from '@/components/RestaurantCard';
 
 const getUserRestaurants = async (userId, owner) => {
   if (owner) {
-    // traer los restaurantes registrados por este usuario
-    const res = await axios(`${process.env.NEXTAUTH_URL}/api/restaurant`);
+    // traer los restaurantes creados por este usuario
+    const res = await axios(
+      `${process.env.NEXTAUTH_URL}/api/restaurant/owner/${userId}`,
+    );
     return res.data;
   } else {
     // traer los restaurantes reseñados y calificados por este usuario
     const res = await axios(
-      `${process.env.NEXTAUTH_URL}/api/reviews/usuario/${userId}`,
+      `${process.env.NEXTAUTH_URL}/api/restaurant/user-reviews/${userId}`,
     );
     return res.data;
   }
@@ -81,58 +84,54 @@ export default async function ProfileUser() {
             <h3>
               {Profiledate.name} {Profiledate.lastName}
             </h3>
-            |<h3>Comensal frecuente</h3>
             <ActualizarPerfil PerfilDatos={Profiledate} />
           </div>
 
-          <h6 className='ml-2 text-xl my-1'>Biografía</h6>
-          <section className='p-2 border-[#45424C7A] border-[1px] rounded-md  mx-2 mt-3 mb-10'>
-            <p>
-              Mi nombre es Gabriela pero me dicen Gabi, tengo 23 años y me
-              considero una persona amante de la gastronomía. En mis tiempos
-              libres me dedico a buscar y reseñar restaurantes/cafeterías.
-            </p>
-            <ActualizarPerfil PerfilDatos={Profiledate} />
-          </section>
-          <div></div>
           {owner ? (
-            <h6 className='text-xl mb-3'>Gestión de restaurantes</h6>
+            <div>
+              <h6 className='text-xl mb-3'>Gestión de restaurantes</h6>
+              <NewRestaurantCard />
+            </div>
           ) : (
-            <h6 className='text-xl mb-3'>Mis reseñas actuales</h6>
+            <div>
+              <h6 className='ml-2 text-xl my-1'>Biografía</h6>
+              <section className='p-2 border-[#45424C7A] border-[1px] rounded-md  mx-2 mt-3 mb-10'>
+                <p>{Profiledate.bio}</p>
+                <ActualizarPerfil PerfilDatos={Profiledate} />
+              </section>
+              <h6 className='text-xl mb-3'>Mis reseñas actuales</h6>
+            </div>
           )}
-          <div className=' ctn-reseñas overflow-x-auto h-[211px]  m-auto relative'>
-            {restaurantsList.length > 0 ? (
-              <ul className=' flex gap-3  absolute top-0  '>
-                {owner && <NewRestaurantCard />}
-                {restaurantsList.map((receñas) => (
-                  <li
-                    key={receñas.id}
-                    className='w-[365px] border-[#45424C7A] border-[1px] rounded-md '
-                  >
-                    <img
-                      src={receñas.image}
-                      alt={receñas.name}
-                      width={'100%'}
-                      className='block object-center object-cover h-[111px] rounded-t-md'
-                    />
-                    <div className='relative  rounded-b-md'>
-                      <section className='flex gap-1 absolute right-2 top-1'>
-                        <Estrella color='yellow' />
-                        <p className='text-[#45424C7A] text-[18px]'>
-                          {receñas.averageRating}
-                        </p>
-                      </section>
-                      <section className='flex gap-4 font-medium px-5 py-4'>
-                        <p>{receñas.name}</p> | <p>{receñas.location}</p>
-                      </section>
+
+          <section className='p-4 shadow-lg rounded-md min-h-80 max-h-[500px] overflow-auto mt-4'>
+            {owner ? (
+              restaurantsList.length > 0 ? (
+                <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+                  {restaurantsList.map((r) => (
+                    <div className='shadow-md rounded-md' key={r.id}>
+                      <RestaurantCard item={r} pathEdit='/new-restaurant' />
                     </div>
-                  </li>
+                  ))}
+                </section>
+              ) : (
+                <p className='text-center mt-8 italic text-gray-color'>
+                  No has añadido ningun restaurante aún.
+                </p>
+              )
+            ) : restaurantsList.length > 0 ? (
+              <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+                {restaurantsList.map((r) => (
+                  <div className='shadow-md rounded-md' key={r.id}>
+                    <RestaurantCard item={r} />
+                  </div>
                 ))}
-              </ul>
+              </section>
             ) : (
-              <p>No tienes reseñas</p>
+              <p className='text-center mt-8 italic text-gray-color'>
+                No has añadido ninguna reseña aún.
+              </p>
             )}
-          </div>
+          </section>
         </div>
       </div>
     </div>
