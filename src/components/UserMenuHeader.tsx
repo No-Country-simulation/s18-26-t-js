@@ -11,7 +11,6 @@ export default function UserMenuHeader() {
     setOpenOptions(!openOptions);
   };
   const user = useSession();
-  // console.log(user);
 
   return (
     <div className='flex justify-end items-center relative'>
