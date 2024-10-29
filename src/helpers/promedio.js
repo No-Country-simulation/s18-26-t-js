@@ -2,21 +2,21 @@ import db from '@/libs/db'
 
 export default async function actualizarPromedio (restaurantId) {
   
-  // Obtener reseñas del restaurante...
+  // Obtener reseñas del restaurante
   const reviews = await db.review.findMany({
     where: {
       restaurantId,
     }
   });
 
-  // 3. Promedio...
+  // Calcular promedio
   let averageRating = 0;
   if (reviews.length > 0) {
     const sumaCalificaciones = reviews.reduce((total, review) => total + review.rating, 0);
-    averageRating = Math.round(sumaCalificaciones / reviews.length);
+    averageRating = sumaCalificaciones / reviews.length; // Evitar redondeo
   }
 
-  // 4. Actualizar la calificacion.. .
+  // Actualizar la calificación en la base de datos
   await db.restaurant.update({
     where: { 
       id: restaurantId
