@@ -40,7 +40,7 @@ model User {
   bio        String?
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  reviews    Review[]
+  reviews    Review[]    
   restaurants Restaurant[] // Relación uno a muchos  
   favorites  Favorite[]  // Relación con favoritos
 }
@@ -60,8 +60,8 @@ model Restaurant {
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
   user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  city          City         @relation(fields: [cityId], references: [id])
-  category      RestaurantCategory[]  // Relacion con la tabla intermedia
+  city          City         @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  category      RestaurantCategory[] 
   favorites     Favorite[]  
   reviews       Review[] 
 }
@@ -74,7 +74,7 @@ model Review {
   userId       Int
   images       ReviewImage[]
   createdAt    DateTime   @default(now())
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   user         User       @relation(fields: [userId], references: [id])
 }
 
@@ -83,13 +83,13 @@ model ReviewImage {
   imgUrl       String
   reviewId     Int
   createdAt    DateTime   @default(now())
-  review       Review @relation(fields: [reviewId], references: [id])
+  review       Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 }
 
 model City {
   id           Int           @id @default(autoincrement())
   name         String        @unique
-  restaurants  Restaurant[]
+  restaurants  Restaurant[] 
 }
 
 
@@ -118,3 +118,4 @@ model Favorite {
 
   @@id([userId, restaurantId])
 }
+
