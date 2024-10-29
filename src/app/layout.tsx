@@ -41,7 +41,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} ${montserrat.variable} antialiased`}>
+      <head>
+        <link rel='icon' href='/img/Favicon.svg' sizes='any' />
+      </head>
+      <body
+        className={`${inter.className} ${montserrat.variable} antialiased flex flex-col h-dvh`}
+      >
         <ToasterContext />
 
         <Header />

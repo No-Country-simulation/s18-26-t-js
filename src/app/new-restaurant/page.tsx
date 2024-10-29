@@ -8,15 +8,15 @@ export default async function Page() {
     redirect('/auth/login');
   }
   return (
-    <main className='px-20 py-7 grid grid-cols-2 gap-6 bg-[#FBFBF4]'>
-      <section className='flex flex-col gap-6'>
+    <main className='px-5 sm:px-10 lg:px-20 py-7 grid grid-cols-5 gap-6 bg-[#FBFBF4]'>
+      <section className='flex flex-col gap-6 col-span-full md:col-span-3'>
         <h1 className='text-3xl text-[#FB6800]'>Agregar restaurante</h1>
         <div>
           <NewRestaurantForm userId={session.user.id} />
         </div>
       </section>
-      <aside className='flex justify-end items-start gap-4'>
-        <picture className='w-1/3 relative aspect-square mt-24'>
+      <aside className=' justify-end items-start gap-4 col-span-2 hidden md:flex'>
+        <picture className='w-1/3 relative aspect-square mt-[25%]'>
           <Image
             src={'/img/new-restaurant-2.png'}
             alt=''
