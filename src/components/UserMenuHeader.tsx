@@ -13,7 +13,7 @@ export default function UserMenuHeader() {
   const user = useSession();
 
   return (
-    <div className='flex justify-end items-center relative'>
+    <div className='flex justify-end items-center relative w-fit sm:w-1/5'>
       <span
         className='hover:cursor-pointer focus:outline-none w-8 aspect-square relative z-50'
         onClick={toggleOptions}
