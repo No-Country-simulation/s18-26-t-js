@@ -52,7 +52,9 @@ const RestaurantInfo = ({ restaurant }: Props) => {
         <p className='text-lg text-gray-color mb-4'>
           Categoría / Cocina:
           <span className='ml-2 font-semibold'>
-            {restaurant.category.join(', ')}
+            {restaurant.category.length > 0
+              ? restaurant.category.join(', ')
+              : 'No disponible'}
           </span>
         </p>
         <p className='text-lg'>{restaurant.description}</p>

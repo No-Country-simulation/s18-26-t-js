@@ -57,6 +57,7 @@ export async function GET(req, { params }) {
     return new Response(
       JSON.stringify({
         ...restaurant,
+        categoryList: restaurant.category.map((rc) => rc.category),
         category: restaurant.category.map((rc) => rc.category.name), // Cambiar la estructura de categorías
         city: restaurant.city.name, // devolver nombre de ciudad (string)
       }),
@@ -79,8 +80,10 @@ export async function PUT(req, { params }) {
 
   const name = data.get('name');
   const cityId = data.get('cityId') ? +data.get('cityId') : null; // Opcional
+  const categories = data.getAll('category');
   const description = data.get('description');
   const address = data.get('address');
+  const openingHours = data.get('openingHours');
   const image = data.get('imageUrl');
   const logo = data.get('logoUrl');
 
@@ -112,10 +115,19 @@ export async function PUT(req, { params }) {
     const updateData = {
       ...(name && { name }), // Solo incluir si `name` no es nulo
       ...(description && { description }),
+      ...(openingHours && { openingHours }),
       ...(address && { address }),
       ...(cityId && { city: { connect: { id: cityId } } }), // Actualizar relación de ciudad si se proporciona
       imageUrl,
       logoUrl,
+      category: {
+        deleteMany: {}, // Eliminar las categorías existentes
+        create: categories.map((categoryId) => ({
+          category: {
+            connect: { id: +categoryId }, // Conectar las nuevas categorías
+          },
+        })),
+      },
     };
 
     const updatedRestaurant = await prisma.restaurant.update({

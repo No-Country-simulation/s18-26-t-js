@@ -3,11 +3,12 @@ import { GoX } from 'react-icons/go';
 import { useVisibility } from '@/context/VisibilityContext';
 
 interface ModalProps {
+  styles?: string;
   children: ReactNode;
   modalId: string;
 }
 
-export default function Modal({ children, modalId }: ModalProps) {
+export default function Modal({ children, modalId, styles }: ModalProps) {
   const { handleHide } = useVisibility();
 
   return (
@@ -17,7 +18,9 @@ export default function Modal({ children, modalId }: ModalProps) {
         className='bg-[#45424B80] w-full h-full absolute cursor-pointer'
       ></div>
 
-      <div className='scrollBar p-5 w-[80%] h-[85%] shadow-xl relative bg-[--white-color] rounded-xl'>
+      <div
+        className={`${styles} scrollBar p-5 shadow-xl relative bg-[--white-color] rounded-xl`}
+      >
         <div className='flex  justify-end'>
           <button
             onClick={() => handleHide(modalId)}

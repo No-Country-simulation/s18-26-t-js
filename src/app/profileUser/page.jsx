@@ -108,7 +108,10 @@ export default async function ProfileUser() {
                 <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
                   {restaurantsList.map((r) => (
                     <div className='shadow-md rounded-md' key={r.id}>
-                      <RestaurantCard item={r} pathEdit='/new-restaurant' />
+                      <RestaurantCard
+                        item={r}
+                        pathEdit={`/edit-restaurant/${r.id}`}
+                      />
                     </div>
                   ))}
                 </section>
