@@ -100,11 +100,11 @@ function PageContent() {
       <section className=''>
         {!loadingStatus ? (
           !errorMessage ? (
-            <ul className='flex flex-wrap gap-1'>
+            <ul className='flex flex-wrap gap-1 justify-center sm:justify-start'>
               {filteredResult.map((restaurant, index) => (
                 <li
                   key={index}
-                  className='rounded-lg overflow-hidden border max-w-44 md:max-w-60 w-full'
+                  className='rounded-lg overflow-hidden border max-w-44 md:max-w-60 w-[45%]'
                 >
                   <RestaurantCard item={restaurant} />
                 </li>

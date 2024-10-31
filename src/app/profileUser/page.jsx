@@ -44,32 +44,32 @@ export default async function ProfileUser() {
         <div className='w-[300px] '>
           <div className='absolute -top-20 left-5 overflow-hidden w-[150px] h-[150px]'>
             <img
-              src={'/img/user-2.png'}
+              src={Profiledate.avatarUrl || '/img/default-user.jpg' }
               alt='imagen de usuario'
               className='w-full h-full rounded-full object-cover object-center '
             />
           </div>
           <div className='mt-24 p-3 border-[#45424C7A] border-[1px] rounded-md'>
-            <h6 className=' text-xl'>Mi información</h6>
-            <section className='text-[18px] flex gap-2'>
-              <h6 className='font-medium'>Edad:</h6>
-              <p>23</p>
+            <h6 className=' text-xl font-semibold'>Mi información</h6>
+            <section className='text-[18px] flex items-end gap-2'>
+              <h6 className='font-medium'>Nombre de usuario:</h6>
+              <p>{Profiledate.username}</p>
             </section>
             <section className='text-[18px] flex gap-2'>
               <h6 className='font-medium'>País:</h6>
-              <p>Argentina</p>
+              <p>{Profiledate.country}</p>
             </section>
             <section className='text-[18px] flex gap-2 flex-wrap'>
               <h6 className='font-medium'>Email:</h6>
               <p>{Profiledate.email}</p>
             </section>
             <section className='text-[18px] flex gap-2'>
-              <h6 className='font-medium'>Lugares visitados:</h6>
-              <p>35</p>
+              <h6 className='font-medium'>{Profiledate.owner ? 'Cantidad de restaurantes' : 'Lugares visitados'}:</h6>
+              <p>{ restaurantsList.length}</p>
             </section>
-            <section className='text-[18px] flex gap-2'>
-              <h6 className='font-medium'>Nivel:</h6>
-              <p>Experto</p>
+            <section className='text-[18px] flex items-end gap-2'>
+              <h6 className='font-medium'>Fecha de nacimiento:</h6>
+              <p>{Profiledate.birthDate || '20/02/2000'}</p>
             </section>
             <ActualizarPerfil PerfilDatos={Profiledate} id={id} />
           </div>
@@ -83,7 +83,7 @@ export default async function ProfileUser() {
             <h3>
               {Profiledate.name} {Profiledate.lastName}
             </h3>
-            <ActualizarPerfil PerfilDatos={Profiledate} />
+            <ActualizarPerfil PerfilDatos={Profiledate} id={id}/>
           </div>
 
           {owner ? (
@@ -95,8 +95,8 @@ export default async function ProfileUser() {
             <div>
               <h6 className='ml-2 text-xl my-1'>Biografía</h6>
               <section className='p-2 border-[#45424C7A] border-[1px] rounded-md  mx-2 mt-3 mb-10'>
-                <p>{Profiledate.bio}</p>
-                <ActualizarPerfil PerfilDatos={Profiledate} />
+                <p>{Profiledate.bio || 'No tienes biografía'}</p>
+                <ActualizarPerfil PerfilDatos={Profiledate} id = {id}/>
               </section>
               <h6 className='text-xl mb-3'>Mis reseñas actuales</h6>
             </div>

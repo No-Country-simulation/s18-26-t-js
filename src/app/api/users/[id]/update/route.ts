@@ -10,7 +10,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
   // Extraer la imagen y los demás campos
   const formData = await request.formData();
-
+   console.log(formData)
   const name = formData.get('name')?.toString();
   const lastName = formData.get('lastName')?.toString();
 
@@ -18,7 +18,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
   const avatarImage = formData.get('avatarUrl') as File | null;
   const birthDate = formData.get('birthDate') ? new Date(formData.get('birthDate')!.toString()) : undefined;
   const bio = formData.get('bio')?.toString();
-
+  console.log(country, "soy country")
   try {
     let avatarUrl: string | undefined;
 

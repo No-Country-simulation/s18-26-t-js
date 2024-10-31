@@ -1,10 +1,12 @@
 'use client'
 import axios from 'axios';
 import React, { useState } from 'react';
-import { BiEdit } from 'react-icons/bi';
+import { BiEdit, BiLoader } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
 
 export default function ActualizarPerfil({PerfilDatos,id}) {
+
+  const [Loading, setLoading] = useState(false);
 
     const [openForm,setOpen] = useState(false)
       const [formData, setFormData] = useState({
@@ -12,8 +14,7 @@ export default function ActualizarPerfil({PerfilDatos,id}) {
         name: PerfilDatos.name,
         lastName: PerfilDatos.lastName,
         username: PerfilDatos.username,
-        email: PerfilDatos.email,
-        owner: PerfilDatos.owner,
+        avatarUrl: PerfilDatos.file,
         birthDate: PerfilDatos.birthDate,
         bio: PerfilDatos.bio,
       });
@@ -27,12 +28,37 @@ export default function ActualizarPerfil({PerfilDatos,id}) {
       };
     
       const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
+        let formData2 = new FormData()
+        formData2.append(
+          "country", formData.country
+        )
+        formData2.append(
+          "name", formData.name
+        )
+        formData2.append(
+          "lastName", formData.lastName
+        ) 
+        formData2.append(
+          "username", formData.username
+        )
+        formData2.append(
+          "bio", formData.bio
+        )
+        formData2.append(
+          "birthDate", formData.birthDate
+        )
+       
         console.log('Form data submitted:', formData);
         // Aquí puedes enviar los datos a tu API utilizando Axios u otra librería.
-       /* await axios.put(`${process.env.NEXTAUTH_URL}/api/users/${id}`,{
-          formData
-        }).then( res => console.log(res))*/
+       await axios.put(`/api/users/${id}/update`,
+          formData2
+        ).then( res => {
+          setLoading(false)
+          setOpen(false)
+          console.log(res)
+        })
       };
     
       return (
@@ -83,7 +109,17 @@ export default function ActualizarPerfil({PerfilDatos,id}) {
               required
             />
           </div>
-    
+          <div className=''>
+            <label>Sube tu foto de perfil:</label>
+            <input
+            className='p-1 w-full bg-transparent border-yellow-400 border-[1px] rounded-md'
+              type="file"
+              name="avatarUrl"
+              //value={formData.birthDate }
+              onChange={handleChange}
+              
+            />
+          </div>
           <div className=''>
             <label>Username:</label>
             <input
@@ -95,29 +131,7 @@ export default function ActualizarPerfil({PerfilDatos,id}) {
               required
             />
           </div>
-    
-          <div className=''>
-            <label>Email:</label>
-            <input
-            className='p-1 w-full bg-transparent border-yellow-400 border-[1px] rounded-md'
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-    
-          <div className='flex gap-2 justify-start  items-center'>
-            <label>Owner:</label>
-            <input
-            className='cursor-pointer'
-              type="checkbox"
-              name="owner"
-              checked={formData.owner}
-              onChange={handleChange}
-            />
-          </div>
+  
     
           <div className=''>
             <label>Birth Date:</label>
@@ -141,7 +155,12 @@ export default function ActualizarPerfil({PerfilDatos,id}) {
               placeholder='Mi biografía'
             />
           </div>
-    
+          <div
+            className={`col-span-2  transition-all flex justify-center items-center ${Loading ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`}
+          >
+            Por favor <BiLoader className='animate-spin' />
+            espere
+          </div>
           <button type="submit"
           className='bg-yellow-600 text-white font-semibold col-span-2 mt-5 py-1 rounded-md '
           >Submit</button>
