@@ -1,8 +1,24 @@
 import NewRestaurantForm from '@/components/NewRestaurantForm';
 import { getSession } from '@/libs/actions';
+import { Restaurant } from '@/types/restaurant';
+import axios from 'axios';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
-export default async function Page() {
+import { notFound, redirect } from 'next/navigation';
+
+interface PageProps {
+  params: {
+    restaurantId: string;
+  };
+}
+
+export default async function Page({ params }: PageProps) {
+  const { restaurantId } = params;
+
+  const restaurantIdNumber = Number(restaurantId);
+  if (isNaN(restaurantIdNumber) || restaurantIdNumber <= 0) {
+    notFound();
+  }
+
   const session = await getSession();
   if (!session) {
     redirect('/auth/login');
@@ -10,12 +26,21 @@ export default async function Page() {
 
   if (!session.user.owner) redirect('/profileUser');
 
+  const res = await axios.get(
+    `${process.env.NEXTAUTH_URL}/api/restaurant/${restaurantId}`,
+  );
+
+  const restaurantData: Restaurant = res.data;
+
   return (
     <main className='px-5 sm:px-10 lg:px-20 py-7 grid grid-cols-5 gap-6 bg-[#FBFBF4]'>
       <section className='flex flex-col gap-6 col-span-full md:col-span-3'>
-        <h1 className='text-3xl text-[#FB6800]'>Agregar restaurante</h1>
+        <h1 className='text-3xl text-[#FB6800]'>Editar restaurante</h1>
         <div>
-          <NewRestaurantForm userId={session.user.id} />
+          <NewRestaurantForm
+            userId={session.user.id}
+            restaurantData={restaurantData}
+          />
         </div>
       </section>
       <aside className=' justify-end items-start gap-4 col-span-2 hidden md:flex'>

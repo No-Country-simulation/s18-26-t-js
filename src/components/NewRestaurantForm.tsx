@@ -1,7 +1,7 @@
 'use client';
 import { Category } from '@/types/category';
 import { City } from '@/types/city';
-import { RegisterRestaurant } from '@/types/restaurant';
+import { RegisterRestaurant, Restaurant } from '@/types/restaurant';
 import { fetchCategories } from '@/utils/fetchCategories';
 import { fetchCities } from '@/utils/fetchCities';
 import axios from 'axios';
@@ -12,9 +12,19 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { BiXCircle } from 'react-icons/bi';
 import { LuImagePlus } from 'react-icons/lu';
+import { useVisibility } from '@/context/VisibilityContext';
+import DeleteRestaurantBtn from './DeleteRestaurantBtn';
 
 const days = ['lun', 'mar', 'mie', 'jue', 'vie', 'sab', 'dom'];
-export default function NewRestaurantForm({ userId }: { userId: number }) {
+
+export default function NewRestaurantForm({
+  userId,
+  restaurantData,
+}: {
+  userId: number;
+  restaurantData?: Restaurant;
+}) {
+  // console.log('valor...', restaurantData);
   const [cities, setCities] = useState<City[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [filteredCategories, setFilteredCategories] = useState<Category[]>([]);
@@ -29,15 +39,59 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
   const refInputSearchCategories = useRef<HTMLInputElement | null>(null);
   const { register, handleSubmit, setValue } = useForm<RegisterRestaurant>();
 
+  const refInputOpenTime = useRef<HTMLInputElement | null>(null);
+  const refInputCloseTime = useRef<HTMLInputElement | null>(null);
+
+  const { handleHide } = useVisibility();
+
   const router = useRouter();
 
   useEffect(() => {
+    if (restaurantData) {
+      const categoriesData = restaurantData.categoryList.map((c) => c.id);
+      setCategoriesSelected(categoriesData);
+      setValue('category', categoriesData);
+
+      setValue('logoUrl', restaurantData.logoUrl || null);
+      setLogoSelected(restaurantData.logoUrl);
+
+      setValue('imageUrl', restaurantData.imageUrl || null);
+      setBannerSelected(restaurantData.imageUrl);
+
+      setValue('name', restaurantData.name);
+      setValue('address', restaurantData.address || '');
+      setValue('cityId', restaurantData.cityId);
+      setValue('phone', restaurantData.phone || '');
+      setValue('description', restaurantData.description || '');
+
+      if (
+        restaurantData.openingHours &&
+        restaurantData.openingHours.includes('/')
+      ) {
+        const stringData = restaurantData.openingHours;
+        const timeAndDays = stringData.split(' / ');
+        const time = timeAndDays[0].split(' - ');
+        const days = timeAndDays[1].split(', ');
+        setTimeSelected({ open: time[0], close: time[1] });
+
+        if (refInputOpenTime.current && refInputCloseTime.current) {
+          refInputOpenTime.current.value = time[0];
+          refInputCloseTime.current.value = time[1];
+        }
+
+        setDaysSelected(days);
+
+        // setValue('openingHours', restaurantData.openingHours);
+      }
+    }
+
     fetchCategories().then((res) => {
       setCategories(res);
       setFilteredCategories(res);
     });
     fetchCities().then((res) => setCities(res));
   }, []);
+
   useEffect(() => {
     setFilteredCategories(categories);
     if (refInputSearchCategories.current) {
@@ -45,6 +99,7 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoriesSelected]);
+
   const loadNewImage = (
     newImage: File,
   ): Promise<string | ArrayBuffer | null> => {
@@ -62,7 +117,10 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
     });
   };
   const onSubmit: SubmitHandler<RegisterRestaurant> = async (data) => {
-    data.openingHours = `${timeSelected?.open} - ${timeSelected?.close} - ${daysSelected.join(' - ')}`;
+    if (timeSelected?.open && timeSelected?.close && daysSelected.length > 0) {
+      data.openingHours = `${timeSelected.open} - ${timeSelected.close} / ${daysSelected.join(', ')}`;
+    }
+
     data.cityId = Number(data.cityId);
     data.userId = userId;
     const formData = new FormData();
@@ -74,10 +132,40 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
       }
     }
 
+    if (typeof formData.get('imageUrl') === 'string')
+      formData.delete('imageUrl');
+    if (typeof formData.get('logoUrl') === 'string') formData.delete('logoUrl');
+
     try {
-      const { data } = await axios.post('/api/restaurant', formData);
-      if (data.id) {
-        toast.success('¡Tu restaurante se creó con éxito!');
+      if (restaurantData) {
+        const { data } = await axios.put(
+          `/api/restaurant/${restaurantData.id}`,
+          formData,
+        );
+        if (data.id) {
+          toast.success('¡Tu restaurante se actualizó con éxito!');
+          router.push('/profileUser');
+          router.refresh();
+        }
+      } else {
+        const { data } = await axios.post('/api/restaurant', formData);
+        if (data.id) {
+          toast.success('¡Tu restaurante se creó con éxito!');
+          router.push('/profileUser');
+          router.refresh();
+        }
+      }
+    } catch (error) {
+      toast.error('¡oh no! Algo ah salido mal.');
+      console.log(error);
+    }
+  };
+
+  const handleDelete = async (restaurantId: number) => {
+    try {
+      const res = await axios.delete(`/api/restaurant/${restaurantId}`);
+      if (res.status === 200) {
+        toast.success('¡Restaurante Eliminado!');
         router.push('/profileUser');
         router.refresh();
       }
@@ -279,6 +367,7 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
           <div className='flex flex-col'>
             <p className='text-sm'>Inicio</p>
             <input
+              ref={refInputOpenTime}
               type='time'
               defaultValue={'00:00'}
               className='border rounded-lg p-3'
@@ -294,6 +383,7 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
           <div className='flex flex-col'>
             <p className='text-sm'>Cierre</p>
             <input
+              ref={refInputCloseTime}
               type='time'
               defaultValue={'23:59'}
               className='border rounded-lg p-3'
@@ -331,10 +421,45 @@ export default function NewRestaurantForm({ userId }: { userId: number }) {
 
       <button
         type='submit'
-        className='text-center bg-[#FB6800] basis-[35%] font-medium  text-white-color px-5 py-1 rounded-md w-2/3 m-auto'
+        className='text-center bg-[#FB6800] basis-[35%] font-medium  text-white-color px-5 py-1 rounded-md w-2/3 m-auto my-4'
       >
-        Agregar restaurante
+        {restaurantData ? 'Guardar Cambios' : 'Agregar restaurante'}
       </button>
+
+      {restaurantData && (
+        <DeleteRestaurantBtn>
+          <div>
+            <h2 className='text-center text-xl mb-4'>
+              ¿Está seguro de que desea eliminar este restaurante?
+            </h2>
+            <p className='text-sm text-gray-color mb-4 leading-6'>
+              Esta acción eliminará todos los datos relacionados con este
+              restaurante, incluidos calificaciones, reseñas y cualquier
+              información asociada. Esta acción no se puede deshacer.
+            </p>
+            <div className='flex gap-8 justify-end'>
+              <button
+                className='bg-gray-500 p-2 text-white rounded-md'
+                type='button'
+                onClick={() => handleHide('delete-restaurant')}
+              >
+                Cancelar
+              </button>
+
+              <button
+                className='bg-red-800 p-2 text-white rounded-md'
+                type='button'
+                onClick={() => {
+                  handleDelete(restaurantData.id);
+                  handleHide('delete-restaurant');
+                }}
+              >
+                Eliminar
+              </button>
+            </div>
+          </div>
+        </DeleteRestaurantBtn>
+      )}
     </form>
   );
 }

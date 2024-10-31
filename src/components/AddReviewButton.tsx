@@ -40,7 +40,9 @@ export default function AddReviewButton({
       </button>
 
       {isComponentVisible('review') && (
-        <Modal modalId='review'>{children}</Modal>
+        <Modal styles='w-[80%] h-[85%]' modalId='review'>
+          {children}
+        </Modal>
       )}
     </>
   );

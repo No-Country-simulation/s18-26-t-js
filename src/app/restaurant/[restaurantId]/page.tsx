@@ -2,6 +2,7 @@ import Reviews from '@/components/Reviews';
 import RestaurantInfo from '@/components/RestaurantInfo';
 import Rating from '@/components/Rating';
 import axios from 'axios';
+import { notFound } from 'next/navigation';
 
 interface PageProps {
   params: {
@@ -11,6 +12,11 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const { restaurantId } = params;
+
+  const restaurantIdNumber = Number(restaurantId);
+  if (isNaN(restaurantIdNumber) || restaurantIdNumber <= 0) {
+    notFound();
+  }
 
   const res = await axios(
     `${process.env.NEXTAUTH_URL}/api/restaurant/${restaurantId}`,

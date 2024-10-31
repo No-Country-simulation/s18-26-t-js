@@ -1,3 +1,4 @@
+import { Category } from '@prisma/client';
 import { CategoryName } from './category';
 
 export interface Review {
@@ -26,6 +27,7 @@ export interface Restaurant {
   createdAt: Date;
   updatedAt: Date;
   category: CategoryName[];
+  categoryList: Category[];
   reviews: Review[];
 }
 
@@ -39,6 +41,6 @@ export interface RegisterRestaurant {
   address: string;
   phone: string;
   openingHours: string;
-  imageUrl: File | null;
-  logoUrl: File | null;
+  imageUrl: File | null | string;
+  logoUrl: File | null | string;
 }
